@@ -3,12 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticable;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * @property integer $id
  * @property int $idsenior
  * @property int $idusroh
  * @property int $idkamar
+ * @property int $idtahun
  * @property string $nama
  * @property string $nim
  * @property string $jeniskelamin
@@ -16,14 +19,17 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $username
  * @property string $password
  * @property string $passcode
- * @property string $tahunajaran
- * @property string $token
- * @property string $rememberme
+ * @property string $remember_token
  * @property string $created_at
  * @property string $updated_at
  */
-class Senior extends Model
+class Senior extends Authenticable
 {
+    use Notifiable;
+
+    protected $hidden = ['password', 'passcode'];
+    protected $guard = 'senior';
+
     /**
      * The table associated with the model.
      * 
@@ -41,10 +47,6 @@ class Senior extends Model
     /**
      * @var array
      */
-    protected $fillable = ['idsenior', 'idusroh', 'idkamar', 'nama', 'nim', 'jeniskelamin', 'foto', 'username', 'password', 'passcode', 'tahunajaran', 'token', 'rememberme', 'created_at', 'updated_at'];
-
-    protected $hidden = ['password'];
-    
-    protected $guard = 'admin';
+    protected $fillable = ['idsenior', 'idusroh', 'idkamar', 'idtahun', 'nama', 'nim', 'jeniskelamin', 'foto', 'username', 'password', 'passcode', 'remember_token', 'created_at', 'updated_at'];
 
 }

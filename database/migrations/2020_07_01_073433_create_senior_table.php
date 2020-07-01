@@ -18,6 +18,7 @@ class CreateSeniorTable extends Migration
             $table->integer('idsenior');
             $table->integer('idusroh');
             $table->integer('idkamar');
+            $table->integer('idtahun');
             $table->string('nama');
             $table->string('nim');
             $table->string('jeniskelamin');
@@ -25,7 +26,6 @@ class CreateSeniorTable extends Migration
             $table->string('username');
             $table->string('password');
             $table->string('passcode');
-            $table->string('tahunajaran');
             $table->rememberToken();
             $table->timestamps();
         });
