@@ -26,8 +26,7 @@ class CreateSeniorTable extends Migration
             $table->string('password');
             $table->string('passcode');
             $table->string('tahunajaran');
-            $table->string('token');
-            $table->string('rememberme');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
