@@ -46,6 +46,11 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        'senior' => [
+            'driver' => 'eloquent',
+            'model' => App\Senior::class,
+        ]
     ],
 
     /*

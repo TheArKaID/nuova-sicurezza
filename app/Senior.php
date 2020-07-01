@@ -43,4 +43,8 @@ class Senior extends Model
      */
     protected $fillable = ['idsenior', 'idusroh', 'idkamar', 'nama', 'nim', 'jeniskelamin', 'foto', 'username', 'password', 'passcode', 'tahunajaran', 'token', 'rememberme', 'created_at', 'updated_at'];
 
+    protected $hidden = ['password'];
+    
+    protected $guard = 'admin';
+
 }
