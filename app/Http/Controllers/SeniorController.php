@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Tahun;
+use App\Pengaturan;
 
 class SeniorController extends Controller
 {
@@ -22,9 +23,10 @@ class SeniorController extends Controller
     public function tahun()
     {
         $tahun = Tahun::all();
-        // dd($tahun[0]->tahunajaran);
+        $pengaturan = Pengaturan::first();
         return view('senior.tahun', [
-            'tahun' => $tahun
+            'tahun' => $tahun,
+            'pengaturan' => $pengaturan
         ]);
     }
 }

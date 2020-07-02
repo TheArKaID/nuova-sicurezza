@@ -1,9 +1,6 @@
 @extends('layouts.senior')
 
 @section('content')
-    <?php
-        $tahunaktif['tahunaktif'] = "2020/2021";
-    ?>
     <div class="row">
     <div class="col-lg-12">
         <div class="main-card mb-3 card">
@@ -27,7 +24,7 @@
                         <select name="tahun" id="tahun" class="form-control col-md-8" style="display: inline">
                             <?php
                                 foreach($tahun as $t) {
-                                    if($t->tahunajaran==$tahunaktif['tahunaktif'])
+                                    if($t->tahunajaran==$pengaturan['tahunaktif'])
                                         echo "<option selected>$t->tahunajaran</option>";
                                     else
                                         echo "<option>$t->tahunajaran</option>";
