@@ -6,7 +6,7 @@
         <div class="main-card mb-3 card">
             <div class="card-body">
                 <h5 class="card-title">Tambah Tahun</h5>
-                <form action="index?proses=manage-tahun" method="post">
+                <form action="{{route('tahun.add')}}" method="post">
                     <div class="form-group">
                         <input name="tahunawal" placeholder="Tahun Awal" type="number" class="form-control col-md-4" min="2000" max="9999" style="display: inline" required>
                         <input name="tahunakhir"  placeholder="Tahun Akhir" type="number" class="form-control col-md-4" min="2000" max="9999" style="display: inline" required>
