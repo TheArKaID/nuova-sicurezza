@@ -48,8 +48,8 @@ return [
         ],
 
         'senior' => [
-            'driver' => 'eloquent',
-            'model' => App\Senior::class,
+            'driver' => 'session',
+            'provider' => 'senior',
         ]
     ],
 
@@ -76,6 +76,10 @@ return [
             'model' => App\User::class,
         ],
 
+        'senior' => [
+            'driver' => 'eloquent',
+            'model' => App\Senior::class,
+        ]
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',

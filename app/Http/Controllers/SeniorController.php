@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
+class SeniorController extends Controller
+{
+    public function __construct()
+    {
+        $this->middleware('auth:senior');
+    }
+
+    public function index()
+    {
+        echo "senior telah login";
+        echo "<a href='/s/logout'>logout</a>";
+    }
+}
