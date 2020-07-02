@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Tahun;
+
 class SeniorController extends Controller
 {
     public function __construct()
@@ -19,6 +21,10 @@ class SeniorController extends Controller
 
     public function tahun()
     {
-        return view('senior.tahun');
+        $tahun = Tahun::all();
+        // dd($tahun[0]->tahunajaran);
+        return view('senior.tahun', [
+            'tahun' => $tahun
+        ]);
     }
 }
