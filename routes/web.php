@@ -23,6 +23,9 @@ Route::post('/s/login', "Auth\SeniorAuthController@postLogin")->name('senior.log
 Route::middleware('auth:senior')->group(function(){
     Route::get('/s', "SeniorController@index");
     Route::get('/s/logout', "Auth\SeniorAuthController@logout");
+
+    // Tahun
+    Route::get('/s/tahun', "SeniorController@tahun")->name('tahun');
 });
 
 /**

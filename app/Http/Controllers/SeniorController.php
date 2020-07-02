@@ -16,4 +16,9 @@ class SeniorController extends Controller
     {
         return view('senior.dashboard');
     }
+
+    public function tahun()
+    {
+        return view('senior.tahun');
+    }
 }
