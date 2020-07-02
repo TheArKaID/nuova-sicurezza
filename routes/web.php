@@ -32,6 +32,10 @@ Route::get('/login', function () {
     return view('pot.login');
 })->name('login');
 
+Route::post('/login', function () {
+    return view('pot.login');
+})->name('login.post');
+
 Route::get('/admin', function () {
     return redirect('/login');
 })->name('admin');

@@ -27,20 +27,20 @@
                     <form class="form-inline" style="display: inline-block" action="{{route('senior.login.post')}}" method="POST">
                         {{ csrf_field() }}
                         <div class="form-group">
-                            <input name="username" placeholder="Username" type="text" class="col-md-12 mb-2 form-control" style="width: none" required>
                             @error('username')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                                <span class="invalid-feedback" style="display: block" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                            <input name="username" placeholder="Username" type="text" class="col-md-12 mb-2 form-control" style="width: none" required>
                         </div>
                         <div class="form-group">
-                            <input name="password" placeholder="Password" type="password" class="col-md-12 mb-2 form-control" style="width: none" required>
                             @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                                <span class="invalid-feedback" style="display: block" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                            <input name="password" placeholder="Password" type="password" class="col-md-12 mb-2 form-control" style="width: none" required>
                         </div>
                         <div class="form-group">
                             <button class="col-md-12 btn btn-primary">Login</button>

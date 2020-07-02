@@ -24,15 +24,15 @@
         <div class="card">
             <div class="card-body"><h5 class="card-title">Login</h5>
                 <div>
-                    <form class="form-inline" style="display: inline-block" action="{{route('admin')}}" method="POST">
+                    <form class="form-inline" style="display: inline-block" action="{{route('login.post')}}" method="POST">
                         {{ csrf_field() }}
                         <div class="form-group">
+                            {!!isset($_POST['username']) ? "<span class='invalid-feedback' style='display:block' role='alert'><strong>Username tidak ditemukan</strong></span>" : ""!!}
                             <input name="username" placeholder="Username" type="text" class="col-md-12 mb-2 form-control" style="width: none" required>
-                            {{isset($_POST['username']) ? "<span class='invalid-feedback' role='alert'><strong>Username tidak ditemukan</strong></span>" : ""}}
                         </div>
                         <div class="form-group">
+                            {!!isset($_POST['password']) ? "<span class='invalid-feedback' style='display:block' role='alert'><strong>Password yang anda masukkan salah</strong></span>" : ""!!}
                             <input name="password" placeholder="Password" type="password" class="col-md-12 mb-2 form-control" style="width: none" required>
-                            {{isset($_POST['password']) ? "<span class='invalid-feedback' role='alert'><strong>Password yang anda masukkan salah</strong></span>" : ""}}
                         </div>
                         <div class="form-group">
                             <button class="col-md-12 btn btn-primary">Login</button>

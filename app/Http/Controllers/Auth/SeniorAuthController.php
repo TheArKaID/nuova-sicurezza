@@ -34,13 +34,13 @@ class SeniorAuthController extends Controller
         if (auth()->guard('senior')->attempt($request->only('username', 'password'))) {
             $request->session()->regenerate();
             $this->clearLoginAttempts($request);
-            return redirect()->intended();
+            return redirect('/s');
         } else {
             $this->incrementLoginAttempts($request);
             return redirect()
                 ->back()
                 ->withInput()
-                ->withErrors(["Data anda Salah!"]);
+                ->withErrors(['username' => "Username atau Password anda Salah!"]);
         }
     }
 
