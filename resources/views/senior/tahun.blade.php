@@ -23,7 +23,7 @@
                 <form action="{{route('tahun.set')}}" method="post">
                     {{ csrf_field() }}
                     <div class="form-group">
-                        <select name="tahun" id="tahun" class="form-control col-md-8" style="display: inline">
+                        <select name="tahun" id="tahun" class="form-control col-md-8" style="display: inline" required>
                             <?php
                                 foreach($tahun as $t) {
                                     if($t->tahunajaran==$pengaturan['tahunaktif'])
@@ -42,10 +42,10 @@
         <div class="main-card mb-3 card">
             <div class="card-body">
                 <h5 class="card-title">Hapus Tahun</h5>
-                <form action="index?proses=manage-tahun" method="post">
+                <form action="{{route('tahun.delete')}}" method="post">
                     {{ csrf_field() }}
                     <div class="form-group">
-                        <select name="hapustahun" id="hapustahun" class="form-control col-md-8" style="display: inline">
+                        <select name="tahun" id="tahun" class="form-control col-md-8" style="display: inline" required>
                             <?php
                                 foreach($tahun as $t) {
                                     echo "<option>$t->tahunajaran</option>";

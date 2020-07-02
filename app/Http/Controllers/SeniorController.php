@@ -76,4 +76,25 @@ class SeniorController extends Controller
         
         return redirect()->back()->with('sukses', 'Tahun Aktif Berhasil Diubah');
     }
+
+    public function hapusTahun(Request $request)
+    {
+        $this->validate($request, [
+            'tahun' => 'required'
+        ]);
+        
+        $tahun = Tahun::where('tahunajaran', $request->tahun)->first();
+        if($tahun==null){
+            return redirect()->back()->withInput()->withErrors(['tahun' => 'Tahun Tidak Ditemukan']);
+        }
+
+        $pengaturan = Pengaturan::first();
+        if($pengaturan->tahunaktif==$request->tahun){
+            return redirect()->back()->withInput()->withErrors(['tahun' => 'Tahun Sedang Aktif. Harap Ubah Tahun Aktif Terlebih Dahulu']);
+        }
+
+        $tahun->delete();
+        
+        return redirect()->back()->with('sukses', 'Tahun Telah Dihapus');
+    }
 }
