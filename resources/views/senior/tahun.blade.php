@@ -20,7 +20,7 @@
         <div class="main-card mb-3 card">
             <div class="card-body">
                 <h5 class="card-title">Set Tahun Aktif</h5>
-                <form action="index?proses=manage-tahun" method="post">
+                <form action="{{route('tahun.set')}}" method="post">
                     {{ csrf_field() }}
                     <div class="form-group">
                         <select name="tahun" id="tahun" class="form-control col-md-8" style="display: inline">

@@ -27,6 +27,7 @@ Route::middleware('auth:senior')->group(function(){
     // Tahun
     Route::get('/s/tahun', "SeniorController@tahun")->name('tahun');
     Route::post('/s/tahun/add', "SeniorController@tambahTahun")->name('tahun.add');
+    Route::post('/s/tahun/set', "SeniorController@setTahun")->name('tahun.set');
 });
 
 /**

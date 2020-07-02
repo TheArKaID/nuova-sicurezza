@@ -56,6 +56,24 @@ class SeniorController extends Controller
         $tahun = new Tahun;
         $tahun->tahunajaran = $tahunajaran;
         $tahun->save();
-        return redirect()->back()->with('sukses', 'Data Tahun Berhasil ditambahkan');
+        return redirect()->back()->with('sukses', 'Data Tahun Berhasil Ditambahkan');
+    }
+
+    public function setTahun(Request $request)
+    {
+        $this->validate($request, [
+            'tahun' => 'required'
+        ]);
+
+        $tahun = Tahun::where('tahunajaran', $request->tahun)->first();
+        if($tahun==null){
+            return redirect()->back()->withInput()->withErrors(['tahun' => 'Tahun Tidak Ditemukan']);
+        }
+
+        $pengaturan = Pengaturan::first();
+        $pengaturan->tahunaktif = $request->tahun;
+        $pengaturan->save();
+        
+        return redirect()->back()->with('sukses', 'Tahun Aktif Berhasil Diubah');
     }
 }
