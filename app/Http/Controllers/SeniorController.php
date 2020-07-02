@@ -14,7 +14,6 @@ class SeniorController extends Controller
 
     public function index()
     {
-        echo "senior telah login";
-        echo "<a href='/s/logout'>logout</a>";
+        return view('senior.dashboard');
     }
 }
