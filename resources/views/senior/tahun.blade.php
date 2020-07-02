@@ -7,9 +7,10 @@
             <div class="card-body">
                 <h5 class="card-title">Tambah Tahun</h5>
                 <form action="{{route('tahun.add')}}" method="post">
+                    {{ csrf_field() }}
                     <div class="form-group">
-                        <input name="tahunawal" placeholder="Tahun Awal" type="number" class="form-control col-md-4" min="2000" max="9999" style="display: inline" required>
-                        <input name="tahunakhir"  placeholder="Tahun Akhir" type="number" class="form-control col-md-4" min="2000" max="9999" style="display: inline" required>
+                        <input name="tahunawal" placeholder="Tahun Awal" type="number" class="form-control col-md-4" min="2000" max="9999" style="display: inline" value="{{old('tahunawal')}}" required>
+                        <input name="tahunakhir"  placeholder="Tahun Akhir" type="number" class="form-control col-md-4" min="2000" max="9999" style="display: inline" value="{{old('tahunakhir')}}" required>
                         <input name="submit" type="submit" class="mb-2 mr-2 btn btn-primary" value="Tambah">
                     </div>
                 </form>
@@ -20,6 +21,7 @@
             <div class="card-body">
                 <h5 class="card-title">Set Tahun Aktif</h5>
                 <form action="index?proses=manage-tahun" method="post">
+                    {{ csrf_field() }}
                     <div class="form-group">
                         <select name="tahun" id="tahun" class="form-control col-md-8" style="display: inline">
                             <?php
@@ -41,6 +43,7 @@
             <div class="card-body">
                 <h5 class="card-title">Hapus Tahun</h5>
                 <form action="index?proses=manage-tahun" method="post">
+                    {{ csrf_field() }}
                     <div class="form-group">
                         <select name="hapustahun" id="hapustahun" class="form-control col-md-8" style="display: inline">
                             <?php

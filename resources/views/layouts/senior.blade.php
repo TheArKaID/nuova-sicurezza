@@ -637,6 +637,21 @@
             </div>
             <div class="app-main__outer">
                 <div class="app-main__inner">
+
+                @if ($errors->any())
+                    <div class='mb-3 card text-white card-body bg-danger'>
+                        <h5 class='text-white card-title'>GAGAL!</h5>
+                        {{ $errors->first() }}
+                    </div>
+                @endif
+                
+                @if (session()->has('sukses'))
+                    <div class='mb-3 card text-white card-body bg-success'>
+                        <h5 class='text-white card-title'>BERHASIL!</h5>
+                        {{session()->get('sukses')}}
+                    </div>
+                @endif
+                
                 <?php 
                     if($error){
                         echo "<div class='mb-3 card text-white card-body bg-danger'>
@@ -695,58 +710,58 @@
                                 break;
                             }
                         echo "</div>";
-                        } elseif ($success) {
-                            echo "<div class='mb-3 card text-white card-body bg-success'>
-                                <h5 class='text-white card-title'>BERHASIL!</h5>";
-                            switch ($success) {
-                                case 'tahun-tambah':
-                                    echo "Tahun Telah Ditambahkan";
-                                    break;
-                                case 'tahun-update':
-                                    echo "Tahun Telah Diubah";
-                                    break;
-                                case 'tahun-hapus':
-                                    echo "Tahun Telah Dihapus";
-                                    break;
-                                case 'resident-tambah':
-                                    echo "Resident Telah Ditambahkan";
-                                    break;
-                                case 'resident-hapus':
-                                    echo "Resident Telah Dihapus";
-                                    break;
-                                case 'pelanggaran-tambah':
-                                    echo "Pelanggaran Telah Ditambahkan";
-                                    break;
-                                case 'pelanggaran-hapus':
-                                    echo "Pelanggaran Telah Dihapus";
-                                    break;
-                                case 'senior-hapus':
-                                    echo "Senior Telah Dihapus";
-                                    break;
-                                case 'senior-tambah':
-                                    echo "Senior Telah Ditambahkan";
-                                    break;
-                                case 'resident-import':
-                                    echo "Data Resident Berhasil di Import";
-                                    break;
-                                case 'pelanggaran-edit':
-                                    echo "Data Pelanggaran Berhasil Diedit";
-                                    break;
-                                case 'senior-edit':
-                                    echo "Data Senior Berhasil Diedit";
-                                    break;
-                                case 'usroh-edit':
-                                    echo "Data Usroh Berhasil Diedit";
-                                    break;
-                                case 'resident-edit':
-                                    echo "Data Resident Berhasil Diedit";
-                                    break;
-                                default:
-                                    echo "";
-                                    break;
-                            }
-                            echo "</div>";
+                    } elseif ($success) {
+                        echo "<div class='mb-3 card text-white card-body bg-success'>
+                            <h5 class='text-white card-title'>BERHASIL!</h5>";
+                        switch ($success) {
+                            case 'tahun-tambah':
+                                echo "Tahun Telah Ditambahkan";
+                                break;
+                            case 'tahun-update':
+                                echo "Tahun Telah Diubah";
+                                break;
+                            case 'tahun-hapus':
+                                echo "Tahun Telah Dihapus";
+                                break;
+                            case 'resident-tambah':
+                                echo "Resident Telah Ditambahkan";
+                                break;
+                            case 'resident-hapus':
+                                echo "Resident Telah Dihapus";
+                                break;
+                            case 'pelanggaran-tambah':
+                                echo "Pelanggaran Telah Ditambahkan";
+                                break;
+                            case 'pelanggaran-hapus':
+                                echo "Pelanggaran Telah Dihapus";
+                                break;
+                            case 'senior-hapus':
+                                echo "Senior Telah Dihapus";
+                                break;
+                            case 'senior-tambah':
+                                echo "Senior Telah Ditambahkan";
+                                break;
+                            case 'resident-import':
+                                echo "Data Resident Berhasil di Import";
+                                break;
+                            case 'pelanggaran-edit':
+                                echo "Data Pelanggaran Berhasil Diedit";
+                                break;
+                            case 'senior-edit':
+                                echo "Data Senior Berhasil Diedit";
+                                break;
+                            case 'usroh-edit':
+                                echo "Data Usroh Berhasil Diedit";
+                                break;
+                            case 'resident-edit':
+                                echo "Data Resident Berhasil Diedit";
+                                break;
+                            default:
+                                echo "";
+                                break;
                         }
+                        echo "</div>";
+                    }
                     ?>
                     
                     @yield('content')
