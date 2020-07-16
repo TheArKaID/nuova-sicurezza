@@ -5,12 +5,15 @@
         width: 25% !important; 
         margin-right: unset !important;
     }
+    .iconwrap-d{
+        width: 33% !important; 
+        margin-right: unset !important;
+    }
     .iconwrap:hover{
         background-color: aliceblue !important;
     }
 </style>
 @section('content')
-
     <div class="row">
         <div class="col-lg-12">
             <div class="app-page-title">
@@ -56,6 +59,49 @@
                     </a>
                 </div>
             </div>
+            @if (Auth::user()->isdivman) 
+            <div class="main-card mb-3 card">
+                <div class="card-body">
+                    <h5>Divisi Keamanan</h5>
+                    <a href="#1">
+                    <div class="font-icon-wrapper font-icon-lg iconwrap-d">
+                        <i class="pe-7s-user icon-gradient bg-grow-early"></i>
+                        <p style="font-size: .55rem;">Senior</p>
+                    </div>
+                    </a>
+                    <a href="#4">
+                    <div class="font-icon-wrapper font-icon-lg iconwrap-d">
+                        <i class="pe-7s-box2 icon-gradient bg-sunny-morning"></i>
+                        <p style="font-size: .55rem;">Usroh</p>
+                    </div>
+                    </a>
+                    <a href="#2">
+                    <div class="font-icon-wrapper font-icon-lg iconwrap-d">
+                        <i class="pe-7s-users icon-gradient bg-malibu-beach"></i>
+                        <p style="font-size: .55rem;">Resident</p>
+                    </div>
+                    </a>
+                    <a href="#3">
+                    <div class="font-icon-wrapper font-icon-lg iconwrap-d">
+                        <i class="pe-7s-hammer icon-gradient bg-strong-bliss"></i>
+                        <p style="font-size: .55rem;">Peraturan</p>
+                    </div>
+                    </a>
+                    <a href="#3">
+                    <div class="font-icon-wrapper font-icon-lg iconwrap-d">
+                        <i class="pe-7s-note icon-gradient bg-mixed-hopes"></i>
+                        <p style="font-size: .55rem;">Rekap Poin</p>
+                    </div>
+                    </a>
+                    <a href="#3">
+                    <div class="font-icon-wrapper font-icon-lg iconwrap-d">
+                        <i class="pe-7s-date icon-gradient bg-deep-blue"></i>
+                        <p style="font-size: .55rem;">Tahun</p>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            @endif
         <div>
     </div>
 
