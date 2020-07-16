@@ -32,8 +32,8 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="main-card mb-3 card">
-                <div class="card-body"><h5 class="card-title">Table with hover</h5>
-                    <table class="mb-0 table table-hover">
+                <div class="card-body">
+                    <table class="mb-0 table table-hover table-responsive">
                         <thead>
                         <tr>
                             <th>#</th>

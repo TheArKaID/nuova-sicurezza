@@ -12,26 +12,25 @@ use App\Pengaturan;
 
 class SeniorController extends Controller
 {
-    protected $mobile;
+    protected $helper;
 
     public function __construct()
     {
-        $this->mobile = new \Helper;
+        $this->helper = new \Helper;
         $this->middleware('auth:senior');
     }
 
     public function index()
     {
-        if($this->mobile->isMobile())
+        if($this->helper->isMobile())
             return view('m.senior.dashboard');
         return view('senior.dashboard');
     }
 
     public function resident()
     {
-        $resident = Resident::where('idtahun', '1')->get();
-
-        if($this->mobile->isMobile())
+        $resident = Resident::where('idtahun', $this->helper->tahunAktif())->get();
+        if($this->helper->isMobile())
             return view('m.senior.resident', ['resident'=>$resident]);
         return view('senior.resident', ['resident'=>$resident]);
     }
