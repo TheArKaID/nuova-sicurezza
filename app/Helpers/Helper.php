@@ -14,7 +14,7 @@
         function tahunAktif()
         {
             $ta = \App\Pengaturan::first();
-            return $ta->tahunaktif;
+            return $ta->idtahunaktif;
         }
     }
 ?>
