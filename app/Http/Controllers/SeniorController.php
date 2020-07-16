@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Validator;
 
+use App\Resident;
 use App\Tahun;
 use App\Pengaturan;
 
@@ -28,8 +29,10 @@ class SeniorController extends Controller
 
     public function resident()
     {
+        $resident = Resident::where('idtahun', '1')->get();
+
         if($this->mobile->isMobile())
-            return view('m.senior.resident');
-        return view('senior.resident');
+            return view('m.senior.resident', ['resident'=>$resident]);
+        return view('senior.resident', ['resident'=>$resident]);
     }
 }

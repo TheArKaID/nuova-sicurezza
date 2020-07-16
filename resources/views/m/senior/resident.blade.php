@@ -43,24 +43,20 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <tr class='clickable-row' data-url='#1'>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr class='clickable-row' data-url='#2'>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr class='clickable-row' data-url='#3'>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
+                            @php
+                                $row=1;
+                            @endphp
+                            @foreach ($resident as $r)
+                                <tr class='clickable-row' data-url='#/{{$r->id}}'>
+                                    <th scope="row">{{$row}}</th>
+                                    <td>{{$r->idkamar}}</td>
+                                    <td>{{$r->nama}}</td>
+                                    <td>{{$r->nim}}</td>
+                                </tr>
+                                @php
+                                    $row++;
+                                @endphp
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
