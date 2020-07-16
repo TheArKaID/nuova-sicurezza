@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class TahunController extends Controller
 {
+    protected $mobile;
+    
+    public function __construct()
+    {
+        $this->mobile = new \Helper;
+        $this->middleware('auth:senior');
+    }
+
     public function index()
     {
         $tahun = Tahun::all();
