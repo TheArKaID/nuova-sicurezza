@@ -25,4 +25,11 @@ class SeniorController extends Controller
             return view('m.senior.dashboard');
         return view('senior.dashboard');
     }
+
+    public function resident()
+    {
+        if($this->mobile->isMobile())
+            return view('m.senior.resident');
+        return view('senior.resident');
+    }
 }
