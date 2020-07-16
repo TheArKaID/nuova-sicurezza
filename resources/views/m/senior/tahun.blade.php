@@ -26,10 +26,10 @@
                         <select name="tahun" id="tahun" class="form-control col-md-8" style="display: inline" required>
                             <?php
                                 foreach($tahun as $t) {
-                                    if($t->tahunajaran==$pengaturan['tahunaktif'])
+                                    if($t->id==$pengaturan['idtahunaktif'])
                                         echo "<option selected>$t->tahunajaran</option>";
                                     else
-                                        echo "<option>$t->tahunajaran</option>";
+                                        echo "<option value='$t->id'>$t->tahunajaran</option>";
                                 }
                             ?>
                         </select>
@@ -48,7 +48,7 @@
                         <select name="tahun" id="tahun" class="form-control col-md-8" style="display: inline" required>
                             <?php
                                 foreach($tahun as $t) {
-                                    echo "<option>$t->tahunajaran</option>";
+                                    echo "<option value='$t->id'>$t->tahunajaran</option>";
                                 }
                             ?>
                         </select>

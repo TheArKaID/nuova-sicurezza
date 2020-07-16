@@ -72,14 +72,13 @@ class TahunController extends Controller
         $this->validate($request, [
             'tahun' => 'required'
         ]);
-
-        $tahun = Tahun::where('tahunajaran', $request->tahun)->first();
+        $tahun = Tahun::find($request->tahun);
         if($tahun==null){
             return redirect()->back()->withInput()->withErrors(['tahun' => 'Tahun Tidak Ditemukan']);
         }
 
         $pengaturan = Pengaturan::first();
-        $pengaturan->tahunaktif = $request->tahun;
+        $pengaturan->idtahunaktif = $request->tahun;
         $pengaturan->save();
         
         return redirect()->back()->with('sukses', 'Tahun Aktif Berhasil Diubah');
@@ -91,13 +90,13 @@ class TahunController extends Controller
             'tahun' => 'required'
         ]);
         
-        $tahun = Tahun::where('tahunajaran', $request->tahun)->first();
+        $tahun = Tahun::find($request->tahun);
         if($tahun==null){
             return redirect()->back()->withInput()->withErrors(['tahun' => 'Tahun Tidak Ditemukan']);
         }
 
         $pengaturan = Pengaturan::first();
-        if($pengaturan->tahunaktif==$request->tahun){
+        if($pengaturan->idtahunaktif==$request->tahun){
             return redirect()->back()->withInput()->withErrors(['tahun' => 'Tahun Sedang Aktif. Harap Ubah Tahun Aktif Terlebih Dahulu']);
         }
 
