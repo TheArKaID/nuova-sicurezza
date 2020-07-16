@@ -10,5 +10,11 @@
                 return true;
             return false;
         }
+
+        function tahunAktif()
+        {
+            $ta = \App\Pengaturan::first();
+            return $ta->tahunaktif;
+        }
     }
 ?>
