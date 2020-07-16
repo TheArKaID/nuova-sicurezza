@@ -31,13 +31,13 @@ Route::middleware('auth:senior')->group(function(){
      * Divisi Keamanan
      */
     // Kamar
-    Route::get('/s/kamar', "Divman/KamarController@kamar");
+    Route::get('/s/kamar', "Divman\KamarController@kamar");
 
     // Tahun
-    Route::get('/s/tahun', "Divman/TahunController@index")->name('tahun');
-    Route::post('/s/tahun/add', "Divman/TahunController@tambahTahun")->name('tahun.add');
-    Route::post('/s/tahun/set', "Divman/TahunController@setTahun")->name('tahun.set');
-    Route::post('/s/tahun/delete', "Divman/TahunController@hapusTahun")->name('tahun.delete');      
+    Route::get('/s/tahun', "Divman\TahunController@index")->name('tahun');
+    Route::post('/s/tahun/add', "Divman\TahunController@tambahTahun")->name('tahun.add');
+    Route::post('/s/tahun/set', "Divman\TahunController@setTahun")->name('tahun.set');
+    Route::post('/s/tahun/delete', "Divman\TahunController@hapusTahun")->name('tahun.delete');      
 });
 
 

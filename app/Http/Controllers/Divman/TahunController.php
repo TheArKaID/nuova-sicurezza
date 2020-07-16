@@ -3,16 +3,25 @@
 namespace App\Http\Controllers\Divman;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Tahun;
+use App\Pengaturan;
 
 class TahunController extends Controller
 {
-    protected $mobile;
+    protected $helper, $isdivman;
     
     public function __construct()
     {
-        $this->mobile = new \Helper;
+        $this->helper = new \Helper;
         $this->middleware('auth:senior');
+        $this->middleware(function ($request, $next) {
+            if(!Auth::user()->isdivman)
+                return redirect('/s');
+                
+            return $next($request);
+        });
     }
 
     public function index()

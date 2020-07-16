@@ -93,7 +93,7 @@
                         <p style="font-size: .55rem;">Rekap Poin</p>
                     </div>
                     </a>
-                    <a href="#3">
+                    <a href="{{route('tahun')}}">
                     <div class="font-icon-wrapper font-icon-lg iconwrap-d">
                         <i class="pe-7s-date icon-gradient bg-deep-blue"></i>
                         <p style="font-size: .55rem;">Tahun</p>
