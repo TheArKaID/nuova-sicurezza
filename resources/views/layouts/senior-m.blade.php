@@ -95,7 +95,7 @@
             </div>
         </div>
         <div class="app-main">
-            <div class="app-main__outer" style="padding-left: unset">
+            <div class="app-main__outer" style="padding-bottom: unset;padding-left: unset">
                 <div class="app-main__inner" style="padding: 15px 15px 0;">
 
                 @if ($errors->any())
@@ -227,9 +227,9 @@
                     @yield('content')
 
                 </div>
-                <div class="app-wrapper-footer">
-                    <div class="app-footer">
-                        <div class="app-footer__inner" style="margin-left: auto;">
+                <div class="app-wrapper-footer" style="width: 100%;">
+                    <div class="app-footer" style="position: unset;">
+                        <div class="app-footer__inner" style="margin-left: unset">
                             <ul class="nav text-center" style="width: 100%">
                                 <li class="nav-item">
                                     <a href="javascript:void(0);" class="nav-link">
