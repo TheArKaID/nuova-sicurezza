@@ -45,35 +45,11 @@
                     </button>
                 </span>
             </div>
-            <div class="app-header__content">
+            <div class="app-header__content" style="top: 160px;">
                 <div class="app-header-left">
-                    <div class="search-wrapper">
-                        <div class="input-holder">
-                            <input type="text" class="search-input" placeholder="Type to search">
-                            <button class="search-icon"><span></span></button>
-                        </div>
-                        <button class="close"></button>
+                    <div>
+                        <h5>Sicurezza</h5>
                     </div>
-                    <ul class="header-menu nav">
-                        <li class="nav-item">
-                            <a href="javascript:void(0);" class="nav-link">
-                                <i class="nav-link-icon fa fa-database"> </i>
-                                Statistics
-                            </a>
-                        </li>
-                        <li class="btn-group nav-item">
-                            <a href="javascript:void(0);" class="nav-link">
-                                <i class="nav-link-icon fa fa-edit"></i>
-                                Projects
-                            </a>
-                        </li>
-                        <li class="dropdown nav-item">
-                            <a href="javascript:void(0);" class="nav-link">
-                                <i class="nav-link-icon fa fa-cog"></i>
-                                Settings
-                            </a>
-                        </li>
-                    </ul>
                 </div>
                 <div class="app-header-right">
                     <div class="header-btn-lg pr-0">
@@ -120,7 +96,7 @@
         </div>
         <div class="app-main">
             <div class="app-main__outer" style="padding-left: unset">
-                <div class="app-main__inner">
+                <div class="app-main__inner" style="padding: 15px 15px 0;">
 
                 @if ($errors->any())
                     <div class='mb-3 card text-white card-body bg-danger'>
@@ -255,24 +231,17 @@
                     <div class="app-footer">
                         <div class="app-footer__inner" style="margin-left: auto;">
                             <ul class="nav text-center" style="width: 100%">
-                                <li class="nav-item" style="width: 25%">
-                                    <a href="javascript:void(0);" class="nav-link" style="display: block">
-                                        <i class="fa fa-home fa-3x"></i>
+                                <li class="nav-item">
+                                    <a href="javascript:void(0);" class="nav-link">
+                                        <div class="badge badge-success mr-1 ml-0">
+                                            <small>NEW</small>
+                                        </div>
+                                        Unires
                                     </a>
                                 </li>
-                                <li class="nav-item" style="width: 25%">
-                                    <a href="javascript:void(0);" class="nav-link" style="display: block">
-                                        <i class="fa fa-user fa-3x"></i>
-                                    </a>
-                                </li>
-                                <li class="nav-item" style="width: 25%">
-                                    <a href="javascript:void(0);" class="nav-link" style="display: block">
-                                        <i class="fa fa-home fa-3x"></i>
-                                    </a>
-                                </li>
-                                <li class="nav-item" style="width: 25%">
-                                    <a href="javascript:void(0);" class="nav-link" style="display: block">
-                                        <i class="fa fa-user fa-3x"></i>
+                                <li class="nav-item">
+                                    <a href="javascript:void(0);" class="nav-link">
+                                        UMY
                                     </a>
                                 </li>
                             </ul>
