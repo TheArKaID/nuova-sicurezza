@@ -1,5 +1,13 @@
 @extends('layouts.senior-m')
 
+@section('styles')
+    <style>
+        .clickable-row:hover{
+            cursor: pointer;
+        }
+    </style>
+@endsection
+
 @section('content')
     <div class="row">
         <div class="col-lg-12">
