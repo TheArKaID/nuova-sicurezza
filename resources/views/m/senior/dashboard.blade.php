@@ -39,7 +39,7 @@
                         <p style="font-size: .55rem;">Senior</p>
                     </div>
                     </a>
-                    <a href="#2">
+                    <a href="/s/resident">
                     <div class="font-icon-wrapper font-icon-lg iconwrap">
                         <i class="fa fa-users icon-gradient bg-malibu-beach"></i>
                         <p style="font-size: .55rem;">Resident</p>
@@ -93,7 +93,7 @@
                         <p style="font-size: .55rem;">Rekap Poin</p>
                     </div>
                     </a>
-                    <a href="{{route('tahun')}}">
+                    <a href="{{route('divman.tahun')}}">
                     <div class="font-icon-wrapper font-icon-lg iconwrap-d">
                         <i class="pe-7s-date icon-gradient bg-deep-blue"></i>
                         <p style="font-size: .55rem;">Tahun</p>

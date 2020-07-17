@@ -25,19 +25,19 @@ Route::middleware('auth:senior')->group(function(){
     Route::get('/s/logout', "Auth\SeniorAuthController@logout");
 
     // Resident
-    Route::get('/s/resident', "SeniorController@resident");
+    Route::get('/s/resident', "SeniorController@resident")->name('resident');
 
     /**
      * Divisi Keamanan
      */
     // Kamar
-    Route::get('/s/kamar', "Divman\KamarController@kamar");
+    Route::get('/s/kamar', "Divman\KamarController@kamar")->name('divman.kamar');
 
     // Tahun
-    Route::get('/s/tahun', "Divman\TahunController@index")->name('tahun');
-    Route::post('/s/tahun/add', "Divman\TahunController@tambahTahun")->name('tahun.add');
-    Route::post('/s/tahun/set', "Divman\TahunController@setTahun")->name('tahun.set');
-    Route::post('/s/tahun/delete', "Divman\TahunController@hapusTahun")->name('tahun.delete');      
+    Route::get('/s/tahun', "Divman\TahunController@index")->name('divman.tahun');
+    Route::post('/s/tahun/add', "Divman\TahunController@tambahTahun")->name('divman.tahun.add');
+    Route::post('/s/tahun/set', "Divman\TahunController@setTahun")->name('divman.tahun.set');
+    Route::post('/s/tahun/delete', "Divman\TahunController@hapusTahun")->name('divman.tahun.delete');      
 });
 
 
