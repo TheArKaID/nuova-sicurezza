@@ -6,7 +6,7 @@
         margin-right: unset !important;
     }
     .iconwrap-d{
-        width: 33% !important; 
+        width: 25% !important; 
         margin-right: unset !important;
     }
     .iconwrap:hover{
@@ -81,10 +81,10 @@
                         <p style="font-size: .55rem;">Resident</p>
                     </div>
                     </a>
-                    <a href="#3">
+                    <a href="#2">
                     <div class="font-icon-wrapper font-icon-lg iconwrap-d">
-                        <i class="pe-7s-hammer icon-gradient bg-strong-bliss"></i>
-                        <p style="font-size: .55rem;">Peraturan</p>
+                        <i class="pe-7s-door-lock icon-gradient bg-malibu-beach"></i>
+                        <p style="font-size: .55rem;">Kamar</p>
                     </div>
                     </a>
                     <a href="#3">
@@ -93,10 +93,22 @@
                         <p style="font-size: .55rem;">Rekap Poin</p>
                     </div>
                     </a>
+                    <a href="#3">
+                    <div class="font-icon-wrapper font-icon-lg iconwrap-d">
+                        <i class="pe-7s-hammer icon-gradient bg-strong-bliss"></i>
+                        <p style="font-size: .55rem;">Tengko</p>
+                    </div>
+                    </a>
                     <a href="{{route('divman.tahun')}}">
                     <div class="font-icon-wrapper font-icon-lg iconwrap-d">
                         <i class="pe-7s-date icon-gradient bg-deep-blue"></i>
                         <p style="font-size: .55rem;">Tahun</p>
+                    </div>
+                    </a>
+                    <a href="#3">
+                    <div class="font-icon-wrapper font-icon-lg iconwrap-d">
+                        <i class="pe-7s-settings icon-gradient bg-strong-bliss"></i>
+                        <p style="font-size: .55rem;">Pengaturan</p>
                     </div>
                     </a>
                 </div>
