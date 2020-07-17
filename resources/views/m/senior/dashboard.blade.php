@@ -69,7 +69,7 @@
                         <p style="font-size: .55rem;">Senior</p>
                     </div>
                     </a>
-                    <a href="/s/usroh">
+                    <a href="{{route('divman.usroh')}}">
                     <div class="font-icon-wrapper font-icon-lg iconwrap-d">
                         <i class="pe-7s-box2 icon-gradient bg-sunny-morning"></i>
                         <p style="font-size: .55rem;">Usroh</p>

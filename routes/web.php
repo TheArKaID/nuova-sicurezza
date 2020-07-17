@@ -31,18 +31,19 @@ Route::middleware('auth:senior')->group(function(){
      * Divisi Keamanan
      */
     // Usroh
-    Route::get('/s/usroh', "Divman\UsrohController@index")->name('divman.usroh');
-    Route::get('/s/usroh/tambah', "Divman\UsrohController@tambah")->name('divman.usroh.tambah');
-    Route::post('/s/usroh/tambah', "Divman\UsrohController@tambahUsroh")->name('divman.usroh.tambah');
+    Route::get('/s/d-usroh', "Divman\UsrohController@index")->name('divman.usroh');
+    Route::get('/s/d-usroh/tambah', "Divman\UsrohController@tambah")->name('divman.usroh.tambah');
+    Route::post('/s/d-usroh/tambah', "Divman\UsrohController@tambahUsroh")->name('divman.usroh.tambah');
+    Route::get('/s/d-usroh/{id}', "Divman\UsrohController@detail")->name('divman.usroh.detail');
 
     // Kamar
-    Route::get('/s/kamar', "Divman\KamarController@index")->name('divman.kamar');
+    Route::get('/s/d-kamar', "Divman\KamarController@index")->name('divman.kamar');
 
     // Tahun
-    Route::get('/s/tahun', "Divman\TahunController@index")->name('divman.tahun');
-    Route::post('/s/tahun/add', "Divman\TahunController@tambahTahun")->name('divman.tahun.add');
-    Route::post('/s/tahun/set', "Divman\TahunController@setTahun")->name('divman.tahun.set');
-    Route::post('/s/tahun/delete', "Divman\TahunController@hapusTahun")->name('divman.tahun.delete');      
+    Route::get('/s/d-tahun', "Divman\TahunController@index")->name('divman.tahun');
+    Route::post('/s/d-tahun/add', "Divman\TahunController@tambahTahun")->name('divman.tahun.add');
+    Route::post('/s/d-tahun/set', "Divman\TahunController@setTahun")->name('divman.tahun.set');
+    Route::post('/s/d-tahun/delete', "Divman\TahunController@hapusTahun")->name('divman.tahun.delete');      
 });
 
 
