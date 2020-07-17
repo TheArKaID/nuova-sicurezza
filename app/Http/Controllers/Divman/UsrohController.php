@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Divman;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use \App\Tahun;
 
 class UsrohController extends Controller
 {
@@ -24,7 +25,11 @@ class UsrohController extends Controller
 
     public function index()
     {
+        $ta = $this->helper->tahunAktif();
+        $tahun = Tahun::find($ta)->first();
         if($this->helper->isMobile())
-            return view('m.divman.usroh');
+            return view('m.divman.usroh', [
+                'tahun' => $tahun
+            ]);
     }
 }

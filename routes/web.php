@@ -30,6 +30,9 @@ Route::middleware('auth:senior')->group(function(){
     /**
      * Divisi Keamanan
      */
+    // Usroh
+    Route::get('/s/usroh', "Divman\UsrohController@index")->name('divman.usroh');
+
     // Kamar
     Route::get('/s/kamar', "Divman\KamarController@index")->name('divman.kamar');
 
