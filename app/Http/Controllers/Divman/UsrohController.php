@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
-class KamarController extends Controller
+class UsrohController extends Controller
 {
     protected $helper;
     
@@ -25,10 +25,6 @@ class KamarController extends Controller
     public function index()
     {
         if($this->helper->isMobile())
-            return view('m.divman.tahun', [
-                'tahun' => $tahun,
-                'pengaturan' => $pengaturan
-            ]);
+            return view('m.divman.usroh');
     }
-    
 }
