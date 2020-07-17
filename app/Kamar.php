@@ -32,6 +32,6 @@ class Kamar extends Model
     /**
      * @var array
      */
-    protected $fillable = ['idtahun', 'nomor', 'created_at', 'updated_at'];
+    protected $fillable = ['idtahun', 'idusroh', 'nomor', 'created_at', 'updated_at'];
 
 }

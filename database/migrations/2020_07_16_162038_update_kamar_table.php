@@ -16,6 +16,7 @@ class UpdateKamarTable extends Migration
         Schema::table('kamar', function (Blueprint $table) {
             $table->dropColumn('lantai');
             $table->dropColumn('gedung');
+            $table->integer('idusroh')->after('idtahun');
         });
     }
 
@@ -29,6 +30,7 @@ class UpdateKamarTable extends Migration
         Schema::table('kamar', function (Blueprint $table) {
             $table->tinyInteger('lantai')->after('nomor');
             $table->string('gedung', 10)->after('lantai');
+            $table->dropColumn('idusroh');
         });
     }
 }
