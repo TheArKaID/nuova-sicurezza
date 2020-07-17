@@ -28,11 +28,14 @@ class UsrohController extends Controller
     {
         $ta = $this->helper->tahunAktif();
         $tahun = Tahun::find($ta)->first();
+        $usroh = Usroh::where('idtahun', $ta)->get();
         if($this->helper->isMobile())
             return view('m.divman.usroh.index', [
+                'usroh' => $usroh,
                 'tahun' => $tahun
             ]);
         return view('divman.usroh.index', [
+            'usroh' => $usroh,
             'tahun' => $tahun
         ]);
     }

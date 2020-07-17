@@ -32,20 +32,20 @@
                         </tr>
                         </thead>
                         <tbody>
-                            {{-- @php
+                            @php
                                 $row=1;
                             @endphp
-                            @foreach ($resident as $r)
-                                <tr class='clickable-row' data-url='#/{{$r->id}}'>
+                            @foreach ($usroh as $u)
+                                <tr class='clickable-row' data-url='#/{{$u->id}}'>
                                     <th scope="row">{{$row}}</th>
-                                    <td>{{$r->idkamar}}</td>
-                                    <td>{{$r->nama}}</td>
-                                    <td>{{$r->nim}}</td>
+                                    <td>{{$u->nama}}</td>
+                                    <td>{{$u->lantai}}</td>
+                                    <td>{{$u->gedung}}</td>
                                 </tr>
                                 @php
                                     $row++;
                                 @endphp
-                            @endforeach --}}
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
