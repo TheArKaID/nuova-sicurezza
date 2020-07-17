@@ -34,6 +34,7 @@ class UsrohController extends Controller
                 'usroh' => $usroh,
                 'tahun' => $tahun
             ]);
+
         return view('divman.usroh.index', [
             'usroh' => $usroh,
             'tahun' => $tahun
@@ -48,6 +49,7 @@ class UsrohController extends Controller
             return view('m.divman.usroh.tambah', [
                 'tahun' => $tahun
             ]);
+
         return view('divman.usroh.tambah', [
             'tahun' => $tahun
         ]);
@@ -56,19 +58,35 @@ class UsrohController extends Controller
     public function tambahUsroh(Request $request)
     {
         $this->validate($request, [
-            'usroh' => 'required',
+            'nama' => 'required',
             'lantai' => 'required',
             'gedung' => 'required'
         ]);
 
         $usroh = new Usroh;
         $usroh->idtahun = $this->helper->tahunAktif();
-        $usroh->nama = $request->usroh;
+        $usroh->nama = $request->nama;
         $usroh->lantai = $request->lantai;
         $usroh->gedung = $request->gedung;
         $usroh->save();
 
         return redirect(route('divman.usroh'));
+    }
 
+    public function detail($id)
+    {
+        $usroh = Usroh::where('id', $id)->where('idtahun', $this->helper->tahunAktif())->first();
+        
+        if($usroh==null)
+            return redirect()->back();
+
+        if($this->helper->isMobile())
+            return view('m.divman.usroh.detail', [
+                'usroh' => $usroh
+            ]);
+
+        return view('divman.usroh.detail', [
+            'usroh' => $usroh
+        ]);
     }
 }
