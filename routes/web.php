@@ -31,7 +31,7 @@ Route::middleware('auth:senior')->group(function(){
      * Divisi Keamanan
      */
     // Kamar
-    Route::get('/s/kamar', "Divman\KamarController@kamar")->name('divman.kamar');
+    Route::get('/s/kamar', "Divman\KamarController@index")->name('divman.kamar');
 
     // Tahun
     Route::get('/s/tahun', "Divman\TahunController@index")->name('divman.tahun');

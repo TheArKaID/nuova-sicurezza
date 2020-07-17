@@ -626,7 +626,7 @@
                             </li>
                             <li class="app-sidebar__heading">Master Tahun Ajaran</li>
                             <li>
-                                <a href="{{route('tahun')}}"  <?php echo $page=="tahun" ? "class='mm-active'" : false;?>>
+                                <a href="{{route('divman.tahun')}}"  <?php echo $page=="tahun" ? "class='mm-active'" : false;?>>
                                     <i class="metismenu-icon pe-7s-date">
                                     </i>Manage Tahun
                                 </a>
