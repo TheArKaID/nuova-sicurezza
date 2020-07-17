@@ -21,8 +21,9 @@
         <div class="col-lg-12">
             <div class="main-card mb-3 card">
                 <div class="card-body">
-                    <form action="{{route('divman.usroh.tambah')}}" method="POST">
+                    <form action="{{route('divman.usroh.simpan')}}" method="POST">
                         {{ csrf_field() }}
+                        <input type="hidden" name="id" value="{{$usroh->id}}">
                         <div class="position-relative row form-group">
                             <label for="namaUsroh" class="col-sm-2 col-form-label">Nama Usroh</label>
                             <div class="col-sm-10">
@@ -48,7 +49,7 @@
                         <div class="position-relative row form-group">
                             <div class="col-sm-10 offset-sm-2">
                                 <button class="btn btn-secondary">Simpan</button>
-                                <a href="#" class="btn btn-danger" style="float: right">Hapus</a>
+                                <a href="{{route('divman.usroh.hapus', $usroh->id)}}" class="btn btn-danger" style="float: right">Hapus</a>
                             </div>
                         </div>
                     </form>

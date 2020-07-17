@@ -89,4 +89,19 @@ class UsrohController extends Controller
             'usroh' => $usroh
         ]);
     }
+
+    public function simpan(Request $request)
+    {
+        $this->validate($request, [
+            'id' => 'required',
+            'nama' => 'required',
+            'lantai' => 'required',
+            'gedung' => 'required'
+        ]);
+
+        $usroh = Usroh::where('id', $request->id)->where('idtahun', $this->helper->tahunAktif())->first();
+        $usroh->update($request->all());
+        
+        return redirect(route('divman.usroh'));
+    }
 }
