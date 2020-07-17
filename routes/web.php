@@ -32,6 +32,8 @@ Route::middleware('auth:senior')->group(function(){
      */
     // Usroh
     Route::get('/s/usroh', "Divman\UsrohController@index")->name('divman.usroh');
+    Route::get('/s/usroh/tambah', "Divman\UsrohController@tambah")->name('divman.usroh.tambah');
+    Route::post('/s/usroh/tambah', "Divman\UsrohController@tambahUsroh")->name('divman.usroh.tambah');
 
     // Kamar
     Route::get('/s/kamar', "Divman\KamarController@index")->name('divman.kamar');

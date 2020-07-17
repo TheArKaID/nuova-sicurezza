@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use \App\Tahun;
+use \App\Usroh;
 
 class UsrohController extends Controller
 {
@@ -28,8 +29,43 @@ class UsrohController extends Controller
         $ta = $this->helper->tahunAktif();
         $tahun = Tahun::find($ta)->first();
         if($this->helper->isMobile())
-            return view('m.divman.usroh', [
+            return view('m.divman.usroh.index', [
                 'tahun' => $tahun
             ]);
+        return view('divman.usroh.index', [
+            'tahun' => $tahun
+        ]);
+    }
+
+    public function tambah()
+    {
+        $ta = $this->helper->tahunAktif();
+        $tahun = Tahun::find($ta)->first();
+        if($this->helper->isMobile())
+            return view('m.divman.usroh.tambah', [
+                'tahun' => $tahun
+            ]);
+        return view('divman.usroh.tambah', [
+            'tahun' => $tahun
+        ]);
+    }
+
+    public function tambahUsroh(Request $request)
+    {
+        $this->validate($request, [
+            'usroh' => 'required',
+            'lantai' => 'required',
+            'gedung' => 'required'
+        ]);
+
+        $usroh = new Usroh;
+        $usroh->idtahun = $this->helper->tahunAktif();
+        $usroh->nama = $request->usroh;
+        $usroh->lantai = $request->lantai;
+        $usroh->gedung = $request->gedung;
+        $usroh->save();
+
+        return redirect(route('divman.usroh'));
+
     }
 }
