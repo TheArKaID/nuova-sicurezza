@@ -39,9 +39,8 @@ class Usroh extends Model
         return $this->hasMany('App\Kamar', 'idusroh');
     }
 
-    // this is a recommended way to declare event handlers
     protected static function booted() {
-        static::deleting(function($usroh) { // before delete() method call this
+        static::deleting(function($usroh) {
             foreach($usroh->kamar as $k) { 
                 $k->delete(); 
             };
