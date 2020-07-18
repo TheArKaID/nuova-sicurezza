@@ -34,4 +34,17 @@ class Usroh extends Model
      */
     protected $fillable = ['idtahun', 'nama', 'lantai', 'gedung', 'created_at', 'updated_at'];
 
+    public function kamar()
+    {
+        return $this->hasMany('App\Kamar', 'idusroh');
+    }
+
+    // this is a recommended way to declare event handlers
+    protected static function booted() {
+        static::deleting(function($usroh) { // before delete() method call this
+            foreach($usroh->kamar as $k) { 
+                $k->delete(); 
+            };
+        });
+    }
 }

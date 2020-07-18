@@ -104,4 +104,12 @@ class UsrohController extends Controller
         
         return redirect(route('divman.usroh'));
     }
+
+    public function hapus($id)
+    {
+        $usroh = Usroh::where('id', $id)->where('idtahun', $this->helper->tahunAktif())->first();
+        $usroh->delete();
+        
+        return redirect(route('divman.usroh'));
+    }
 }
