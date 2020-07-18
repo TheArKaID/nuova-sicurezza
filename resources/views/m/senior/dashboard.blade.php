@@ -70,7 +70,7 @@
                             <p style="font-size: .55rem;">Usroh</p>
                         </div>
                     </a>
-                    <a href="#2">
+                    <a href="{{route('divman.kamar')}}">
                         <div class="font-icon-wrapper font-icon-lg iconwrap-d">
                             <i class="pe-7s-door-lock icon-gradient bg-malibu-beach"></i>
                             <p style="font-size: .55rem;">Kamar</p>

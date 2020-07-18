@@ -34,4 +34,8 @@ class Kamar extends Model
      */
     protected $fillable = ['idtahun', 'idusroh', 'nomor', 'created_at', 'updated_at'];
 
+    public function usroh()
+    {
+        return $this->belongsTo('App\Usroh', 'idusroh');
+    }
 }

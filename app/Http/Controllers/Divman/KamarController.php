@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Divman;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Kamar;
+use App\Tahun;
 
 class KamarController extends Controller
 {
@@ -24,11 +26,18 @@ class KamarController extends Controller
 
     public function index()
     {
+        $ta = $this->helper->tahunAktif();
+        $tahun = Tahun::find($ta)->first();
+        $kamar = Kamar::where('idtahun', $ta)->get();
         if($this->helper->isMobile())
-            return view('m.divman.tahun', [
+            return view('m.divman.kamar.index', [
                 'tahun' => $tahun,
-                'pengaturan' => $pengaturan
+                'kamar' => $kamar
             ]);
+        return view('divman.kamar.index', [
+            'tahun' => $tahun,
+            'kamar' => $kamar
+        ]);
     }
     
 }
