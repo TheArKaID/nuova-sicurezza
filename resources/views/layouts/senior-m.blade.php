@@ -32,6 +32,7 @@
 
 @endphp
 <body>
+    @yield('modals')
     <div class="app-container app-theme-white body-tabs-shadow <?php echo $uisetting['fixedsidebar'] == 1 ? ' fixed-sidebar' : ''; echo $uisetting['fixedheader'] == 1 ? ' fixed-header' : ''; echo $uisetting['fixedfooter'] == 1 ? ' fixed-footer' : ''; echo $uisetting['sidebar'] == 1 ? ' closed-sidebar' : '';?>">
         <div class="app-header header-shadow <?php echo $uisetting['headeroption']; ?>">
             <div class="app-header__logo" style="width: auto; display:flex">
@@ -243,7 +244,7 @@
                         }
                         echo "</div>";
                     }
-                    ?>
+                ?>
                     
                     @yield('content')
 
@@ -275,7 +276,6 @@
     <script type="text/javascript" src="{{asset('assets/admin/js/main.js')}}"></script>
 
     @yield('scripts')
-    
 </body>
 
 </html>
