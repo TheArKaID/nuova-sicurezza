@@ -63,41 +63,41 @@
             <div class="main-card mb-3 card">
                 <div class="card-body">
                     <h5>Divisi Keamanan</h5>
+                    </a>
+                    <a href="{{route('divman.usroh')}}">
+                        <div class="font-icon-wrapper font-icon-lg iconwrap-d">
+                            <i class="pe-7s-box2 icon-gradient bg-sunny-morning"></i>
+                            <p style="font-size: .55rem;">Usroh</p>
+                        </div>
+                    </a>
+                    <a href="#2">
+                        <div class="font-icon-wrapper font-icon-lg iconwrap-d">
+                            <i class="pe-7s-door-lock icon-gradient bg-malibu-beach"></i>
+                            <p style="font-size: .55rem;">Kamar</p>
+                        </div>
+                    </a>
                     <a href="#1">
                     <div class="font-icon-wrapper font-icon-lg iconwrap-d">
                         <i class="pe-7s-user icon-gradient bg-grow-early"></i>
                         <p style="font-size: .55rem;">Senior</p>
                     </div>
-                    </a>
-                    <a href="{{route('divman.usroh')}}">
-                    <div class="font-icon-wrapper font-icon-lg iconwrap-d">
-                        <i class="pe-7s-box2 icon-gradient bg-sunny-morning"></i>
-                        <p style="font-size: .55rem;">Usroh</p>
-                    </div>
-                    </a>
                     <a href="#2">
                     <div class="font-icon-wrapper font-icon-lg iconwrap-d">
                         <i class="pe-7s-users icon-gradient bg-malibu-beach"></i>
                         <p style="font-size: .55rem;">Resident</p>
                     </div>
                     </a>
-                    <a href="#2">
-                    <div class="font-icon-wrapper font-icon-lg iconwrap-d">
-                        <i class="pe-7s-door-lock icon-gradient bg-malibu-beach"></i>
-                        <p style="font-size: .55rem;">Kamar</p>
-                    </div>
+                    <a href="#3">
+                        <div class="font-icon-wrapper font-icon-lg iconwrap-d">
+                            <i class="pe-7s-hammer icon-gradient bg-strong-bliss"></i>
+                            <p style="font-size: .55rem;">Tengko</p>
+                        </div>
                     </a>
                     <a href="#3">
-                    <div class="font-icon-wrapper font-icon-lg iconwrap-d">
-                        <i class="pe-7s-note icon-gradient bg-mixed-hopes"></i>
-                        <p style="font-size: .55rem;">Rekap Poin</p>
-                    </div>
-                    </a>
-                    <a href="#3">
-                    <div class="font-icon-wrapper font-icon-lg iconwrap-d">
-                        <i class="pe-7s-hammer icon-gradient bg-strong-bliss"></i>
-                        <p style="font-size: .55rem;">Tengko</p>
-                    </div>
+                        <div class="font-icon-wrapper font-icon-lg iconwrap-d">
+                            <i class="pe-7s-note icon-gradient bg-mixed-hopes"></i>
+                            <p style="font-size: .55rem;">Rekap Poin</p>
+                        </div>
                     </a>
                     <a href="{{route('divman.tahun')}}">
                     <div class="font-icon-wrapper font-icon-lg iconwrap-d">
