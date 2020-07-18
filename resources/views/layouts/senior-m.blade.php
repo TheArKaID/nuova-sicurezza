@@ -18,22 +18,42 @@
     $uisetting['fixedsidebar'] = 1;
     $uisetting['headeroption'] = 1;
     $uisetting['fixedheader'] = 1;
-    $uisetting['sidebar'] = 1;
+    $uisetting['sidebar'] = 0;
     $uisetting['fixedfooter'] = 1;
     $uisetting['sidebaroption'] = 1;
     $page = 'home';
     $error = null;
     $success = null;
+    
+    // Untuk Tombol Back
+    $url = explode('/', Request::url());
+    array_pop($url);
+    $url = implode('/', $url);
+
 @endphp
 <body>
     <div class="app-container app-theme-white body-tabs-shadow <?php echo $uisetting['fixedsidebar'] == 1 ? ' fixed-sidebar' : ''; echo $uisetting['fixedheader'] == 1 ? ' fixed-header' : ''; echo $uisetting['fixedfooter'] == 1 ? ' fixed-footer' : ''; echo $uisetting['sidebar'] == 1 ? ' closed-sidebar' : '';?>">
         <div class="app-header header-shadow <?php echo $uisetting['headeroption']; ?>">
-            <div class="app-header__logo" style="width: auto;">
-                <div class="logo-src"></div>
+            <div class="app-header__logo" style="width: auto; display:flex">
+                <div class="logo-src">
+                    @if (!Request::is('s'))
+                        <a href="/s">
+                            <h5>Sicurezza</h5>
+                        </a>
+                    @endif
+                </div>
             </div>
             <div class="app-header__mobile-menu">
-                <div>
-                    <h5>Sicurezza</h5>
+                <div class="row">
+                    @if (!Request::is('s'))
+                        <a href="{{$url}}" class="btn btn-warning" style="line-height: 1">
+                            <i class='fa fa-arrow-left'></i>
+                        </a>
+                    @else
+                        <a href="/s">
+                            <h5>Sicurezza</h5>
+                        </a>
+                    @endif
                 </div>
             </div>
             <div class="app-header__menu">
