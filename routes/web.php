@@ -48,6 +48,7 @@ Route::middleware('auth:senior')->group(function(){
 
     // Senior
     Route::get('/s/d-senior', "Divman\SeniorController@index")->name('divman.senior');
+    Route::get('/s/d-senior/tambah', "Divman\SeniorController@tambah")->name('divman.senior.tambah');
 
     // Tahun
     Route::get('/s/d-tahun', "Divman\TahunController@index")->name('divman.tahun');

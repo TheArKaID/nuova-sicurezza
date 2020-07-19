@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Senior;
+use App\Usroh;
 
 class SeniorController extends Controller
 {
@@ -35,6 +36,23 @@ class SeniorController extends Controller
             ]);
         
         return view('divman.senior.index', [
+            'tahun' => $tahun,
+            'senior' => $senior,
+        ]);
+    }
+
+    public function tambah()
+    {
+        $ta = $this->helper->idTahunAktif();
+        $tahun = $this->helper->tahunAktif();
+        $usroh = Usroh::where('idtahun', $ta)->get();
+        if($this->helper->isMobile())
+            return view('m.divman.senior.tambah', [
+                'tahun' => $tahun,
+                'usroh' => $usroh,
+            ]);
+        
+        return view('divman.senior.tambah', [
             'tahun' => $tahun,
             'senior' => $senior,
         ]);
