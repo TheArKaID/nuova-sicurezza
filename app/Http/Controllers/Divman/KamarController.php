@@ -74,4 +74,21 @@ class KamarController extends Controller
         
         return redirect(route('divman.kamar'));
     }
+
+    public function detail($id)
+    {
+        $kamar = Kamar::where('id', $id)->where('idtahun', $this->helper->tahunAktif())->first();
+        $usroh = Usroh::where('idtahun', $this->helper->tahunAktif())->get();
+        
+        if($this->helper->isMobile())
+            return view('m.divman.kamar.detail', [
+                'kamar' => $kamar,
+                'usroh' => $usroh
+            ]);
+
+        return view('divman.kamar.detail', [
+            'kamar' => $kamar,
+            'usroh' => $usroh
+        ]);
+    }
 }
