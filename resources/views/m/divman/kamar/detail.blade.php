@@ -21,7 +21,7 @@
         <div class="col-lg-12">
             <div class="main-card mb-3 card">
                 <div class="card-body">
-                    <form action="{{route('divman.usroh.simpan')}}" method="POST">
+                    <form action="{{route('divman.kamar.simpan')}}" method="POST">
                         {{ csrf_field() }}
                         <input type="hidden" name="id" value="{{$kamar->id}}">
                         <div class="position-relative row form-group">
@@ -64,7 +64,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>PERHATIAN! Semua Data Resident pada Usroh {{ $kamar->nama }} akan terhapus juga.</p>
+                    <p>PERHATIAN! Semua Data Resident pada Usroh {{ $kamar->nomor }} akan terhapus juga.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

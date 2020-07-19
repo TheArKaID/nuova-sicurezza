@@ -91,4 +91,17 @@ class KamarController extends Controller
             'usroh' => $usroh
         ]);
     }
+
+    public function simpan(Request $request)
+    {
+        $this->validate($request, [
+            'nomor' => 'required',
+            'idusroh' => 'required'
+        ]);
+
+        $kamar = Kamar::where('id', $request->id)->where('idtahun', $this->helper->tahunAktif())->first();
+        $kamar->update($request->all());
+
+        return redirect(route('divman.kamar'));
+    }
 }
