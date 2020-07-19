@@ -58,17 +58,17 @@
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Hapus Usroh ini ?</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Hapus Kamar ini ?</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>PERHATIAN! Semua Data Resident pada Usroh {{ $kamar->nomor }} akan terhapus juga.</p>
+                    <p>PERHATIAN! Semua Data Resident pada Kamar {{ $kamar->nomor }} akan terhapus juga.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <a href="{{route('divman.usroh.hapus', $kamar->id)}}" class="btn btn-danger">Hapus</a>
+                    <a href="{{route('divman.kamar.hapus', $kamar->id)}}" class="btn btn-danger">Hapus</a>
                 </div>
             </div>
         </div>

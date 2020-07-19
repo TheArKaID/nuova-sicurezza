@@ -38,4 +38,17 @@ class Kamar extends Model
     {
         return $this->belongsTo('App\Usroh', 'idusroh');
     }
+
+    public function resident()
+    {
+        return $this->hasMany('App\Resident', 'idkamar');
+    }
+
+    protected static function booted() {
+        static::deleting(function($kamar) {
+            foreach($kamar->resident as $r) { 
+                $r->delete(); 
+            };
+        });
+    }
 }

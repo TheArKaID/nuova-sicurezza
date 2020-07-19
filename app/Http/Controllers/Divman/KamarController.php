@@ -104,4 +104,13 @@ class KamarController extends Controller
 
         return redirect(route('divman.kamar'));
     }
+    
+    public function hapus($id)
+    {
+        $kamar = Kamar::where('id', $id)->where('idtahun', $this->helper->tahunAktif())->first();
+        $kamar->delete();
+        
+        return redirect(route('divman.kamar'));
+    }
+
 }
