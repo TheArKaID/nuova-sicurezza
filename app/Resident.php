@@ -37,4 +37,13 @@ class Resident extends Model
      */
     protected $fillable = ['idusroh', 'idkamar', 'idtahun', 'nama', 'nim', 'jeniskelamin', 'foto', 'created_at', 'updated_at'];
 
+    public function kamar()
+    {
+        return $this->belongsTo('App\Kamar', 'idkamar');
+    }
+    
+    public function usroh()
+    {
+        return $this->belongsTo('App\Usroh', 'idusroh');
+    }
 }
