@@ -18,7 +18,7 @@
                             <i class="pe-7s-home icon-gradient bg-mean-fruit">
                             </i>
                         </div>
-                        <div>Kamar {{$tahun->tahunajaran}}</div>
+                        <div>Kamar {{$tahun}}</div>
                     </div>
                 </div>
             </div>

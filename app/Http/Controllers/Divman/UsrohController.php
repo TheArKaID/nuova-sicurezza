@@ -26,8 +26,8 @@ class UsrohController extends Controller
 
     public function index()
     {
-        $ta = $this->helper->tahunAktif();
-        $tahun = Tahun::find($ta)->first();
+        $ta = $this->helper->idTahunAktif();
+        $tahun = $this->helper->tahunAktif();
         $usroh = Usroh::where('idtahun', $ta)->get();
         if($this->helper->isMobile())
             return view('m.divman.usroh.index', [
@@ -43,8 +43,8 @@ class UsrohController extends Controller
 
     public function tambah()
     {
-        $ta = $this->helper->tahunAktif();
-        $tahun = Tahun::find($ta)->first();
+        $ta = $this->helper->idTahunAktif();
+        $tahun = $this->helper->tahunAktif();
         if($this->helper->isMobile())
             return view('m.divman.usroh.tambah', [
                 'tahun' => $tahun
@@ -64,7 +64,7 @@ class UsrohController extends Controller
         ]);
 
         $usroh = new Usroh;
-        $usroh->idtahun = $this->helper->tahunAktif();
+        $usroh->idtahun = $this->helper->idTahunAktif();
         $usroh->nama = $request->nama;
         $usroh->lantai = $request->lantai;
         $usroh->gedung = $request->gedung;
@@ -75,7 +75,7 @@ class UsrohController extends Controller
 
     public function detail($id)
     {
-        $usroh = Usroh::where('id', $id)->where('idtahun', $this->helper->tahunAktif())->first();
+        $usroh = Usroh::where('id', $id)->where('idtahun', $this->helper->idTahunAktif())->first();
         
         if($usroh==null)
             return redirect()->back();
@@ -99,7 +99,7 @@ class UsrohController extends Controller
             'gedung' => 'required'
         ]);
 
-        $usroh = Usroh::where('id', $request->id)->where('idtahun', $this->helper->tahunAktif())->first();
+        $usroh = Usroh::where('id', $request->id)->where('idtahun', $this->helper->idTahunAktif())->first();
         $usroh->update($request->all());
         
         return redirect(route('divman.usroh'));
@@ -107,7 +107,7 @@ class UsrohController extends Controller
 
     public function hapus($id)
     {
-        $usroh = Usroh::where('id', $id)->where('idtahun', $this->helper->tahunAktif())->first();
+        $usroh = Usroh::where('id', $id)->where('idtahun', $this->helper->idTahunAktif())->first();
         $usroh->delete();
         
         return redirect(route('divman.usroh'));

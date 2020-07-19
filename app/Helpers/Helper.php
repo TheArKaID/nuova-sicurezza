@@ -11,10 +11,17 @@
             return false;
         }
 
-        function tahunAktif()
+        function idTahunAktif()
         {
             $ta = \App\Pengaturan::first();
             return $ta->idtahunaktif;
+        }
+
+        function tahunAktif()
+        {
+            $ta = \App\Pengaturan::first();
+            $tahun = \App\Tahun::find($ta)->first();
+            return $tahun->tahunajaran;
         }
     }
 ?>

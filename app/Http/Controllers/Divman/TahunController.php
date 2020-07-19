@@ -62,7 +62,7 @@ class TahunController extends Controller
         }
         
         $tahun = new Tahun;
-        $tahun->tahunajaran = $tahunajaran;
+        $tahun = $tahunajaran;
         $tahun->save();
         return redirect()->back()->with('sukses', 'Data Tahun Berhasil Ditambahkan');
     }

@@ -27,8 +27,8 @@ class KamarController extends Controller
 
     public function index()
     {
-        $ta = $this->helper->tahunAktif();
-        $tahun = Tahun::find($ta)->first();
+        $ta = $this->helper->idTahunAktif();
+        $tahun = $this->helper->tahunAktif();
         $kamar = Kamar::where('idtahun', $ta)->get();
         if($this->helper->isMobile())
             return view('m.divman.kamar.index', [
@@ -44,9 +44,9 @@ class KamarController extends Controller
 
     public function tambah()
     {
-        $ta = $this->helper->tahunAktif();
-        $tahun = Tahun::find($ta)->first();
-        $usroh = Usroh::where('idtahun', $this->helper->tahunAktif())->get();
+        $ta = $this->helper->idTahunAktif();
+        $tahun = $this->helper->tahunAktif();
+        $usroh = Usroh::where('idtahun', $this->helper->idTahunAktif())->get();
         if($this->helper->isMobile())
             return view('m.divman.kamar.tambah', [
                 'tahun' => $tahun,
@@ -67,7 +67,7 @@ class KamarController extends Controller
         ]);
 
         $kamar = new Kamar;
-        $kamar->idtahun = $this->helper->tahunAktif();
+        $kamar->idtahun = $this->helper->idTahunAktif();
         $kamar->nomor = $request->nomor;
         $kamar->idusroh = $request->idusroh;
         $kamar->save();
@@ -77,8 +77,8 @@ class KamarController extends Controller
 
     public function detail($id)
     {
-        $kamar = Kamar::where('id', $id)->where('idtahun', $this->helper->tahunAktif())->first();
-        $usroh = Usroh::where('idtahun', $this->helper->tahunAktif())->get();
+        $kamar = Kamar::where('id', $id)->where('idtahun', $this->helper->idTahunAktif())->first();
+        $usroh = Usroh::where('idtahun', $this->helper->idTahunAktif())->get();
         
         if($this->helper->isMobile())
             return view('m.divman.kamar.detail', [
@@ -99,7 +99,7 @@ class KamarController extends Controller
             'idusroh' => 'required'
         ]);
 
-        $kamar = Kamar::where('id', $request->id)->where('idtahun', $this->helper->tahunAktif())->first();
+        $kamar = Kamar::where('id', $request->id)->where('idtahun', $this->helper->idTahunAktif())->first();
         $kamar->update($request->all());
 
         return redirect(route('divman.kamar'));
@@ -107,7 +107,7 @@ class KamarController extends Controller
     
     public function hapus($id)
     {
-        $kamar = Kamar::where('id', $id)->where('idtahun', $this->helper->tahunAktif())->first();
+        $kamar = Kamar::where('id', $id)->where('idtahun', $this->helper->idTahunAktif())->first();
         $kamar->delete();
         
         return redirect(route('divman.kamar'));

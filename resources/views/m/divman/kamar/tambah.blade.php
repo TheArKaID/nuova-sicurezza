@@ -10,7 +10,7 @@
                             <i class="pe-7s-home icon-gradient bg-mean-fruit">
                             </i>
                         </div>
-                        <div>Tambah Kamar {{$tahun->tahunajaran}}</div>
+                        <div>Tambah Kamar {{$tahun}}</div>
                     </div>
                 </div>
             </div>

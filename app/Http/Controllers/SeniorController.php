@@ -29,7 +29,7 @@ class SeniorController extends Controller
 
     public function resident()
     {
-        $resident = Resident::where('idtahun', $this->helper->tahunAktif())->get();
+        $resident = Resident::where('idtahun', $this->helper->idTahunAktif())->get();
         if($this->helper->isMobile())
             return view('m.senior.resident', ['resident'=>$resident]);
         return view('senior.resident', ['resident'=>$resident]);
