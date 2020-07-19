@@ -40,6 +40,8 @@ Route::middleware('auth:senior')->group(function(){
 
     // Kamar
     Route::get('/s/d-kamar', "Divman\KamarController@index")->name('divman.kamar');
+    Route::get('/s/d-kamar/tambah', "Divman\KamarController@tambah")->name('divman.kamar.tambah');
+    Route::post('/s/d-kamar/tambah', "Divman\KamarController@tambahKamar")->name('divman.kamar.tambah');
 
     // Tahun
     Route::get('/s/d-tahun', "Divman\TahunController@index")->name('divman.tahun');

@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login | Sicurezza</title>
     <link rel="stylesheet" href="{{asset('assets/admin/css/main.css')}}">
+    @laravelPWA
     <style>
       .centered {
             text-align: center;

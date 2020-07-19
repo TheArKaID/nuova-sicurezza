@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Kamar;
 use App\Tahun;
+use App\Usroh;
 
 class KamarController extends Controller
 {
@@ -34,10 +35,43 @@ class KamarController extends Controller
                 'tahun' => $tahun,
                 'kamar' => $kamar
             ]);
+
         return view('divman.kamar.index', [
             'tahun' => $tahun,
             'kamar' => $kamar
         ]);
     }
-    
+
+    public function tambah()
+    {
+        $ta = $this->helper->tahunAktif();
+        $tahun = Tahun::find($ta)->first();
+        $usroh = Usroh::where('idtahun', $this->helper->tahunAktif())->get();
+        if($this->helper->isMobile())
+            return view('m.divman.kamar.tambah', [
+                'tahun' => $tahun,
+                'usroh' => $usroh
+            ]);
+
+        return view('divman.kamar.tambah', [
+            'tahun' => $tahun,
+            'usroh' => $usroh
+        ]);
+    }
+
+    public function tambahKamar(Request $request)
+    {
+        $this->validate($request,[
+            'nomor' => 'required',
+            'idusroh' => 'required'
+        ]);
+
+        $kamar = new Kamar;
+        $kamar->idtahun = $this->helper->tahunAktif();
+        $kamar->nomor = $request->nomor;
+        $kamar->idusroh = $request->idusroh;
+        $kamar->save();
+        
+        return redirect(route('divman.kamar'));
+    }
 }
