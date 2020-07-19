@@ -49,4 +49,13 @@ class Senior extends Authenticable
      */
     protected $fillable = ['idsenior', 'idusroh', 'idkamar', 'idtahun', 'nama', 'nim', 'jeniskelamin', 'foto', 'username', 'password', 'passcode', 'isdivman', 'remember_token', 'created_at', 'updated_at'];
 
+    public function usroh()
+    {
+        return $this->belongsTo('App\Usroh' ,'idusroh');
+    }
+
+    public function kamar()
+    {
+        return $this->belongsTo('App\Kamar', 'idkamar');
+    }
 }

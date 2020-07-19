@@ -76,7 +76,7 @@
                             <p style="font-size: .55rem;">Kamar</p>
                         </div>
                     </a>
-                    <a href="#1">
+                    <a href="{{route('divman.senior')}}">
                     <div class="font-icon-wrapper font-icon-lg iconwrap-d">
                         <i class="pe-7s-user icon-gradient bg-grow-early"></i>
                         <p style="font-size: .55rem;">Senior</p>

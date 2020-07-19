@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Divman;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Senior;
 
 class SeniorController extends Controller
 {
@@ -24,9 +25,18 @@ class SeniorController extends Controller
 
     public function index()
     {
+        $ta = $this->helper->idTahunAktif();
+        $senior = Senior::where('idtahun', $ta)->get();
+        $tahun = $this->helper->tahunAktif();
         if($this->helper->isMobile())
-            return view('m.divman.senior.index');
+            return view('m.divman.senior.index', [
+                'tahun' => $tahun,
+                'senior' => $senior,
+            ]);
         
-        return view('divman.senior.index');
+        return view('divman.senior.index', [
+            'tahun' => $tahun,
+            'senior' => $senior,
+        ]);
     }
 }
