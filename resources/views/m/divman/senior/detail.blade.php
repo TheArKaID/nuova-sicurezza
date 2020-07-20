@@ -5,6 +5,11 @@
         small{
             color: green
         }
+
+        img {
+            width: inherit;
+            height: inherit;
+        }
     </style>
 @endsection
 
@@ -18,7 +23,7 @@
                             <i class="pe-7s-home icon-gradient bg-mean-fruit">
                             </i>
                         </div>
-                        <div>Tambah Senior {{$tahun}}</div>
+                        <div>Detail {{ $senior->nama}}</div>
                     </div>
                 </div>
             </div>
@@ -29,21 +34,23 @@
         <div class="col-lg-12">
             <div class="main-card mb-3 card">
                 <div class="card-body">
-                    <form action="{{route('divman.senior.tambah')}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('divman.senior.simpan')}}" method="POST" enctype="multipart/form-data">
                         {{ csrf_field() }}
+                        <input type="hidden" name="id" value="{{$senior->id}}">
                         <p><small style="color: blue">* is required</small></p>
+
                         <hr>
 
                         <div class="position-relative row form-group">
                             <label for="nama" class="col-sm-2 col-form-label">*Nama</label>
                             <div class="col-sm-10">
-                                <input name="nama" id="nama" placeholder="Nama Senior" type="text" class="form-control" value="{{old('nama')}}" required>
+                                <input name="nama" id="nama" placeholder="Nama Senior" type="text" class="form-control" value="{{ $senior->nama }}" required>
                             </div>
                         </div>
                         <div class="position-relative row form-group">
                             <label for="NIM" class="col-sm-2 col-form-label">*NIM</label>
                             <div class="col-sm-10">
-                                <input name="nim" id="NIM" placeholder="NIM" type="number" class="form-control" value="{{old('nim')}}">
+                                <input name="nim" id="NIM" placeholder="NIM" type="number" class="form-control" value="{{ $senior->nim }}">
                                 <small>11 Digit</small>
                             </div>
                         </div>
@@ -52,14 +59,19 @@
                             <div class="col-sm-10">
                                 <select name="jeniskelamin" id="jeniskelamin" class="form-control" required>
                                     <option selected hidden disabled>Jenis Kelamin</option>
-                                    <option value="1">Laki-laki</option>
-                                    <option value="0">Perempuan</option>
+                                    <option {{ $senior->jeniskelamin==1 ? "selected" : ""}} value="1">Laki-laki</option>
+                                    <option {{ $senior->jeniskelamin==0 ? "selected" : ""}} value="0">Perempuan</option>
                                 </select>
                             </div>
                         </div>
                         <div class="position-relative row form-group">
                             <label for="foto" class="col-sm-2 col-form-label">Foto</label>
+                            <div class="col-md-10">
+                                <small>Saat ini</small>
+                                <img src="{{ asset('storage/foto/' .$tahun. '/senior/' .$senior->foto)}}" alt="" srcset="">
+                            </div>
                             <div class="col-sm-10">
+                                <small>Update Foto</small>
                                 <input name="foto" id="foto" placeholder="Foto" type="file" class="form-control">
                                 <small>File JPG, JPEG, PNG | Max Size : 2mb</small>
                             </div>
@@ -70,21 +82,21 @@
                         <div class="position-relative row form-group">
                             <label for="username" class="col-sm-2 col-form-label">*Username</label>
                             <div class="col-sm-10">
-                                <input name="username" id="username" placeholder="Username" type="text" class="form-control" value="{{old('username')}}" required>
+                                <input name="username" id="username" placeholder="Username" type="text" class="form-control" value="{{ $senior->username }}" required>
                                 <small>4-10 Karakter</small>
                             </div>
                         </div>
                         <div class="position-relative row form-group">
-                            <label for="password" class="col-sm-2 col-form-label">*Password</label>
+                            <label for="password" class="col-sm-2 col-form-label">Ganti Password</label>
                             <div class="col-sm-10">
-                                <input name="password" id="password" placeholder="Password" type="password" class="form-control" required>
+                                <input name="password" id="password" placeholder="Ganti Password" type="password" class="form-control">
                                 <small>8-20 Karakter</small>
                             </div>
                         </div>
                         <div class="position-relative row form-group">
-                            <label for="repassword" class="col-sm-2 col-form-label">*Ulangi Password</label>
+                            <label for="repassword" class="col-sm-2 col-form-label">Ulangi Password Baru</label>
                             <div class="col-sm-10">
-                                <input name="repassword" id="repassword" placeholder="Ulangi Password" type="password" class="form-control" required>
+                                <input name="repassword" id="repassword" placeholder="Ulangi Password" type="password" class="form-control">
                                 <small>8-20 Karakter</small>
                             </div>
                         </div>
@@ -96,8 +108,8 @@
                             <div class="col-sm-10">
                                 <select name="isdivman" id="isdivman" class="form-control" required>
                                     <option selected hidden disabled>Divisi Keamanan</option>
-                                    <option value="1">Ya</option>
-                                    <option value="0">Tidak</option>
+                                    <option {{ $senior->isdivman==1 ? "selected" : ""}} value="1">Ya</option>
+                                    <option {{ $senior->isdivman==0 ? "selected" : ""}} value="0">Tidak</option>
                                 </select>
                             </div>
                         </div>
@@ -107,7 +119,7 @@
                                 <select name="idusroh" id="idusroh" class="form-control" required>
                                     <option selected hidden disabled>Pilih Usroh</option>
                                     @foreach ($usroh as $u)
-                                        <option value="{{ $u->id }}">{{ $u->nama}}</option>
+                                        <option {{ $senior->idusroh==$u->id ? "selected" : ""}} value="{{ $u->id }}">{{ $u->nama}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -116,16 +128,16 @@
                             <label for="idkamar" class="col-sm-2 col-form-label">*Kamar</label>
                             <div class="col-sm-10">
                                 <select name="idkamar" id="idkamar" class="form-control" required>
-                                    <option selected hidden disabled>Pilih Kamar</option>
+                                    <option selected hidden value="{{$senior->kamar->id}}">{{$senior->kamar->nomor}}</option>
                                 </select>
                             </div>
                         </div>
 
                         <hr>
-
+                        
                         <div class="position-relative row form-group">
                             <div class="col-sm-10 offset-sm-2">
-                                <button class="btn btn-secondary">Tambah</button>
+                                <button class="btn btn-secondary">Simpan</button>
                             </div>
                         </div>
                     </form>

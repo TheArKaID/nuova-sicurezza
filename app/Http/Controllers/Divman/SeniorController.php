@@ -59,7 +59,7 @@ class SeniorController extends Controller
         ]);
     }
 
-    public function tambahKamar(Request $request)
+    public function tambahSenior(Request $request)
     {
         $this->validate($request, [
             'nama' => 'required',
@@ -82,6 +82,8 @@ class SeniorController extends Controller
         if($un!=null)
             return redirect()->back()->withInput()->withErrors('Username Telah Digunakan');
         
+        $senior = new Senior;
+
         // Foto
         if($request->hasFile('foto')){
             $this->validate($request, ['foto' => 'mimes:jpeg,jpg,png|max:2048',]);
@@ -90,24 +92,45 @@ class SeniorController extends Controller
             $name = $request->nim .".". $ext;
             $tahun = \Str::replaceFirst('/', '-', $this->helper->tahunAktif());
             $file->move('storage/foto/' .$tahun. "/senior/", $name);
+            $senior->foto = $name;
         }
 
-        $senior = new Senior;
         $senior->idtahun = $this->helper->idTahunAktif();
         $senior->idusroh = $request->idusroh;
         $senior->idkamar = $request->idkamar;
         $senior->nama = $request->nama;
         $senior->nim = $request->nim;
         $senior->jeniskelamin = $request->jeniskelamin;
-        $senior->foto = $request->foto;
         $senior->username = $request->username;
         $senior->password = \Hash::make($request->password);
         $senior->isdivman = $request->isdivman;
+        
         $senior->save();
         
         return redirect(route('divman.senior'));
     }
 
+    public function detail($id)
+    {
+        $ta = $this->helper->idTahunAktif();
+        $tahun = \Str::replaceFirst('/', '-', $this->helper->tahunAktif());
+        $senior = Senior::where('id', $id)->where('idtahun', $this->helper->idTahunAktif())->first();
+        $usroh = Usroh::where('idtahun', $ta)->get();
+        
+        if($this->helper->isMobile())
+            return view('m.divman.senior.detail', [
+                'senior' => $senior,
+                'usroh' => $usroh,
+                'tahun' => $tahun,
+            ]);
+        
+        return view('divman.senior.detail', [
+            'senior' => $senior,
+            'usroh' => $usroh,
+            'tahun' => $tahun,
+        ]);
+    }
+    
     public function getKamar($idusroh)
     {
         $kamar = DB::table('kamar')
@@ -122,5 +145,58 @@ class SeniorController extends Controller
         if(count($kamar)===0)
             $kamar = 0;
         return $kamar;
+    }
+
+    public function simpan(Request $request)
+    {
+        $this->validate($request, [
+            'nama' => 'required',
+            'nim' => 'required|digits:11',
+            'jeniskelamin' => 'required',
+            'username' => 'required|between:3,10',
+            'isdivman' => 'required',
+            'idusroh' => 'required',
+            'idkamar' => 'required'
+        ]);
+
+        $senior = Senior::where('id', $request->id)->where('idtahun', $this->helper->idTahunAktif())->first();
+
+        // Password
+        // dd($request->password && $request->repassword);
+        if($request->password || $request->repassword){
+            $this->validate($request, [
+                'password' => 'required|between:8,20',
+                'repassword' => 'required|between:8,20',
+            ]);
+
+            if($request->password!=$request->repassword)
+                return redirect()->back()->withInput()->withErrors('Password dan Repassword tidak sama!');
+
+            $senior->password = \Hash::make($request->password);
+        }
+
+        // Foto
+        if($request->hasFile('foto')){
+            $this->validate($request, ['foto' => 'mimes:jpeg,jpg,png|max:2048',]);
+            $file = $request->file('foto');
+            $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+            $name = $request->nim .".". $ext;
+            $tahun = \Str::replaceFirst('/', '-', $this->helper->tahunAktif());
+            $file->move('storage/foto/' .$tahun. "/senior/", $name);
+            $senior->foto = $name;
+        }
+
+        $senior->idtahun = $this->helper->idTahunAktif();
+        $senior->idusroh = $request->idusroh;
+        $senior->idkamar = $request->idkamar;
+        $senior->nama = $request->nama;
+        $senior->nim = $request->nim;
+        $senior->jeniskelamin = $request->jeniskelamin;
+        $senior->username = $request->username;
+        $senior->isdivman = $request->isdivman;
+        
+        $senior->save();
+        
+        return redirect(route('divman.senior'));
     }
 }
