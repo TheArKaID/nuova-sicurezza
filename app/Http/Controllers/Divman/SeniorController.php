@@ -82,6 +82,16 @@ class SeniorController extends Controller
         if($un!=null)
             return redirect()->back()->withInput()->withErrors('Username Telah Digunakan');
         
+        // Foto
+        if($request->hasFile('foto')){
+            $this->validate($request, ['foto' => 'mimes:jpeg,jpg,png|max:2048',]);
+            $file = $request->file('foto');
+            $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+            $name = $request->nim .".". $ext;
+            $tahun = \Str::replaceFirst('/', '-', $this->helper->tahunAktif());
+            $file->move('storage/foto/' .$tahun. "/senior/", $name);
+        }
+
         $senior = new Senior;
         $senior->idtahun = $this->helper->idTahunAktif();
         $senior->idusroh = $request->idusroh;

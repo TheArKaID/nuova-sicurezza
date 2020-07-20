@@ -29,7 +29,7 @@
         <div class="col-lg-12">
             <div class="main-card mb-3 card">
                 <div class="card-body">
-                    <form action="{{route('divman.senior.tambah')}}" method="POST">
+                    <form action="{{route('divman.senior.tambah')}}" method="POST" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <p><small style="color: blue">* is required</small></p>
                         <hr>
@@ -37,13 +37,13 @@
                         <div class="position-relative row form-group">
                             <label for="nama" class="col-sm-2 col-form-label">*Nama</label>
                             <div class="col-sm-10">
-                                <input name="nama" id="nama" placeholder="Nama Senior" type="text" class="form-control" required>
+                                <input name="nama" id="nama" placeholder="Nama Senior" type="text" class="form-control" value="{{old('nama')}}" required>
                             </div>
                         </div>
                         <div class="position-relative row form-group">
                             <label for="NIM" class="col-sm-2 col-form-label">NIM</label>
                             <div class="col-sm-10">
-                                <input name="nim" id="NIM" placeholder="NIM" type="number" class="form-control">
+                                <input name="nim" id="NIM" placeholder="NIM" type="number" class="form-control" value="{{old('nim')}}">
                                 <small>11 Digit</small>
                             </div>
                         </div>
@@ -61,6 +61,7 @@
                             <label for="foto" class="col-sm-2 col-form-label">Foto</label>
                             <div class="col-sm-10">
                                 <input name="foto" id="foto" placeholder="Foto" type="file" class="form-control">
+                                <small>File JPG, JPEG, PNG | Max Size : 2mb</small>
                             </div>
                         </div>
                         
@@ -69,7 +70,7 @@
                         <div class="position-relative row form-group">
                             <label for="username" class="col-sm-2 col-form-label">*Username</label>
                             <div class="col-sm-10">
-                                <input name="username" id="username" placeholder="Username" type="text" class="form-control" required>
+                                <input name="username" id="username" placeholder="Username" type="text" class="form-control" value="{{old('username')}}" required>
                                 <small>4-10 Karakter</small>
                             </div>
                         </div>
@@ -146,14 +147,18 @@
 			type: 'GET',
 			dataType: 'json',
                 success: function (usroh) {
-                    $.each(usroh, function (key, value) {
+                    if(usroh===0){
+                        $('select[id="idkamar"]').empty();
+                        $('select[id="idkamar"]').append('<option selected hidden disabled>Usroh Penuh</option>');
+                    } else{
+                        $.each(usroh, function (key, value) {
                         console.log(value)
                         $('select[id="idkamar"]')
                             .append(
                                 '<option value="' + value.id + '">'+ value.nomor +'</option>'
-                            )
-                        ;
-                    });
+                            );
+                        });
+                    }
                     // $('.loader').hide();
                 },
                 error: function(){
