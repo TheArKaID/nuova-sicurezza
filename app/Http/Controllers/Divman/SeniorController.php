@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Divman;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Senior;
 use App\Usroh;
@@ -131,22 +132,6 @@ class SeniorController extends Controller
         ]);
     }
     
-    public function getKamar($idusroh)
-    {
-        $kamar = DB::table('kamar')
-            ->select('kamar.id', 'kamar.nomor')
-            ->leftJoin('resident', 'kamar.id', '=', 'resident.idkamar')
-            ->leftJoin('senior', 'kamar.id', '=', 'senior.idkamar')
-            ->where('kamar.idtahun', $this->helper->idTahunAktif())
-            ->where('kamar.idusroh', $idusroh)
-            ->whereNull('resident.idkamar')
-            ->whereNull('senior.idkamar')
-            ->get();
-        if(count($kamar)===0)
-            $kamar = 0;
-        return $kamar;
-    }
-
     public function simpan(Request $request)
     {
         $this->validate($request, [
@@ -199,4 +184,32 @@ class SeniorController extends Controller
         
         return redirect(route('divman.senior'));
     }
+
+    public function hapus($id)
+    {
+        $senior = Senior::where('id', $id)->where('idtahun', $this->helper->idTahunAktif())->first();
+        
+        $tahun = \Str::replaceFirst('/', '-', $this->helper->tahunAktif());
+        Storage::delete('public/foto/' .$tahun. '/senior/' .$senior->foto);
+        
+        $senior->delete();
+        
+        return redirect(route('divman.senior'));
+    }
+    public function getKamar($idusroh)
+    {
+        $kamar = DB::table('kamar')
+            ->select('kamar.id', 'kamar.nomor')
+            ->leftJoin('resident', 'kamar.id', '=', 'resident.idkamar')
+            ->leftJoin('senior', 'kamar.id', '=', 'senior.idkamar')
+            ->where('kamar.idtahun', $this->helper->idTahunAktif())
+            ->where('kamar.idusroh', $idusroh)
+            ->whereNull('resident.idkamar')
+            ->whereNull('senior.idkamar')
+            ->get();
+        if(count($kamar)===0)
+            $kamar = 0;
+        return $kamar;
+    }
+
 }

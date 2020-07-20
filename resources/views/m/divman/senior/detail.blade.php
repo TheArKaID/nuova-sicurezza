@@ -138,6 +138,7 @@
                         <div class="position-relative row form-group">
                             <div class="col-sm-10 offset-sm-2">
                                 <button class="btn btn-secondary">Simpan</button>
+                                <a href="#" class="btn mr-2 mb-2 btn-danger" data-toggle="modal" data-target=".modalDelete" style="float: right">Hapus</a>
                             </div>
                         </div>
                     </form>
@@ -184,4 +185,26 @@
             $('select[id="idkamar"]').append('<option selected hidden disabled>Pilih Kamar</option>');
         }
     </script>
+@endsection
+
+@section('modals')
+    <div class="modal fade modalDelete" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Hapus Senior ini ?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>PERHATIAN! Data Senior {{ $senior->nama }} akan terhapus.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <a href="{{route('divman.senior.hapus', $senior->id)}}" class="btn btn-danger">Hapus</a>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
