@@ -85,17 +85,6 @@ class SeniorController extends Controller
         
         $senior = new Senior;
 
-        // Foto
-        if($request->hasFile('foto')){
-            $this->validate($request, ['foto' => 'mimes:jpeg,jpg,png|max:2048',]);
-            $file = $request->file('foto');
-            $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
-            $name = $request->nim .".". $ext;
-            $tahun = \Str::replaceFirst('/', '-', $this->helper->tahunAktif());
-            $file->move('storage/foto/' .$tahun. "/senior/", $name);
-            $senior->foto = $name;
-        }
-
         $senior->idtahun = $this->helper->idTahunAktif();
         $senior->idusroh = $request->idusroh;
         $senior->idkamar = $request->idkamar;
@@ -108,6 +97,18 @@ class SeniorController extends Controller
         
         $senior->save();
         
+        // Foto
+        if($request->hasFile('foto')){
+            $this->validate($request, ['foto' => 'mimes:jpeg,jpg,png|max:2048',]);
+            $file = $request->file('foto');
+            $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+            $name = $senior->id .".". $ext;
+            $tahun = \Str::replaceFirst('/', '-', $this->helper->tahunAktif());
+            $file->move('storage/foto/' .$tahun. "/senior/", $name);
+            $senior->foto = $name;
+            $senior->save();
+        }
+
         return redirect(route('divman.senior'));
     }
 
@@ -165,7 +166,7 @@ class SeniorController extends Controller
             $this->validate($request, ['foto' => 'mimes:jpeg,jpg,png|max:2048',]);
             $file = $request->file('foto');
             $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
-            $name = $request->nim .".". $ext;
+            $name = $request->id .".". $ext;
             $tahun = \Str::replaceFirst('/', '-', $this->helper->tahunAktif());
             $file->move('storage/foto/' .$tahun. "/senior/", $name);
             $senior->foto = $name;
