@@ -49,6 +49,8 @@ Route::middleware('auth:senior')->group(function(){
     // Senior
     Route::get('/s/d-senior', "Divman\SeniorController@index")->name('divman.senior');
     Route::get('/s/d-senior/tambah', "Divman\SeniorController@tambah")->name('divman.senior.tambah');
+    Route::get('/s/d-senior/getkamar/{idusroh}', "Divman\SeniorController@getKamar")->name('divman.senior.getkamar');
+    Route::post('/s/d-senior/tambah', "Divman\SeniorController@tambahKamar")->name('divman.senior.tambah');
 
     // Tahun
     Route::get('/s/d-tahun', "Divman\TahunController@index")->name('divman.tahun');
@@ -56,7 +58,6 @@ Route::middleware('auth:senior')->group(function(){
     Route::post('/s/d-tahun/set', "Divman\TahunController@setTahun")->name('divman.tahun.set');
     Route::post('/s/d-tahun/delete', "Divman\TahunController@hapusTahun")->name('divman.tahun.delete');      
 });
-
 
 /**
  * Honey Pot

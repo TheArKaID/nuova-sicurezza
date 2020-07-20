@@ -1,5 +1,13 @@
 @extends('layouts.senior-m')
 
+@section('styles')
+    <style>
+        small{
+            color: green
+        }
+    </style>
+@endsection
+
 @section('content')
     <div class="row">
         <div class="col-lg-12">
@@ -23,7 +31,7 @@
                 <div class="card-body">
                     <form action="{{route('divman.senior.tambah')}}" method="POST">
                         {{ csrf_field() }}
-                        <p><small>* is required</small></p>
+                        <p><small style="color: blue">* is required</small></p>
                         <hr>
 
                         <div class="position-relative row form-group">
@@ -36,6 +44,7 @@
                             <label for="NIM" class="col-sm-2 col-form-label">NIM</label>
                             <div class="col-sm-10">
                                 <input name="nim" id="NIM" placeholder="NIM" type="number" class="form-control">
+                                <small>11 Digit</small>
                             </div>
                         </div>
                         <div class="position-relative row form-group">
@@ -61,18 +70,21 @@
                             <label for="username" class="col-sm-2 col-form-label">*Username</label>
                             <div class="col-sm-10">
                                 <input name="username" id="username" placeholder="Username" type="text" class="form-control" required>
+                                <small>4-10 Karakter</small>
                             </div>
                         </div>
                         <div class="position-relative row form-group">
                             <label for="password" class="col-sm-2 col-form-label">*Password</label>
                             <div class="col-sm-10">
                                 <input name="password" id="password" placeholder="Password" type="password" class="form-control" required>
+                                <small>8-20 Karakter</small>
                             </div>
                         </div>
                         <div class="position-relative row form-group">
                             <label for="repassword" class="col-sm-2 col-form-label">*Re Password</label>
                             <div class="col-sm-10">
                                 <input name="repassword" id="repassword" placeholder="Re Password" type="password" class="form-control" required>
+                                <small>8-20 Karakter</small>
                             </div>
                         </div>
 
@@ -93,9 +105,9 @@
                             <div class="col-sm-10">
                                 <select name="idusroh" id="idusroh" class="form-control" required>
                                     <option selected hidden disabled>Pilih Usroh</option>
-                                    {{-- @foreach ($usroh as $u)
+                                    @foreach ($usroh as $u)
                                         <option value="{{ $u->id }}">{{ $u->nama}}</option>
-                                    @endforeach --}}
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -104,9 +116,6 @@
                             <div class="col-sm-10">
                                 <select name="idkamar" id="idkamar" class="form-control" required>
                                     <option selected hidden disabled>Pilih Kamar</option>
-                                    {{-- @foreach ($usroh as $u)
-                                        <option value="{{ $u->id }}">{{ $u->nama}}</option>
-                                    @endforeach --}}
                                 </select>
                             </div>
                         </div>
@@ -123,4 +132,39 @@
             </div>
         <div>
     </div>
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('assets/admin/js/jquery.min.js')}}"></script>
+    <script>
+        $("select[name='idusroh'").on('change', function () {
+            clearKamar();
+            var idusroh = this.value;
+            console.log(idusroh);
+            jQuery.ajax({
+            url: "/s/d-senior/getkamar/" +idusroh,
+			type: 'GET',
+			dataType: 'json',
+                success: function (usroh) {
+                    $.each(usroh, function (key, value) {
+                        console.log(value)
+                        $('select[id="idkamar"]')
+                            .append(
+                                '<option value="' + value.id + '">'+ value.nomor +'</option>'
+                            )
+                        ;
+                    });
+                    // $('.loader').hide();
+                },
+                error: function(){
+                    // $('.loader').hide();
+                }
+            });
+        });
+
+        function clearKamar() {
+            $('select[id="idkamar"]').empty();
+            $('select[id="idkamar"]').append('<option selected hidden disabled>Pilih Kamar</option>');
+        }
+    </script>
 @endsection
