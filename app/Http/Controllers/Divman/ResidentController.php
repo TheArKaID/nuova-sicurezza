@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Divman;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Resident;
 use App\Usroh;
@@ -151,6 +152,20 @@ class ResidentController extends Controller
         $resident->jeniskelamin = $request->jeniskelamin;
         
         $resident->save();
+        
+        return redirect(route('divman.resident'));
+    }
+
+    public function hapus($id)
+    {
+        $resident = Resident::where('id', $id)->where('idtahun', $this->helper->idTahunAktif())->first();
+        
+        if($resident->foto){
+            $tahun = \Str::replaceFirst('/', '-', $this->helper->tahunAktif());
+            Storage::delete('public/foto/' .$tahun. '/resident/' .$resident->foto);
+        }
+        
+        $resident->delete();
         
         return redirect(route('divman.resident'));
     }

@@ -168,7 +168,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <a href="{{route('divman.senior.hapus', $resident->id)}}" class="btn btn-danger">Hapus</a>
+                    <a href="{{route('divman.resident.hapus', $resident->id)}}" class="btn btn-danger">Hapus</a>
                 </div>
             </div>
         </div>
