@@ -34,7 +34,37 @@ class TengkoController extends Controller
         
         return view('divman.tengko.index', [
             'tahun' => $tahun,
-            'tengko' => $senior,
+            'tengko' => $tengko,
         ]);
+    }
+
+    public function tambah()
+    {
+        $ta = $this->helper->idTahunAktif();
+        $tahun = $this->helper->tahunAktif();
+        if($this->helper->isMobile())
+            return view('m.divman.tengko.tambah', [
+                'tahun' => $tahun,
+            ]);
+        
+        return view('divman.tengko.tambah', [
+            'tahun' => $tahun,
+        ]);
+    }
+
+    public function tambahTengko(Request $request)
+    {
+        $this->validate($request,[
+            'tipe' => 'required',
+            'penjelasan' => 'required'
+        ]);
+
+        $tengko = new Tengko;
+        $tengko->idtahun = $this->helper->idTahunAktif();
+        $tengko->tipe = $request->tipe;
+        $tengko->penjelasan = $request->penjelasan;
+        $tengko->save();
+        
+        return redirect(route('divman.tengko'));
     }
 }
