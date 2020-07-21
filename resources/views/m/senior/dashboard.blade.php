@@ -81,7 +81,7 @@
                         <i class="pe-7s-user icon-gradient bg-grow-early"></i>
                         <p style="font-size: .55rem;">Senior</p>
                     </div>
-                    <a href="#2">
+                    <a href="{{ route('divman.resident')}}">
                     <div class="font-icon-wrapper font-icon-lg iconwrap-d">
                         <i class="pe-7s-users icon-gradient bg-malibu-beach"></i>
                         <p style="font-size: .55rem;">Resident</p>
