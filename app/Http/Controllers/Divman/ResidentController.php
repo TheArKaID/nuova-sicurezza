@@ -118,6 +118,42 @@ class ResidentController extends Controller
             'tahun' => $tahun,
         ]);
     }
+
+    public function simpan(Request $request)
+    {
+        
+        $this->validate($request, [
+            'nama' => 'required',
+            'nim' => 'required|digits:11',
+            'jeniskelamin' => 'required',
+            'idusroh' => 'required',
+            'idkamar' => 'required'
+        ]);
+
+        $resident = Resident::where('id', $request->id)->where('idtahun', $this->helper->idTahunAktif())->first();
+
+        // Foto
+        if($request->hasFile('foto')){
+            $this->validate($request, ['foto' => 'mimes:jpeg,jpg,png|max:2048',]);
+            $file = $request->file('foto');
+            $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+            $name = $request->id .".". $ext;
+            $tahun = \Str::replaceFirst('/', '-', $this->helper->tahunAktif());
+            $file->move('storage/foto/' .$tahun. "/resident/", $name);
+            $resident->foto = $name;
+        }
+
+        $resident->idtahun = $this->helper->idTahunAktif();
+        $resident->idusroh = $request->idusroh;
+        $resident->idkamar = $request->idkamar;
+        $resident->nama = $request->nama;
+        $resident->nim = $request->nim;
+        $resident->jeniskelamin = $request->jeniskelamin;
+        
+        $resident->save();
+        
+        return redirect(route('divman.resident'));
+    }
     
     public function getKamar($idusroh)
     {

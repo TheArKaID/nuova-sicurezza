@@ -34,7 +34,7 @@
         <div class="col-lg-12">
             <div class="main-card mb-3 card">
                 <div class="card-body">
-                    <form action="{{route('divman.senior.simpan')}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('divman.resident.simpan')}}" method="POST" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <input type="hidden" name="id" value="{{$resident->id}}">
                         <p><small style="color: blue">* is required</small></p>
