@@ -67,4 +67,31 @@ class TengkoController extends Controller
         
         return redirect(route('divman.tengko'));
     }
+
+    public function detail($id)
+    {
+        $tengko = Tengko::where('id', $id)->where('idtahun', $this->helper->idTahunAktif())->first();
+        
+        if($this->helper->isMobile())
+            return view('m.divman.tengko.detail', [
+                'tengko' => $tengko
+            ]);
+
+        return view('divman.tengko.detail', [
+            'tengko' => $tengko
+        ]);
+    }
+
+    public function simpan(Request $request)
+    {
+        $this->validate($request, [
+            'tipe' => 'required',
+            'penjelasan' => 'required'
+        ]);
+
+        $tengko = Tengko::where('id', $request->id)->where('idtahun', $this->helper->idTahunAktif())->first();
+        $tengko->update($request->all());
+
+        return redirect(route('divman.tengko'));
+    }
 }

@@ -43,7 +43,7 @@
                                 $row=1;
                             @endphp
                             @foreach ($tengko as $t)
-                                <tr class='clickable-row' data-url='{{route('divman.kamar.detail', $t->id)}}'>
+                                <tr class='clickable-row' data-url='{{route('divman.tengko.detail', $t->id)}}'>
                                     <th scope="row">{{$row}}</th>
                                     <td>{{$t->tipe}}</td>
                                     <td>{{$t->penjelasan}}</td>
