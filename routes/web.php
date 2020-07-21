@@ -64,6 +64,9 @@ Route::middleware('auth:senior')->group(function(){
     Route::post('/s/d-resident/simpan', "Divman\ResidentController@simpan")->name('divman.resident.simpan');
     Route::get('/s/d-resident/hapus/{id}', "Divman\ResidentController@hapus")->name('divman.resident.hapus');
 
+    // Tengko
+    Route::get('/s/d-tengko', "Divman\TengkoController@index")->name('divman.tengko');
+
     // Tahun
     Route::get('/s/d-tahun', "Divman\TahunController@index")->name('divman.tahun');
     Route::post('/s/d-tahun/add', "Divman\TahunController@tambahTahun")->name('divman.tahun.add');

@@ -48,7 +48,7 @@
                     <a href="#3">
                     <div class="font-icon-wrapper font-icon-lg iconwrap">
                         <i class="fa fa-lock icon-gradient bg-sunny-morning"></i>
-                        <p style="font-size: .55rem;">Peraturan</p>
+                        <p style="font-size: .55rem;">Tengko</p>
                     </div>
                     </a>
                     <a href="#4">
@@ -87,7 +87,7 @@
                         <p style="font-size: .55rem;">Resident</p>
                     </div>
                     </a>
-                    <a href="#3">
+                    <a href="{{ route('divman.tengko')}}">
                         <div class="font-icon-wrapper font-icon-lg iconwrap-d">
                             <i class="pe-7s-hammer icon-gradient bg-strong-bliss"></i>
                             <p style="font-size: .55rem;">Tengko</p>
