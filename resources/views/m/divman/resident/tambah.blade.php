@@ -29,7 +29,7 @@
         <div class="col-lg-12">
             <div class="main-card mb-3 card">
                 <div class="card-body">
-                    <form action="{{route('divman.senior.tambah')}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('divman.resident.tambah')}}" method="POST" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <p><small style="color: blue">* is required</small></p>
                         <hr>

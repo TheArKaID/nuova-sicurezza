@@ -57,6 +57,47 @@ class ResidentController extends Controller
         ]);
     }
 
+    public function tambahResident(Request $request)
+    {
+        
+        $this->validate($request, [
+            'nama' => 'required',
+            'nim' => 'required|unique:resident,nim|digits:11',
+            'jeniskelamin' => 'required',
+            'idusroh' => 'required',
+            'idkamar' => 'required'
+        ]);
+
+        // Password
+        if($request->password!=$request->repassword)
+            return redirect()->back()->withInput()->withErrors('Password dan Repassword tidak sama!');
+
+        $resident = new Resident;
+
+        $resident->idtahun = $this->helper->idTahunAktif();
+        $resident->idusroh = $request->idusroh;
+        $resident->idkamar = $request->idkamar;
+        $resident->nama = $request->nama;
+        $resident->nim = $request->nim;
+        $resident->jeniskelamin = $request->jeniskelamin;
+        
+        $resident->save();
+        
+        // Foto
+        if($request->hasFile('foto')){
+            $this->validate($request, ['foto' => 'mimes:jpeg,jpg,png|max:2048',]);
+            $file = $request->file('foto');
+            $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+            $name = $resident->id .".". $ext;
+            $tahun = \Str::replaceFirst('/', '-', $this->helper->tahunAktif());
+            $file->move('storage/foto/' .$tahun. "/resident/", $name);
+            $resident->foto = $name;
+            $resident->save();
+        }
+
+        return redirect(route('divman.resident'));
+    }
+
     public function getKamar($idusroh)
     {
         $kamar = DB::table('kamar')
