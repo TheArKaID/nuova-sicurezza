@@ -148,7 +148,6 @@ class SeniorController extends Controller
         $senior = Senior::where('id', $request->id)->where('idtahun', $this->helper->idTahunAktif())->first();
 
         // Password
-        // dd($request->password && $request->repassword);
         if($request->password || $request->repassword){
             $this->validate($request, [
                 'password' => 'required|between:8,20',
@@ -190,13 +189,16 @@ class SeniorController extends Controller
     {
         $senior = Senior::where('id', $id)->where('idtahun', $this->helper->idTahunAktif())->first();
         
-        $tahun = \Str::replaceFirst('/', '-', $this->helper->tahunAktif());
-        Storage::delete('public/foto/' .$tahun. '/senior/' .$senior->foto);
+        if($senior->foto){
+            $tahun = \Str::replaceFirst('/', '-', $this->helper->tahunAktif());
+            Storage::delete('public/foto/' .$tahun. '/senior/' .$senior->foto);
+        }
         
         $senior->delete();
         
         return redirect(route('divman.senior'));
     }
+
     public function getKamar($idusroh)
     {
         $kamar = DB::table('kamar')
