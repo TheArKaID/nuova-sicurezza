@@ -70,6 +70,7 @@ Route::middleware('auth:senior')->group(function(){
     Route::post('/s/d-tengko/tambah', "Divman\TengkoController@tambahTengko")->name('divman.tengko.tambah');
     Route::get('/s/d-tengko/{id}', "Divman\TengkoController@detail")->name('divman.tengko.detail');
     Route::post('/s/d-tengko/simpan', "Divman\TengkoController@simpan")->name('divman.tengko.simpan');
+    Route::get('/s/d-tengko/hapus/{id}', "Divman\TengkoController@hapus")->name('divman.tengko.hapus');
 
     // Tahun
     Route::get('/s/d-tahun', "Divman\TahunController@index")->name('divman.tahun');

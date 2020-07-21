@@ -65,11 +65,11 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>PERHATIAN! Semua Data Resident pada Tengko {{ $tengko->nomor }} akan terhapus juga.</p>
+                    <p>PERHATIAN! Semua Data Pelanggaran Resident yang berkaitan dengan Tengko ini akan terhapus juga.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <a href="{{route('divman.kamar.hapus', $tengko->id)}}" class="btn btn-danger">Hapus</a>
+                    <a href="{{route('divman.tengko.hapus', $tengko->id)}}" class="btn btn-danger">Hapus</a>
                 </div>
             </div>
         </div>

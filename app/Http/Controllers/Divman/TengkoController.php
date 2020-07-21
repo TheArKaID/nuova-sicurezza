@@ -94,4 +94,12 @@ class TengkoController extends Controller
 
         return redirect(route('divman.tengko'));
     }
+
+    public function hapus($id)
+    {
+        $tengko = Tengko::where('id', $id)->where('idtahun', $this->helper->idTahunAktif())->first();
+        $tengko->delete();
+        
+        return redirect(route('divman.tengko'));
+    }
 }
