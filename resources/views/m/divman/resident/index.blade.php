@@ -44,7 +44,7 @@
                                 $row=1;
                             @endphp
                             @foreach ($resident as $r)
-                                <tr class='clickable-row' data-url='{{route('divman.senior.detail', $r->id)}}'>
+                                <tr class='clickable-row' data-url='{{route('divman.resident.detail', $r->id)}}'>
                                     <th scope="row">{{$row}}</th>
                                     <td>{{$r->nama}}</td>
                                     <td>{{$r->kamar->nomor}}</td>

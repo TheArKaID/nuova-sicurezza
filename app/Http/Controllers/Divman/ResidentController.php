@@ -98,6 +98,27 @@ class ResidentController extends Controller
         return redirect(route('divman.resident'));
     }
 
+    public function detail($id)
+    {
+        $ta = $this->helper->idTahunAktif();
+        $tahun = \Str::replaceFirst('/', '-', $this->helper->tahunAktif());
+        $resident = Resident::where('id', $id)->where('idtahun', $this->helper->idTahunAktif())->first();
+        $usroh = Usroh::where('idtahun', $ta)->get();
+        
+        if($this->helper->isMobile())
+            return view('m.divman.resident.detail', [
+                'resident' => $resident,
+                'usroh' => $usroh,
+                'tahun' => $tahun,
+            ]);
+        
+        return view('divman.resident.detail', [
+            'resident' => $resident,
+            'usroh' => $usroh,
+            'tahun' => $tahun,
+        ]);
+    }
+    
     public function getKamar($idusroh)
     {
         $kamar = DB::table('kamar')
