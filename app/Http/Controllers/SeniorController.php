@@ -23,15 +23,15 @@ class SeniorController extends Controller
     public function index()
     {
         if($this->helper->isMobile())
-            return view('m.senior.dashboard');
-        return view('senior.dashboard');
+            return view('m.senior.senior.index');
+        return view('senior.senior.index');
     }
 
     public function resident()
     {
         $resident = Resident::where('idtahun', $this->helper->idTahunAktif())->get();
         if($this->helper->isMobile())
-            return view('m.senior.resident', ['resident'=>$resident]);
-        return view('senior.resident', ['resident'=>$resident]);
+            return view('m.senior.resident.index', ['resident'=>$resident]);
+        return view('senior.resident.index', ['resident'=>$resident]);
     }
 }

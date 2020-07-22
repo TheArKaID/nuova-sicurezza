@@ -22,8 +22,11 @@ Route::get('/s/login', "Auth\SeniorAuthController@login")->name('senior.login');
 Route::post('/s/login', "Auth\SeniorAuthController@postLogin")->name('senior.login.post');
 
 Route::middleware('auth:senior')->group(function(){
-    Route::get('/s', "SeniorController@index");
+    Route::get('/s', "DashboardController@index");
     Route::get('/s/logout', "Auth\SeniorAuthController@logout");
+
+    // Senior
+    Route::get('/s/senior', "SeniorController@index");
 
     // Resident
     Route::get('/s/resident', "SeniorController@resident")->name('resident');

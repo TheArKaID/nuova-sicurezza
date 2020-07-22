@@ -29,11 +29,11 @@ class TahunController extends Controller
         $tahun = Tahun::all();
         $pengaturan = Pengaturan::first();
         if($this->helper->isMobile())
-            return view('m.divman.tahun', [
+            return view('m.divman.tahun.index', [
                 'tahun' => $tahun,
                 'pengaturan' => $pengaturan
             ]);
-        return view('senior.tahun', [
+        return view('divman.tahun.index', [
             'tahun' => $tahun,
             'pengaturan' => $pengaturan
         ]);
