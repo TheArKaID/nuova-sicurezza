@@ -33,7 +33,7 @@
             </div>
             <div class="main-card mb-3 card">
                 <div class="card-body">
-                    <a href="#1">
+                    <a href="{{route('senior.senior')}}">
                     <div class="font-icon-wrapper font-icon-lg iconwrap">
                         <i class="fa fa-user-tie icon-gradient bg-grow-early"></i>
                         <p style="font-size: .55rem;">Senior</p>

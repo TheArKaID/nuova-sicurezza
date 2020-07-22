@@ -26,10 +26,10 @@ Route::middleware('auth:senior')->group(function(){
     Route::get('/s/logout', "Auth\SeniorAuthController@logout");
 
     // Senior
-    Route::get('/s/senior', "SeniorController@index");
+    Route::get('/s/senior', "SeniorController@index")->name('senior.senior');
 
     // Resident
-    Route::get('/s/resident', "SeniorController@resident")->name('resident');
+    Route::get('/s/resident', "SeniorController@resident")->name('senior.resident');
 
     /**
      * Divisi Keamanan

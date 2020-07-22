@@ -9,6 +9,7 @@ use Validator;
 use App\Resident;
 use App\Tahun;
 use App\Pengaturan;
+use App\Senior;
 
 class SeniorController extends Controller
 {
@@ -22,9 +23,18 @@ class SeniorController extends Controller
 
     public function index()
     {
+        $ta = $this->helper->idTahunAktif();
+        $senior = Senior::where('idtahun', $ta)->get();
+        $tahun = $this->helper->tahunAktif();
         if($this->helper->isMobile())
-            return view('m.senior.senior.index');
-        return view('senior.senior.index');
+            return view('m.senior.senior.index', [
+                'tahun' => $tahun,
+                'senior' => $senior
+            ]);
+        return view('senior.senior.index', [
+            'tahun' => $tahun,
+            'senior' => $senior
+        ]);
     }
 
     public function resident()
