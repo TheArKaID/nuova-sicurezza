@@ -27,6 +27,7 @@ Route::middleware('auth:senior')->group(function(){
 
     // Senior
     Route::get('/s/senior', "SeniorController@index")->name('senior.senior');
+    Route::get('/s/senior/{id}', "SeniorController@detail")->name('senior.senior.detail');
 
     // Resident
     Route::get('/s/resident', "SeniorController@resident")->name('senior.resident');

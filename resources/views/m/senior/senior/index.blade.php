@@ -47,7 +47,7 @@
                                 $row=1;
                             @endphp
                             @foreach ($senior as $s)
-                                <tr class='clickable-row' data-url='#/{{$s->id}}'>
+                                <tr class='clickable-row' data-url='{{route('senior.senior.detail', $s->id)}}'>
                                     <th scope="row">{{$row}}</th>
                                     <td>{{$s->nama}}</td>
                                     <td>{{$s->usroh->nama}}</td>

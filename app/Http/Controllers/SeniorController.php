@@ -5,10 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Validator;
-
-use App\Resident;
+use App\Usroh;
 use App\Tahun;
-use App\Pengaturan;
 use App\Senior;
 
 class SeniorController extends Controller
@@ -37,6 +35,27 @@ class SeniorController extends Controller
         ]);
     }
 
+    public function detail($id)
+    {
+        $ta = $this->helper->idTahunAktif();
+        $tahun = \Str::replaceFirst('/', '-', $this->helper->tahunAktif());
+        $senior = Senior::where('id', $id)->where('idtahun', $this->helper->idTahunAktif())->first();
+        
+        if($this->helper->isMobile())
+            return view('m.senior.senior.detail', [
+                'senior' => $senior,
+                'tahun' => $tahun,
+            ]);
+        
+        return view('senior.senior.detail', [
+            'senior' => $senior,
+            'tahun' => $tahun,
+        ]);
+    }
+
+    /**
+     * MOVE TO RESIDENTCONTROLLER
+     */
     public function resident()
     {
         $resident = Resident::where('idtahun', $this->helper->idTahunAktif())->get();
