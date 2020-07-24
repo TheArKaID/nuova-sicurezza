@@ -2,6 +2,9 @@
 
 @section('styles')
     <style>
+        .clickable-row:hover{
+            cursor: pointer;
+        }
     </style>
 @endsection
 
@@ -28,74 +31,65 @@
                 <div class="card-body">
                     <div class="row" style="display: grid">
                         <div class="widget-content p-0">
-                            <div class="widget-content-wrapper" style="float: left">
+                            <div class="widget-content-wrapper clickable-row" style="float: left" data-url='{{isset($senior[0]) ? route('senior.senior.detail', $senior[0]["id"]) : '#'}}'>
                                 <div class="widget-content-left mr-1">
                                     <div class="widget-content-left">
-                                        <img class="rounded-circle" src="assets/images/avatars/4.jpg" alt="" width="30">
+                                        @if (isset($senior[0]))
+                                            <img class="rounded-circle" src="{{ asset('storage/foto/' .$tahun. '/senior/' .$senior[0]['foto'])}}" alt="" width="30">
+                                        @else
+                                            <img class="rounded-circle" src="{{ asset('images/user-default.jpg')}}" alt="" width="30">
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="widget-content-left flex2">
-                                    <div class="widget-heading">John Doe</div>
+                                    <div class="widget-heading">{{isset($senior[0]) ? $senior[0]['nama'] : "-"}}</div>
                                     <div class="widget-subheading opacity-7">SR</div>
                                 </div>
                             </div>
-                            <div class="widget-content-wrapper" style="float: right; text-align: right">
+                            <div class="widget-content-wrapper clickable-row" style="float: right; text-align: right" data-url='{{isset($senior[1]) ? route('senior.senior.detail', $senior[1]["id"]) : '#'}}'>
                                 <div class="widget-content-left flex2">
-                                    <div class="widget-heading">John Doe</div>
+                                    <div class="widget-heading">{{isset($senior[1]) ? $senior[1]['nama'] : "-"}}</div>
                                     <div class="widget-subheading opacity-7">ASR</div>
                                 </div>
                                 <div class="widget-content-left mr-1">
                                     <div class="widget-content-left">
-                                        <img class="rounded-circle" src="assets/images/avatars/4.jpg" alt="" width="30">
+                                        @if (isset($senior[1]))
+                                            <img class="rounded-circle" src="{{ asset('storage/foto/' .$tahun. '/senior/' .$senior[1]['foto'])}}" alt="" width="30">
+                                        @else
+                                            <img class="rounded-circle" src="{{ asset('images/user-default.jpg')}}" alt="" width="30">
+                                        @endif
                                     </div>
                                 </div>
                             </div>
                         </div>    
                     </div>
+                    
                     <hr>
 
                     <div class="row">
                         <div class="table-responsive">
                             <table class="align-middle mb-0 table table-borderless table-striped table-hover">
                                 <tbody>
-                                <tr>
-                                    <td class="text-center text-muted">U401A</td>
-                                    <td>
-                                        <div class="widget-content p-0">
-                                            <div class="widget-content-wrapper">
-                                                <div class="widget-content-left mr-3">
-                                                    <div class="widget-content-left">
-                                                        <img class="rounded-circle" src="assets/images/avatars/4.jpg" alt="" width="40">
+                                @foreach ($resident as $r)
+                                    <tr class='clickable-row' data-url='{{route('senior.resident.detail', $r->id)}}'>
+                                        <td class="text-center text-muted">{{$r->kamar->nomor}}</td>
+                                        <td>
+                                            <div class="widget-content p-0">
+                                                <div class="widget-content-wrapper">
+                                                    <div class="widget-content-left mr-3">
+                                                        <div class="widget-content-left">
+                                                            <img class="rounded-circle" src="{{ asset('storage/foto/' .$tahun. '/resident/' .$r->foto)}}" alt="" width="40" height="40">
+                                                        </div>
+                                                    </div>
+                                                    <div class="widget-content-left flex2">
+                                                        <div class="widget-heading">{{$r->nama}}</div>
+                                                        <div class="widget-subheading opacity-7">{{$r->nim}}</div>
                                                     </div>
                                                 </div>
-                                                <div class="widget-content-left flex2">
-                                                    <div class="widget-heading">John Doe</div>
-                                                    <div class="widget-subheading opacity-7">Teknik Mesin</div>
-                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td class="text-center">20170140001</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center text-muted">U401B</td>
-                                    <td>
-                                        <div class="widget-content p-0">
-                                            <div class="widget-content-wrapper">
-                                                <div class="widget-content-left mr-3">
-                                                    <div class="widget-content-left">
-                                                        <img class="rounded-circle" src="assets/images/avatars/3.jpg" alt="" width="40">
-                                                    </div>
-                                                </div>
-                                                <div class="widget-content-left flex2">
-                                                    <div class="widget-heading">Ruben Tillman</div>
-                                                    <div class="widget-subheading opacity-7">Agribisnis</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="text-center">20170140011</td>
-                                </tr>
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -104,4 +98,15 @@
             </div>
         <div>
     </div>
+@endsection
+
+@section('scripts')
+<script src="{{asset('assets/admin/js/jquery.min.js')}}"></script>
+<script>
+    $(document).ready(function($) {
+        $(".clickable-row").click(function() {
+            window.location = $(this).data("url");
+        });
+    });
+</script>    
 @endsection
