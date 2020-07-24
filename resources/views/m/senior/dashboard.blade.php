@@ -39,13 +39,13 @@
                         <p style="font-size: .55rem;">Senior</p>
                     </div>
                     </a>
-                    <a href="/s/resident">
+                    <a href="{{ route('senior.resident') }}">
                     <div class="font-icon-wrapper font-icon-lg iconwrap">
                         <i class="fa fa-users icon-gradient bg-malibu-beach"></i>
                         <p style="font-size: .55rem;">Resident</p>
                     </div>
                     </a>
-                    <a href="#3">
+                    <a href="{{ route('senior.tengko') }} ">
                     <div class="font-icon-wrapper font-icon-lg iconwrap">
                         <i class="fa fa-lock icon-gradient bg-sunny-morning"></i>
                         <p style="font-size: .55rem;">Tengko</p>

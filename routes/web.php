@@ -33,6 +33,9 @@ Route::middleware('auth:senior')->group(function(){
     Route::get('/s/resident', "ResidentController@index")->name('senior.resident');
     Route::get('/s/resident/{id}', "ResidentController@detail")->name('senior.resident.detail');
 
+    // Tengko
+    Route::get('/s/tengko', "TengkoController@index")->name('senior.tengko');
+
     /**
      * Divisi Keamanan
      */
