@@ -114,6 +114,16 @@
                             </div>
                         </div>
                         <div class="position-relative row form-group">
+                            <label for="status" class="col-sm-2 col-form-label">*Status</label>
+                            <div class="col-sm-10">
+                                <select name="status" id="status" class="form-control" required>
+                                    <option selected hidden disabled>Status Senior</option>
+                                    <option value="0" {{ $senior->status==0 ? "selected" : ""}}>Senior Resident</option>
+                                    <option value="1" {{ $senior->status==1 ? "selected" : ""}}>Assistant of Senior Resident</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="position-relative row form-group">
                             <label for="idusroh" class="col-sm-2 col-form-label">*Usroh</label>
                             <div class="col-sm-10">
                                 <select name="idusroh" id="idusroh" class="form-control" required>

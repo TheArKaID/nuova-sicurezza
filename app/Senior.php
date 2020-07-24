@@ -47,7 +47,7 @@ class Senior extends Authenticable
     /**
      * @var array
      */
-    protected $fillable = ['idsenior', 'idusroh', 'idkamar', 'idtahun', 'nama', 'nim', 'jeniskelamin', 'foto', 'username', 'password', 'passcode', 'isdivman', 'remember_token', 'created_at', 'updated_at'];
+    protected $fillable = ['idsenior', 'idusroh', 'idkamar', 'idtahun', 'status', 'nama', 'nim', 'jeniskelamin', 'foto', 'username', 'password', 'passcode', 'isdivman', 'remember_token', 'created_at', 'updated_at'];
 
     public function usroh()
     {

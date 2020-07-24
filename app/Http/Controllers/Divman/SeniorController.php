@@ -70,6 +70,7 @@ class SeniorController extends Controller
             'password' => 'required|between:8,20',
             'repassword' => 'required|between:8,20',
             'isdivman' => 'required',
+            'status' => 'required',
             'idusroh' => 'required',
             'idkamar' => 'required'
         ]);
@@ -94,6 +95,7 @@ class SeniorController extends Controller
         $senior->username = $request->username;
         $senior->password = \Hash::make($request->password);
         $senior->isdivman = $request->isdivman;
+        $senior->status = $request->status;
         
         $senior->save();
         
@@ -141,6 +143,7 @@ class SeniorController extends Controller
             'jeniskelamin' => 'required',
             'username' => 'required|between:3,10',
             'isdivman' => 'required',
+            'status' => 'required',
             'idusroh' => 'required',
             'idkamar' => 'required'
         ]);
@@ -179,6 +182,7 @@ class SeniorController extends Controller
         $senior->jeniskelamin = $request->jeniskelamin;
         $senior->username = $request->username;
         $senior->isdivman = $request->isdivman;
+        $senior->status = $request->status;
         
         $senior->save();
         

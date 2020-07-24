@@ -35,7 +35,7 @@
                         <tr>
                             <th>#</th>
                             <th>Nama</th>
-                            <th>Kamar</th>
+                            <th>Status</th>
                             <th>Usroh</th>
                         </tr>
                         </thead>
@@ -47,7 +47,7 @@
                                 <tr class='clickable-row' data-url='{{route('divman.senior.detail', $s->id)}}'>
                                     <th scope="row">{{$row}}</th>
                                     <td>{{$s->nama}}</td>
-                                    <td>{{$s->kamar->nomor}}</td>
+                                    <td>{{$s->status==0 ? "SR" : "ASR"}}</td>
                                     <td>{{$s->usroh->nama}}</td>
                                 </tr>
                                 @php
