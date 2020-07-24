@@ -30,7 +30,8 @@ Route::middleware('auth:senior')->group(function(){
     Route::get('/s/senior/{id}', "SeniorController@detail")->name('senior.senior.detail');
 
     // Resident
-    Route::get('/s/resident', "SeniorController@resident")->name('senior.resident');
+    Route::get('/s/resident', "ResidentController@index")->name('senior.resident');
+    Route::get('/s/resident/{id}', "ResidentController@detail")->name('senior.resident.detail');
 
     /**
      * Divisi Keamanan

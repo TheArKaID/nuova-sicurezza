@@ -39,7 +39,7 @@
                             <th>#</th>
                             <th>Kamar</th>
                             <th>Nama</th>
-                            <th>Jurusan</th>
+                            <th>NIM</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -47,7 +47,7 @@
                                 $row=1;
                             @endphp
                             @foreach ($resident as $r)
-                                <tr class='clickable-row' data-url='#/{{$r->id}}'>
+                                <tr class='clickable-row' data-url='{{ route('senior.resident.detail', $r->id)}}'>
                                     <th scope="row">{{$row}}</th>
                                     <td>{{$r->idkamar}}</td>
                                     <td>{{$r->nama}}</td>
@@ -63,7 +63,6 @@
             </div>
         <div>
     </div>
-
 @endsection
 
 @section('scripts')

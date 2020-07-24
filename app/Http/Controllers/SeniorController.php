@@ -52,15 +52,4 @@ class SeniorController extends Controller
             'tahun' => $tahun,
         ]);
     }
-
-    /**
-     * MOVE TO RESIDENTCONTROLLER
-     */
-    public function resident()
-    {
-        $resident = Resident::where('idtahun', $this->helper->idTahunAktif())->get();
-        if($this->helper->isMobile())
-            return view('m.senior.resident.index', ['resident'=>$resident]);
-        return view('senior.resident.index', ['resident'=>$resident]);
-    }
 }
