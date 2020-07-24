@@ -18,9 +18,16 @@ class ResidentController extends Controller
     public function index()
     {
         $resident = Resident::where('idtahun', $this->helper->idTahunAktif())->get();
+        $tahun = $this->helper->tahunAktif();
         if($this->helper->isMobile())
-            return view('m.senior.resident.index', ['resident'=>$resident]);
-        return view('senior.resident.index', ['resident'=>$resident]);
+            return view('m.senior.resident.index', [
+                'resident'=> $resident,
+                'tahun' => $tahun
+            ]);
+        return view('senior.resident.index', [
+            'resident'=> $resident,
+            'tahun' => $tahun
+        ]);
     }
 
     public function detail($id)

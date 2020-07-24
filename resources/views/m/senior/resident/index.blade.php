@@ -22,7 +22,7 @@
                             <i class="pe-7s-home icon-gradient bg-mean-fruit">
                             </i>
                         </div>
-                        <div>Resident 2020/2021</div>
+                        <div>Resident {{$tahun}}</div>
                     </div>
                 </div>
             </div>
