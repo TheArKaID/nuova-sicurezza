@@ -56,13 +56,15 @@ class TengkoController extends Controller
     {
         $this->validate($request,[
             'tipe' => 'required',
-            'penjelasan' => 'required'
+            'penjelasan' => 'required',
+            'poin' => 'required|numeric'
         ]);
 
         $tengko = new Tengko;
         $tengko->idtahun = $this->helper->idTahunAktif();
         $tengko->tipe = $request->tipe;
         $tengko->penjelasan = $request->penjelasan;
+        $tengko->poin = $request->poin;
         $tengko->save();
         
         return redirect(route('divman.tengko'));
@@ -86,7 +88,8 @@ class TengkoController extends Controller
     {
         $this->validate($request, [
             'tipe' => 'required',
-            'penjelasan' => 'required'
+            'penjelasan' => 'required',
+            'poin' => 'required|numeric'
         ]);
 
         $tengko = Tengko::where('id', $request->id)->where('idtahun', $this->helper->idTahunAktif())->first();

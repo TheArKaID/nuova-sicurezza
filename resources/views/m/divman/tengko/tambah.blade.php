@@ -41,6 +41,12 @@
                             </div>
                         </div>
                         <div class="position-relative row form-group">
+                            <label for="poin" class="col-sm-2 col-form-label">Poin Pelanggaran</label>
+                            <div class="col-sm-10">
+                                <input type="number" name="poin" id="poin" class="form-control" placeholder="Poin Pelanggaran" value="{{ old('poin') }}" required>
+                            </div>
+                        </div>
+                        <div class="position-relative row form-group">
                             <div class="col-sm-10 offset-sm-2">
                                 <button class="btn btn-secondary">Tambah</button>
                             </div>

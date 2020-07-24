@@ -36,6 +36,7 @@
                             <th>#</th>
                             <th>Tipe</th>
                             <th>Penjelasan</th>
+                            <th>Poin</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -47,6 +48,7 @@
                                     <th scope="row">{{$row}}</th>
                                     <td>{{$t->tipe}}</td>
                                     <td>{{$t->penjelasan}}</td>
+                                    <td>{{$t->poin}}</td>
                                 </tr>
                                 @php
                                     $row++;
