@@ -38,8 +38,8 @@
                         <tr>
                             <th>#</th>
                             <th>Nama</th>
+                            <th>Status</th>
                             <th>Usroh</th>
-                            {{-- <th>Status ? SR/ASR</th> --}}
                         </tr>
                         </thead>
                         <tbody>
@@ -50,6 +50,7 @@
                                 <tr class='clickable-row' data-url='{{route('senior.senior.detail', $s->id)}}'>
                                     <th scope="row">{{$row}}</th>
                                     <td>{{$s->nama}}</td>
+                                    <td>{{$s->status==0 ? "SR" : "ASR"}}</td>
                                     <td>{{$s->usroh->nama}}</td>
                                 </tr>
                                 @php

@@ -26,7 +26,11 @@
                             <i class="pe-7s-home icon-gradient bg-mean-fruit">
                             </i>
                         </div>
-                        <div><small>Detail</small><h4>{{ $senior->nama}}</h4></div>
+                        <div>
+                            <small>Detail</small>
+                            <h4>{{$senior->nama}}</h4>
+                            <h6><small>{{$senior->status==0 ? "Senior Resident" : "Assistant of Senior Resident"}}</small></h6>
+                        </div>
                     </div>
                 </div>
             </div>
