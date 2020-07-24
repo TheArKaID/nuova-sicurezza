@@ -31,6 +31,6 @@ class Tengko extends Model
     /**
      * @var array
      */
-    protected $fillable = ['idtahun', 'tipe', 'penjelasan', 'created_at', 'updated_at'];
+    protected $fillable = ['idtahun', 'tipe', 'penjelasan', 'poin', 'created_at', 'updated_at'];
 
 }
