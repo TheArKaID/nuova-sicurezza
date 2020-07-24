@@ -36,6 +36,10 @@ Route::middleware('auth:senior')->group(function(){
     // Tengko
     Route::get('/s/tengko', "TengkoController@index")->name('senior.tengko');
 
+    // Usroh
+    Route::get('/s/usroh', "UsrohController@index")->name('senior.usroh');
+    Route::get('/s/usroh/{id}', "UsrohController@detail")->name('senior.usroh.detail');
+
     /**
      * Divisi Keamanan
      */

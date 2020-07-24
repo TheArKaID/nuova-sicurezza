@@ -51,7 +51,7 @@
                         <p style="font-size: .55rem;">Tengko</p>
                     </div>
                     </a>
-                    <a href="#4">
+                    <a href="{{ route('senior.usroh') }}">
                     <div class="font-icon-wrapper font-icon-lg iconwrap">
                         <i class="fa fa-box icon-gradient bg-heavy-rain"></i>
                         <p style="font-size: .55rem;">Usroh</p>
