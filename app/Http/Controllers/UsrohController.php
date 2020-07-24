@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Usroh;
+use App\Senior;
 
 class UsrohController extends Controller
 {
@@ -33,6 +34,7 @@ class UsrohController extends Controller
     public function detail($id)
     {
         $usroh = Usroh::where('id', $id)->where('idtahun', $this->helper->idTahunAktif())->first();
+        $senior = $usroh->senior()->get();
         
         if($usroh==null)
             return redirect()->back();

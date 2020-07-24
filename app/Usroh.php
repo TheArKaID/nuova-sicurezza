@@ -39,6 +39,11 @@ class Usroh extends Model
         return $this->hasMany('App\Kamar', 'idusroh');
     }
 
+    public function senior()
+    {
+        return $this->hasMany('App\Senior', 'idusroh');
+    }
+
     protected static function booted() {
         static::deleting(function($usroh) {
             foreach($usroh->kamar as $k) { 
