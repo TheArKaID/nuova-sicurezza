@@ -46,7 +46,14 @@
                             @foreach ($tengko as $t)
                                 <tr class='clickable-row' data-url='{{route('divman.tengko.detail', $t->id)}}'>
                                     <th scope="row">{{$row}}</th>
-                                    <td>{{$t->tipe}}</td>
+                                    <td class="text-center">
+                                        <div class="mb-2 mr-2 badge 
+                                            {{ $t->tipe=="Ringan" ? "badge-warning" : "" }}
+                                            {{ $t->tipe=="Sedang" ? "badge-danger" : "" }}
+                                            {{ $t->tipe=="Berat" ? "badge-dark" : "" }}">
+                                            {{$t->tipe}}
+                                        </div>
+                                    </td>
                                     <td>{{$t->penjelasan}}</td>
                                     <td>{{$t->poin}}</td>
                                 </tr>
