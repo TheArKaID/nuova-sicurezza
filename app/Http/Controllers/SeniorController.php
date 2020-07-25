@@ -23,6 +23,7 @@ class SeniorController extends Controller
     {
         $ta = $this->helper->idTahunAktif();
         $senior = Senior::where('idtahun', $ta)->get();
+        $senior = $this->sortSenior($senior);
         $tahun = $this->helper->tahunAktif();
         if($this->helper->isMobile())
             return view('m.senior.senior.index', [
@@ -51,5 +52,19 @@ class SeniorController extends Controller
             'senior' => $senior,
             'tahun' => $tahun,
         ]);
+    }
+
+    public function sortSenior($senior)
+    {
+        for ($j=0; $j < count($senior); $j++) { 
+            for ($i=0; $i < count($senior)-1;$i++) { 
+                if($senior[$i]->kamar->nomor > $senior[$i+1]->kamar->nomor){
+                    $temp = $senior[$i+1];
+                    $senior[$i+1] = $senior[$i];
+                    $senior[$i] = $temp;
+                }
+            }
+        }
+        return $senior;
     }
 }
