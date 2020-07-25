@@ -32,33 +32,94 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="main-card mb-3 card">
+                <div class="card-header">
+                    <ul class="nav nav-justified">
+                        <li class="nav-item"><a data-toggle="tab" href="#tab-ringan" class="nav-link active show">Ringan</a></li>
+                        <li class="nav-item"><a data-toggle="tab" href="#tab-sedang" class="nav-link show">Sedang</a></li>
+                        <li class="nav-item"><a data-toggle="tab" href="#tab-berat" class="nav-link show">Berat</a></li>
+                    </ul>
+                </div>
                 <div class="card-body">
-                    <table class="mb-0 table table-hover table-responsive">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Tipe</th>
-                            <th>Penjelasan</th>
-                            <th>Poin</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            @php
-                                $row=1;
-                            @endphp
-                            @foreach ($tengko as $t)
+                    <div class="tab-content">
+                        <div class="tab-pane active show" id="tab-ringan" role="tabpanel">
+                            <table class="mb-0 table table-hover">
+                                <thead>
                                 <tr>
-                                    <th scope="row">{{$row}}</th>
-                                    <td>{{$t->tipe}}</td>
-                                    <td>{{$t->penjelasan}}</td>
-                                    <td>{{$t->poin}}</td>
+                                    <th>#</th>
+                                    <th>Penjelasan</th>
+                                    <th>Poin</th>
                                 </tr>
-                                @php
-                                    $row++;
-                                @endphp
-                            @endforeach
-                        </tbody>
-                    </table>
+                                </thead>
+                                <tbody>
+                                    @php
+                                        $row=1;
+                                    @endphp
+                                    @foreach ($tengko['ringan'] as $r)
+                                        <tr>
+                                            <th scope="row">{{$row}}</th>
+                                            <td>{{$r->penjelasan}}</td>
+                                            <td>{{$r->poin}}</td>
+                                        </tr>
+                                        @php
+                                            $row++;
+                                        @endphp
+                                    @endforeach
+                                </tbody>
+                            </table>   
+                        </div>
+                        <div class="tab-pane show" id="tab-sedang" role="tabpanel">
+                            <table class="mb-0 table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Penjelasan</th>
+                                    <th>Poin</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    @php
+                                        $row=1;
+                                    @endphp
+                                    @foreach ($tengko['sedang'] as $s)
+                                        <tr>
+                                            <th scope="row">{{$row}}</th>
+                                            <td>{{$s->penjelasan}}</td>
+                                            <td>{{$s->poin}}</td>
+                                        </tr>
+                                        @php
+                                            $row++;
+                                        @endphp
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane show" id="tab-berat" role="tabpanel">
+                            <table class="mb-0 table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Penjelasan</th>
+                                    <th>Poin</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    @php
+                                        $row=1;
+                                    @endphp
+                                    @foreach ($tengko['berat'] as $b)
+                                        <tr>
+                                            <th scope="row">{{$row}}</th>
+                                            <td>{{$b->penjelasan}}</td>
+                                            <td>{{$b->poin}}</td>
+                                        </tr>
+                                        @php
+                                            $row++;
+                                        @endphp
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         <div>

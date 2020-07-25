@@ -16,7 +16,11 @@ class TengkoController extends Controller
     public function index()
     {
         $ta = $this->helper->idTahunAktif();
-        $tengko = Tengko::where('idtahun', $ta)->get();
+        $ringan = Tengko::where('idtahun', $ta)->where('tipe', 'Ringan')->get();
+        $sedang = Tengko::where('idtahun', $ta)->where('tipe', 'Sedang')->get();
+        $berat = Tengko::where('idtahun', $ta)->where('tipe', 'Berat')->get();
+        $tengko = array('ringan' => $ringan, 'sedang' => $sedang, 'berat' => $berat);
+        
         $tahun = $this->helper->tahunAktif();
         if($this->helper->isMobile())
             return view('m.senior.tengko.index', [
