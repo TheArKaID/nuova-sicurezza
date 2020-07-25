@@ -45,16 +45,16 @@
                         <p style="font-size: .55rem;">Resident</p>
                     </div>
                     </a>
-                    <a href="{{ route('senior.tengko') }} ">
-                    <div class="font-icon-wrapper font-icon-lg iconwrap">
-                        <i class="fa fa-lock icon-gradient bg-sunny-morning"></i>
-                        <p style="font-size: .55rem;">Tengko</p>
-                    </div>
-                    </a>
                     <a href="{{ route('senior.usroh') }}">
                     <div class="font-icon-wrapper font-icon-lg iconwrap">
                         <i class="fa fa-box icon-gradient bg-heavy-rain"></i>
                         <p style="font-size: .55rem;">Usroh</p>
+                    </div>
+                    </a>
+                    <a href="{{ route('senior.tengko') }} ">
+                    <div class="font-icon-wrapper font-icon-lg iconwrap">
+                        <i class="fa fa-lock icon-gradient bg-sunny-morning"></i>
+                        <p style="font-size: .55rem;">Tengko</p>
                     </div>
                     </a>
                 </div>
