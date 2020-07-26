@@ -34,7 +34,7 @@
                 </div>
                 <div class="col-md-12">
                     <div class="row" style="display: grid">
-                        <a href="{{route('senior.resident.poin', $resident->id)}}" class="btn btn-small btn-primary" style="float: right">Poin</a>
+                        <a href="{{route('senior.resident.poin', $resident->id)}}" class="btn btn-small btn-primary" style="float: right">Catatan Pelanggaran</a>
                     </div>
                 </div>
             </div>

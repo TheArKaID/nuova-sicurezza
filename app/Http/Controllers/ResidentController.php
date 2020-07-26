@@ -53,7 +53,17 @@ class ResidentController extends Controller
     
     public function poin($id)
     {
+        $ta = $this->helper->idTahunAktif();
+        $resident = Resident::where('id', $id)->where('idtahun', $this->helper->idTahunAktif())->first();
+
+        if($this->helper->isMobile())
+            return view('m.senior.resident.detail', [
+                'resident' => $resident
+            ]);
         
+        return view('senior.resident.detail', [
+            'resident' => $resident
+        ]);
     }
 
     public function sortResidentByUsroh($resident)
