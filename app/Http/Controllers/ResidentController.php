@@ -46,11 +46,16 @@ class ResidentController extends Controller
             ]);
         
         return view('senior.resident.detail', [
-            'resident' => $senior,
+            'resident' => $resident,
             'tahun' => $tahun,
         ]);
     }
     
+    public function poin($id)
+    {
+        
+    }
+
     public function sortResidentByUsroh($resident)
     {
         $datas = array();

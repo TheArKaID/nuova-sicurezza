@@ -10,8 +10,11 @@
             font-weight: bold;
         }
         img {
+            max-width: 250px;
             width: inherit;
-            height: inherit;
+        }
+        .table-right{
+            text-align: right;
         }
     </style>
 @endsection
@@ -29,6 +32,11 @@
                         <div><small>Detail</small><h4>{{ $resident->nama}}</h4></div>
                     </div>
                 </div>
+                <div class="col-md-12">
+                    <div class="row" style="display: grid">
+                        <a href="{{route('senior.resident.poin', $resident->id)}}" class="btn btn-small btn-primary" style="float: right">Poin</a>
+                    </div>
+                </div>
             </div>
         <div>
     </div>
@@ -38,40 +46,38 @@
             <div class="main-card mb-3 card">
                 <div class="card-body">
                     <div class="position-relative row form-group">
-                        <div class="col-md-10">
+                        <div class="col-md-12" style="text-align: center">
                             <img src="{{ asset('storage/foto/' .$tahun. '/resident/' .$resident->foto)}}" alt="" srcset="">
                         </div>
                     </div>
-                    <div class="position-relative row form-group">
-                        <label for="nama" class="col-sm-2 col-form-label">Nama</label>
-                        <div class="col-sm-10">
-                            <p>{{ $resident->nama }}</p>
-                        </div>
-                    </div>
-                    <div class="position-relative row form-group">
-                        <label for="NIM" class="col-sm-2 col-form-label">NIM</label>
-                        <div class="col-sm-10">
-                            <p>{{ $resident->nim }}</p>
-                        </div>
-                    </div>
-                    <div class="position-relative row form-group">
-                        <label for="jeniskelamin" class="col-sm-2 col-form-label">Jenis Kelamin</label>
-                        <div class="col-sm-10">
-                            <p>{{ $resident->jeniskelamin==1 ? "Putra" : "Putri"}}</p>
-                        </div>
-                    </div>
-                    <div class="position-relative row form-group">
-                        <label for="idkamar" class="col-sm-2 col-form-label">Kamar</label>
-                        <div class="col-sm-10">
-                            <p>{{ $resident->kamar->nomor }}</p>
-                        </div>
-                    </div>
-                    <div class="position-relative row form-group">
-                        <label for="idusroh" class="col-sm-2 col-form-label">Usroh</label>
-                        <div class="col-sm-10">
-                            <p>{{ $resident->usroh->nama }}</p>
-                        </div>
-                    </div>
+                    <table class="table">
+                        <thead>
+                            <th colspan="2" style="text-align: center">Nama</th>
+                        </thead>
+                        <tbody>
+                            <tr><td colspan="2" style="text-align: center">{{ $resident->nama }}</td></tr>
+                        </tbody>
+                        <thead>
+                            <th>Kamar</th>
+                            <th class="table-right">Usroh</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ $resident->kamar->nomor }}</td>
+                                <td class="table-right">{{ $resident->usroh->nama}}</td>
+                            </tr>
+                        </tbody>
+                        <thead>
+                            <th>NIM</th>
+                            <th class="table-right">Jurusan</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ $resident->nim }}</td>
+                                <td class="table-right">{{ $resident->nim }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         <div>

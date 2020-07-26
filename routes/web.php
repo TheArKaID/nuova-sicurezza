@@ -32,6 +32,7 @@ Route::middleware('auth:senior')->group(function(){
     // Resident
     Route::get('/s/resident', "ResidentController@index")->name('senior.resident');
     Route::get('/s/resident/{id}', "ResidentController@detail")->name('senior.resident.detail');
+    Route::get('/s/resident/{id}/poin', "ResidentController@poin")->name('senior.resident.poin');
 
     // Tengko
     Route::get('/s/tengko', "TengkoController@index")->name('senior.tengko');
