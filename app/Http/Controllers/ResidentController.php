@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Resident;
 use App\Usroh;
+use App\Pencatatan;
 
 class ResidentController extends Controller
 {    
@@ -55,17 +56,27 @@ class ResidentController extends Controller
     {
         $ta = $this->helper->idTahunAktif();
         $resident = Resident::where('id', $id)->where('idtahun', $this->helper->idTahunAktif())->first();
+        $pencatatan = Pencatatan::where('idresident', $id)->where('idtahun', $this->helper->idTahunAktif())->get();
 
         if($this->helper->isMobile())
-            return view('m.senior.resident.detail', [
-                'resident' => $resident
+            return view('m.senior.resident.poin', [
+                'resident' => $resident,
+                'pencatatan' => $pencatatan
             ]);
         
-        return view('senior.resident.detail', [
-            'resident' => $resident
+        return view('senior.resident.poin', [
+            'resident' => $resident,
+            'pencatatan' => $pencatatan
         ]);
     }
 
+    public function tambahPoin(Request $request)
+    {
+        $ta = $this->helper->idTahunAktif();
+        $resident = Resident::where('id', $id)->where('idtahun', $this->helper->idTahunAktif())->first();
+        if($resident->usroh->id!=\Auth::user()->usroh->id)
+            return redirect()->back();
+    }
     public function sortResidentByUsroh($resident)
     {
         $datas = array();

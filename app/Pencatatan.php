@@ -36,4 +36,18 @@ class Pencatatan extends Model
      */
     protected $fillable = ['idresident', 'idtengko', 'idtahun', 'idsenior', 'keterangan', 'tanggal', 'created_at', 'updated_at'];
 
+    public function resident()
+    {
+        return $this->hasOne('App\Resident', 'idresident');
+    }
+
+    public function senior()
+    {
+        return $this->hasOne('App\Senior', 'idsenior');
+    }
+
+    public function tengko()
+    {
+        return $this->hasOne('App\Tengko', 'idtengko');
+    }
 }
