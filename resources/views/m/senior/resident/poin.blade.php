@@ -134,10 +134,17 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                <button type="submit" class="btn btn-danger">Tambah</button>
+                <button type="submit" class="btn btn-danger" data-dismiss="modal" onclick="loadui()">Tambah</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
+@endsection
+@section('scripts')
+    <script>
+        function loadui() {
+            $loadingui.show();
+        }
+    </script>
 @endsection

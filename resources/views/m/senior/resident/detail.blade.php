@@ -34,7 +34,7 @@
                 </div>
                 <div class="col-md-12">
                     <div class="row" style="display: grid">
-                        <a href="{{route('senior.resident.poin', $resident->id)}}" class="btn btn-small btn-primary" style="float: right">Catatan Pelanggaran</a>
+                        <a href="{{route('senior.resident.poin', $resident->id)}}" class="btn btn-small btn-primary" style="float: right" onclick="loadui()">Catatan Pelanggaran</a>
                     </div>
                 </div>
             </div>
@@ -82,4 +82,11 @@
             </div>
         <div>
     </div>
+@endsection
+@section('scripts')
+    <script>
+        function loadui() {
+            $loadingui.show();
+        }
+    </script>
 @endsection
