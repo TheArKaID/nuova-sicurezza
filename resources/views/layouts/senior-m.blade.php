@@ -33,6 +33,20 @@
 
 @endphp
 <body>
+    <div id="loadingui" style="display: block">
+        <div class="blockUI blockOverlay" style="border: medium none; margin: 0px; padding: 0px; width: 100%; height: 100%; top: 0px; left: 0px; position: fixed;"></div>
+        <div class="blockUI undefined blockPage" style="position: fixed; opacity: 1; left: 30%">
+            <div class="body-block-example-1 d-none" style="cursor: default;">
+                <div class="loader-wrapper d-flex justify-content-center align-items-center">
+                    <div class="loader">
+                        <div class="ball-rotate">
+                            <div style="background-color: rgb(247, 185, 36);"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     @yield('modals')
     <div class="app-container app-theme-white body-tabs-shadow <?php echo $uisetting['fixedsidebar'] == 1 ? ' fixed-sidebar' : ''; echo $uisetting['fixedheader'] == 1 ? ' fixed-header' : ''; echo $uisetting['fixedfooter'] == 1 ? ' fixed-footer' : ''; echo $uisetting['sidebar'] == 1 ? ' closed-sidebar' : '';?>">
         <div class="app-header header-shadow <?php echo $uisetting['headeroption']; ?>">
@@ -275,7 +289,16 @@
         </div>
     </div>
     <script type="text/javascript" src="{{asset('assets/admin/js/main.js')}}"></script>
-
+    <script src="{{asset('assets/admin/js/jquery.min.js')}}"></script>
+    <script>
+        $loadingui = $('#loadingui');
+        jQuery(document).ready(function(){
+            $loadingui.hide();
+        });
+        function loadui() {
+            $loadingui.show();
+        }
+    </script>
     @yield('scripts')
 </body>
 

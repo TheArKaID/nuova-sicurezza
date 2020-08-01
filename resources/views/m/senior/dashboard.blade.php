@@ -1,18 +1,21 @@
 @extends('layouts.senior-m')
 
-<style>
-    .iconwrap{
-        width: 25% !important; 
-        margin-right: unset !important;
-    }
-    .iconwrap-d{
-        width: 25% !important; 
-        margin-right: unset !important;
-    }
-    .iconwrap:hover{
-        background-color: aliceblue !important;
-    }
-</style>
+@section('styles')
+    <style>
+        .iconwrap{
+            width: 25% !important; 
+            margin-right: unset !important;
+        }
+        .iconwrap-d{
+            width: 25% !important; 
+            margin-right: unset !important;
+        }
+        .iconwrap:hover{
+            background-color: aliceblue !important;
+        }
+    </style>
+@endsection
+
 @section('content')
     <div class="row">
         <div class="col-lg-12">
@@ -33,25 +36,25 @@
             </div>
             <div class="main-card mb-3 card">
                 <div class="card-body">
-                    <a href="{{route('senior.senior')}}">
+                    <a href="{{route('senior.senior') }}" onclick="loadui()">
                     <div class="font-icon-wrapper font-icon-lg iconwrap">
                         <i class="fa fa-user-tie icon-gradient bg-grow-early"></i>
                         <p style="font-size: .55rem;">Senior</p>
                     </div>
                     </a>
-                    <a href="{{ route('senior.resident') }}">
+                    <a href="{{ route('senior.resident') }}" onclick="loadui()">
                     <div class="font-icon-wrapper font-icon-lg iconwrap">
                         <i class="fa fa-users icon-gradient bg-malibu-beach"></i>
                         <p style="font-size: .55rem;">Resident</p>
                     </div>
                     </a>
-                    <a href="{{ route('senior.usroh') }}">
+                    <a href="{{ route('senior.usroh') }}" onclick="loadui()">
                     <div class="font-icon-wrapper font-icon-lg iconwrap">
                         <i class="fa fa-box icon-gradient bg-heavy-rain"></i>
                         <p style="font-size: .55rem;">Usroh</p>
                     </div>
                     </a>
-                    <a href="{{ route('senior.tengko') }} ">
+                    <a href="{{ route('senior.tengko') }}" onclick="loadui()">
                     <div class="font-icon-wrapper font-icon-lg iconwrap">
                         <i class="fa fa-lock icon-gradient bg-sunny-morning"></i>
                         <p style="font-size: .55rem;">Tengko</p>
@@ -64,48 +67,48 @@
                 <div class="card-body">
                     <h5>Divisi Keamanan</h5>
                     </a>
-                    <a href="{{route('divman.usroh')}}">
+                    <a href="{{route('divman.usroh')}}" onclick="loadui()">
                         <div class="font-icon-wrapper font-icon-lg iconwrap-d">
                             <i class="pe-7s-box2 icon-gradient bg-sunny-morning"></i>
                             <p style="font-size: .55rem;">Usroh</p>
                         </div>
                     </a>
-                    <a href="{{route('divman.kamar')}}">
+                    <a href="{{route('divman.kamar')}}" onclick="loadui()">
                         <div class="font-icon-wrapper font-icon-lg iconwrap-d">
                             <i class="pe-7s-door-lock icon-gradient bg-malibu-beach"></i>
                             <p style="font-size: .55rem;">Kamar</p>
                         </div>
                     </a>
-                    <a href="{{route('divman.senior')}}">
+                    <a href="{{route('divman.senior')}}" onclick="loadui()">
                     <div class="font-icon-wrapper font-icon-lg iconwrap-d">
                         <i class="pe-7s-user icon-gradient bg-grow-early"></i>
                         <p style="font-size: .55rem;">Senior</p>
                     </div>
-                    <a href="{{ route('divman.resident')}}">
+                    <a href="{{ route('divman.resident')}}" onclick="loadui()">
                     <div class="font-icon-wrapper font-icon-lg iconwrap-d">
                         <i class="pe-7s-users icon-gradient bg-malibu-beach"></i>
                         <p style="font-size: .55rem;">Resident</p>
                     </div>
                     </a>
-                    <a href="{{ route('divman.tengko')}}">
+                    <a href="{{ route('divman.tengko')}}" onclick="loadui()">
                         <div class="font-icon-wrapper font-icon-lg iconwrap-d">
                             <i class="pe-7s-hammer icon-gradient bg-strong-bliss"></i>
                             <p style="font-size: .55rem;">Tengko</p>
                         </div>
                     </a>
-                    <a href="#3">
+                    <a href="#3" onclick="loadui()">
                         <div class="font-icon-wrapper font-icon-lg iconwrap-d">
                             <i class="pe-7s-note icon-gradient bg-mixed-hopes"></i>
                             <p style="font-size: .55rem;">Rekap Poin</p>
                         </div>
                     </a>
-                    <a href="{{route('divman.tahun')}}">
+                    <a href="{{route('divman.tahun')}}" onclick="loadui()">
                     <div class="font-icon-wrapper font-icon-lg iconwrap-d">
                         <i class="pe-7s-date icon-gradient bg-deep-blue"></i>
                         <p style="font-size: .55rem;">Tahun</p>
                     </div>
                     </a>
-                    <a href="#3">
+                    <a href="#3" onclick="loadui()">
                     <div class="font-icon-wrapper font-icon-lg iconwrap-d">
                         <i class="pe-7s-settings icon-gradient bg-strong-bliss"></i>
                         <p style="font-size: .55rem;">Pengaturan</p>
@@ -242,4 +245,16 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('modals')
+{{-- <div class="body-block-example-1 d-none" style="cursor: default;">
+    <div class="loader-wrapper d-flex justify-content-center align-items-center">
+        <div class="loader">
+            <div class="ball-rotate">
+                <div style="background-color: rgb(247, 185, 36);"></div>
+            </div>
+        </div>
+    </div>
+</div> --}}
 @endsection

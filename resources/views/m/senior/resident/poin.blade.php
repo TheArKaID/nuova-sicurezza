@@ -22,7 +22,7 @@
                             <i class="pe-7s-home icon-gradient bg-mean-fruit">
                             </i>
                         </div>
-                        <div><small>Catatan Pelanggaran</small><h4>{{ $resident->nama}}</h4></div>
+                        <div><small>Catatan Pelanggaran</small><h4>{{ $resident->nama }}</h4></div>
                     </div>
                     @if ($resident->usroh->id==\Auth::user()->usroh->id)
                     <div class="col-md-12">
@@ -99,6 +99,7 @@
             <div class="modal-body">
                 <form action="{{route('divman.tengko.tambah')}}" method="POST">
                     {{ csrf_field() }}
+                    <input type="hidden" name="idresident" value="{{$resident->id}}">
                     <div class="position-relative row form-group">
                         <label for="tipe" class="col-sm-2 col-form-label">Tipe</label>
                         <div class="col-sm-10">
@@ -111,35 +112,30 @@
                         </div>
                     </div>
                     <div class="position-relative row form-group">
-                        <label for="tipe" class="col-sm-2 col-form-label">Tipe</label>
+                        <label for="idtengko" class="col-sm-2 col-form-label">Pelanggaran</label>
                         <div class="col-sm-10">
-                            <select name="tipe" id="tipe" class="form-control" required>
+                            <select name="idtengko" id="idtengko" class="form-control" required>
                                 <option selected hidden disabled> - Pilih Tipe - </option>
                             </select>
                         </div>
                     </div>
                     <div class="position-relative row form-group">
-                        <label for="penjelasan" class="col-sm-2 col-form-label">Keterangan</label>
+                        <label for="keterangan" class="col-sm-2 col-form-label">Keterangan</label>
                         <div class="col-sm-10">
-                            <textarea style="height: 150px;" name="penjelasan" id="penjelasan" placeholder="Detail Tengko" class="form-control" required>{{ old('penjelasan') }}</textarea>
+                            <textarea style="height: 150px;" name="keterangan" id="keterangan" placeholder="Detail Tengko" class="form-control">{{ old('keterangan') }}</textarea>
                         </div>
                     </div>
                     <div class="position-relative row form-group">
-                        <label for="poin" class="col-sm-2 col-form-label">Tanggal</label>
+                        <label for="tanggal" class="col-sm-2 col-form-label">Tanggal</label>
                         <div class="col-sm-10">
-                            <input type="date" class="form-control" name="tanggal" id="tanggal">
+                            <input type="date" class="form-control" name="tanggal" id="tanggal" required>
                         </div>
                     </div>
-                    <div class="position-relative row form-group">
-                        <div class="col-sm-10 offset-sm-2">
-                            <button class="btn btn-secondary">Tambah</button>
-                        </div>
-                    </div>
-                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                <button type="button" class="btn btn-danger">Tambah</button>
+                <button type="submit" class="btn btn-danger">Tambah</button>
+                </form>
             </div>
         </div>
     </div>
