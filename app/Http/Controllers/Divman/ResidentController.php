@@ -30,6 +30,7 @@ class ResidentController extends Controller
         $ta = $this->helper->idTahunAktif();
         $resident = Resident::where('resident.idtahun', $ta)
                     ->join('kamar', 'resident.idkamar', '=', 'kamar.id')
+                    ->select('resident.*')
                     ->orderBy('kamar.nomor')
                     ->paginate(16);
         $tahun = $this->helper->tahunAktif();
@@ -109,7 +110,6 @@ class ResidentController extends Controller
         $tahun = \Str::replaceFirst('/', '-', $this->helper->tahunAktif());
         $resident = Resident::where('id', $id)->where('idtahun', $this->helper->idTahunAktif())->first();
         $usroh = Usroh::where('idtahun', $ta)->get();
-        
         if($this->helper->isMobile())
             return view('m.divman.resident.detail', [
                 'resident' => $resident,
