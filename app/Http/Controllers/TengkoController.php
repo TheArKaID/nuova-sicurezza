@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Tengko;
+use App\Resident;
+use App\Pencatatan;
 
 class TengkoController extends Controller
 {
+    protected $helper;
+
     public function __construct()
     {
         $this->helper = new \Helper;
@@ -32,5 +36,19 @@ class TengkoController extends Controller
             'tahun' => $tahun,
             'tengko' => $tengko,
         ]);
+    }
+
+    public function getPelanggaran($tipe)
+    {
+        $ta = $this->helper->idTahunAktif();
+        $tengko = Tengko::where('idtahun', $ta)->where('tipe', $tipe)->get();
+        $result = array();
+        foreach ($tengko as $key => $value) {
+            $res['id'] = $value['id'];
+            $res['pelanggaran'] = $value['penjelasan'] .' - '. $value['poin'];
+            array_push($result, $res);
+        }
+        
+        return $result;
     }
 }

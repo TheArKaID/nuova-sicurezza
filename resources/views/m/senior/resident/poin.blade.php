@@ -69,9 +69,9 @@
                                     </div>
                                 </td>
                                 <td>{{ $p->tengko->penjelasan }}</td>
+                                <td>{{ $p->keterangan }}</td>
                                 <td>{{ $p->tengko->poin }}</td>
                                 <td>{{ $p->tanggal }}</td>
-                                <td>{{ $p->penjelasan }}</td>
                                 <td>{{ $p->senior->nama }}</td>
                             </tr>
                             @endforeach
@@ -96,55 +96,89 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <form action="{{route('divman.tengko.tambah')}}" method="POST">
-                    {{ csrf_field() }}
-                    <input type="hidden" name="idresident" value="{{$resident->id}}">
-                    <div class="position-relative row form-group">
-                        <label for="tipe" class="col-sm-2 col-form-label">Tipe</label>
-                        <div class="col-sm-10">
-                            <select name="tipe" id="tipe" class="form-control" required>
-                                <option selected hidden disabled>Tipe Pelanggaran</option>
-                                <option value="Ringan">Ringan</option>
-                                <option value="Sedang">Sedang</option>
-                                <option value="Berat">Berat</option>
-                            </select>
+            <form action="{{route('senior.resident.poin.tambah')}}" method="POST">
+                {{ csrf_field() }}
+                <div class="modal-body">
+                        <input type="hidden" name="idresident" value="{{$resident->id}}">
+                        <div class="position-relative row form-group">
+                            <label for="tipe" class="col-sm-2 col-form-label">Tipe</label>
+                            <div class="col-sm-10">
+                                <select name="tipe" id="tipe" class="form-control" required>
+                                    <option selected hidden disabled>Tipe Pelanggaran</option>
+                                    <option value="Ringan">Ringan</option>
+                                    <option value="Sedang">Sedang</option>
+                                    <option value="Berat">Berat</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="position-relative row form-group">
-                        <label for="idtengko" class="col-sm-2 col-form-label">Pelanggaran</label>
-                        <div class="col-sm-10">
-                            <select name="idtengko" id="idtengko" class="form-control" required>
-                                <option selected hidden disabled> - Pilih Tipe - </option>
-                            </select>
+                        <div class="position-relative row form-group">
+                            <label for="idtengko" class="col-sm-2 col-form-label">Pelanggaran</label>
+                            <div class="col-sm-10">
+                                <select name="idtengko" id="idtengko" class="form-control" required>
+                                    <option selected hidden disabled> - Pilih Pelanggaran - </option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="position-relative row form-group">
-                        <label for="keterangan" class="col-sm-2 col-form-label">Keterangan</label>
-                        <div class="col-sm-10">
-                            <textarea style="height: 150px;" name="keterangan" id="keterangan" placeholder="Detail Tengko" class="form-control">{{ old('keterangan') }}</textarea>
+                        <div class="position-relative row form-group">
+                            <label for="keterangan" class="col-sm-2 col-form-label">Keterangan</label>
+                            <div class="col-sm-10">
+                                <textarea style="height: 150px;" name="keterangan" id="keterangan" placeholder="Detail Pelanggaran (Opsional)" class="form-control">{{ old('keterangan') }}</textarea>
+                            </div>
                         </div>
-                    </div>
-                    <div class="position-relative row form-group">
-                        <label for="tanggal" class="col-sm-2 col-form-label">Tanggal</label>
-                        <div class="col-sm-10">
-                            <input type="date" class="form-control" name="tanggal" id="tanggal" required>
+                        <div class="position-relative row form-group">
+                            <label for="tanggal" class="col-sm-2 col-form-label">Tanggal</label>
+                            <div class="col-sm-10">
+                                <input type="date" class="form-control" name="tanggal" id="tanggal" required>
+                            </div>
                         </div>
-                    </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                <button type="submit" class="btn btn-danger" data-dismiss="modal" onclick="loadui()">Tambah</button>
-                </form>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <input type="submit" class="btn btn-success" value="Tambah">
+                </div>
+            </form>
         </div>
     </div>
 </div>
 @endsection
 @section('scripts')
     <script>
+
         function loadui() {
             $loadingui.show();
+        }
+
+        $("select[name='tipe'").on('change', function () {
+            loadData();
+            var tipe = this.value;
+            console.log(tipe);
+            jQuery.ajax({
+            url: "/s/tengko/getpelanggaran/" + tipe,
+			type: 'GET',
+			dataType: 'json',
+                success: function (pelanggaran) {
+                    clearTengko();
+                    $.each(pelanggaran, function (key, value) {
+                        $('select[id="idtengko"]')
+                            .append(
+                                '<option value="' + value.id + '">'+ value.pelanggaran +'</option>'
+                            );
+                        
+                    })
+                },
+                error: function(){
+                    $('select[id="idtengko"]').append('<option selected hidden disabled>Gagal. Cek Koneksi Internet.</option>');    
+                }
+            });
+        });
+
+        function loadData() {
+            $('select[id="idtengko"]').append('<option selected hidden disabled>- Loading -</option>');    
+        }
+
+        function clearTengko() {
+            $('select[id="idtengko"]').empty();
+            $('select[id="idtengko"]').append('<option selected hidden disabled>Pilih Pelanggaran</option>');
         }
     </script>
 @endsection

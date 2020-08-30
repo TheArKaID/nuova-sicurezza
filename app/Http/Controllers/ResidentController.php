@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Resident;
 use App\Usroh;
 use App\Pencatatan;
+use App\Tengko;
 
 class ResidentController extends Controller
 {    
@@ -73,9 +74,28 @@ class ResidentController extends Controller
     public function tambahPoin(Request $request)
     {
         $ta = $this->helper->idTahunAktif();
-        $resident = Resident::where('id', $id)->where('idtahun', $this->helper->idTahunAktif())->first();
+        $this->validate($request,[
+            'idresident' => 'required',
+            'idtengko' => 'required',
+            'tanggal' => 'required'
+        ]);
+        
+        $tengko = Tengko::where('idtahun', $ta)->where('id', $request->idtengko)->first();
+        $resident = Resident::where('idtahun', $ta)->where('id', $request->idresident)->first();
+
         if($resident->usroh->id!=\Auth::user()->usroh->id)
             return redirect()->back();
+
+        $pencatatan = new Pencatatan;
+        $pencatatan->idresident = $request->idresident;
+        $pencatatan->idtengko = $request->idtengko;
+        $pencatatan->idtahun = $ta;
+        $pencatatan->idsenior = \Auth::user()->id;
+        $pencatatan->keterangan = $request->keterangan ?: "-";
+        $pencatatan->tanggal = $request->tanggal;
+        $pencatatan->save();
+
+        return redirect()->back();
     }
     public function sortResidentByUsroh($resident)
     {

@@ -33,10 +33,12 @@ Route::middleware('auth:senior')->group(function(){
     Route::get('/s/resident', "ResidentController@index")->name('senior.resident');
     Route::get('/s/resident/{id}', "ResidentController@detail")->name('senior.resident.detail');
     Route::get('/s/resident/{id}/poin', "ResidentController@poin")->name('senior.resident.poin');
+    Route::post('/s/resident/tambahpoin', "ResidentController@tambahPoin")->name('senior.resident.poin.tambah');
 
     // Tengko
     Route::get('/s/tengko', "TengkoController@index")->name('senior.tengko');
-
+    Route::get('/s/tengko/getpelanggaran/{tipe}', "TengkoController@getPelanggaran")->name('senior.tengko.get');
+    
     // Usroh
     Route::get('/s/usroh', "UsrohController@index")->name('senior.usroh');
     Route::get('/s/usroh/{id}', "UsrohController@detail")->name('senior.usroh.detail');
