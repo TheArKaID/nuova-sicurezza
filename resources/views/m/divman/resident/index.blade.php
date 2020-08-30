@@ -40,22 +40,17 @@
                         </tr>
                         </thead>
                         <tbody>
-                            @php
-                                $row=1;
-                            @endphp
-                            @foreach ($resident as $r)
+                            @foreach ($resident as $row => $r)
                                 <tr class='clickable-row' data-url='{{route('divman.resident.detail', $r->id)}}'>
-                                    <th scope="row">{{$row}}</th>
+                                    <th scope="row">{{$resident->firstItem() + $row}}</th>
                                     <td>{{$r->nama}}</td>
                                     <td>{{$r->kamar->nomor}}</td>
                                     <td>{{$r->usroh->nama}}</td>
                                 </tr>
-                                @php
-                                    $row++;
-                                @endphp
                             @endforeach
                         </tbody>
                     </table>
+                    {{$resident->links()}}
                 </div>
             </div>
         <div>

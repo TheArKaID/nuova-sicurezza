@@ -28,7 +28,10 @@ class ResidentController extends Controller
     public function index()
     {
         $ta = $this->helper->idTahunAktif();
-        $resident = Resident::where('idtahun', $ta)->get();
+        $resident = Resident::where('resident.idtahun', $ta)
+                    ->join('kamar', 'resident.idkamar', '=', 'kamar.id')
+                    ->orderBy('kamar.nomor')
+                    ->paginate(16);
         $tahun = $this->helper->tahunAktif();
         if($this->helper->isMobile())
             return view('m.divman.resident.index', [
