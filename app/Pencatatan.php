@@ -38,16 +38,16 @@ class Pencatatan extends Model
 
     public function resident()
     {
-        return $this->hasOne('App\Resident', 'idresident');
+        return $this->belongsTo('App\Resident', 'idresident');
     }
 
     public function senior()
     {
-        return $this->hasOne('App\Senior', 'idsenior');
+        return $this->belongsTo('App\Senior', 'idsenior');
     }
 
     public function tengko()
     {
-        return $this->hasOne('App\Tengko', 'idtengko');
+        return $this->belongsTo('App\Tengko', 'idtengko');
     }
 }
