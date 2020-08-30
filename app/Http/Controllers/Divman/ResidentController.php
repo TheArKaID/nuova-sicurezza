@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Resident;
 use App\Usroh;
+use App\Kamar;
 
 class ResidentController extends Controller
 {    
@@ -172,15 +173,10 @@ class ResidentController extends Controller
     
     public function getKamar($idusroh)
     {
-        $kamar = DB::table('kamar')
-            ->select('kamar.id', 'kamar.nomor')
-            ->leftJoin('resident', 'kamar.id', '=', 'resident.idkamar')
-            ->leftJoin('senior', 'kamar.id', '=', 'senior.idkamar')
-            ->where('kamar.idtahun', $this->helper->idTahunAktif())
-            ->where('kamar.idusroh', $idusroh)
-            ->whereNull('resident.idkamar')
-            ->whereNull('senior.idkamar')
-            ->get();
+        $kamar = Kamar::where('idtahun', $this->helper->idTahunAktif())
+                    ->where('idusroh', $idusroh)
+                    ->doesntHave('resident')->doesntHave('senior')
+                    ->get();
         if(count($kamar)===0)
             $kamar = 0;
         return $kamar;

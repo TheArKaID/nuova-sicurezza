@@ -43,6 +43,11 @@ class Kamar extends Model
     {
         return $this->hasMany('App\Resident', 'idkamar');
     }
+    
+    public function senior()
+    {
+        return $this->hasOneThrough('App\Usroh', 'App\Senior', 'idkamar', 'id', 'id');
+    }
 
     protected static function booted() {
         static::deleting(function($kamar) {
