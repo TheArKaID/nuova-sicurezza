@@ -17,9 +17,11 @@ class UsrohController extends Controller
 
     public function index()
     {
+        $is = \Auth::user()->jeniskelamin==1 ? "=" : "!=";
         $ta = $this->helper->idTahunAktif();
         $tahun = $this->helper->tahunAktif();
-        $usroh = Usroh::where('idtahun', $ta)->get();
+        $usroh = Usroh::where('idtahun', $ta)->where('gedung', $is, 'U')->get();
+        
         if($this->helper->isMobile())
             return view('m.senior.usroh.index', [
                 'usroh' => $usroh,
@@ -34,8 +36,14 @@ class UsrohController extends Controller
 
     public function detail($id)
     {
+        $is = \Auth::user()->jeniskelamin==1 ? "=" : "!=";
         $tahun = \Str::replaceFirst('/', '-', $this->helper->tahunAktif());
-        $usroh = Usroh::where('id', $id)->where('idtahun', $this->helper->idTahunAktif())->first();
+        $usroh = Usroh::where('id', $id)->where('gedung', $is, 'U')
+                    ->where('idtahun', $this->helper->idTahunAktif())->first();
+
+        if($usroh===NULL)
+            return redirect(route('senior.usroh'));
+
         $resident = Resident::where('idusroh', $id)
                             ->where('idtahun', $this->helper->idTahunAktif())->get();
         $resident = $this->sortResident($resident);
