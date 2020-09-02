@@ -59,6 +59,11 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="row" style="text-align: center; display: block">
+                        <a href="{{ route('senior.senior.x') }}" class="btn btn-primary" style="padding: 5px;">
+                            <i class="fa fa-2x fa-sync clickable-row" style="line-height: 1"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         <div>

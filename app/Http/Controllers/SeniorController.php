@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Cache;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Validator;
@@ -22,7 +23,7 @@ class SeniorController extends Controller
     public function index()
     {
         $ta = $this->helper->idTahunAktif();
-        $senior = Senior::where('idtahun', $ta)->get();
+        $senior = Senior::where('idtahun', $ta)->where('jeniskelamin', (Cache::get('seniorstatus')))->get();
         $senior = $this->sortSenior($senior);
         $tahun = $this->helper->tahunAktif();
         if($this->helper->isMobile())
@@ -34,6 +35,12 @@ class SeniorController extends Controller
             'tahun' => $tahun,
             'senior' => $senior
         ]);
+    }
+    
+    public function indexX()
+    {
+        Cache::put('seniorstatus', !(Cache::get('seniorstatus')));
+        return redirect(route('senior.senior'));
     }
 
     public function detail($id)
