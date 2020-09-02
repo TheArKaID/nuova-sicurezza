@@ -21,9 +21,9 @@ class ResidentController extends Controller
     public function index()
     {
         $tahun = $this->helper->tahunAktif();
-        $resident = Resident::where('idtahun', $this->helper->idTahunAktif())->get();
+        $resident = Resident::where('idtahun', $this->helper->idTahunAktif())
+                    ->where('jeniskelamin', (\Auth::user()->jeniskelamin))->paginate(16);
         $resident = $this->sortResidentByKamar($resident);
-        $resident = $this->sortResidentByUsroh($resident);
         if($this->helper->isMobile())
             return view('m.senior.resident.index', [
                 'resident'=> $resident,
@@ -39,8 +39,13 @@ class ResidentController extends Controller
     {
         $ta = $this->helper->idTahunAktif();
         $tahun = \Str::replaceFirst('/', '-', $this->helper->tahunAktif());
-        $resident = Resident::where('id', $id)->where('idtahun', $this->helper->idTahunAktif())->first();
+        $resident = Resident::where('id', $id)
+                    ->where('jeniskelamin', (\Auth::user()->jeniskelamin))
+                    ->where('idtahun', $this->helper->idTahunAktif())->first();
         
+        if($resident===NULL)
+            return redirect(route('senior.resident'));
+
         if($this->helper->isMobile())
             return view('m.senior.resident.detail', [
                 'resident' => $resident,
@@ -56,8 +61,12 @@ class ResidentController extends Controller
     public function poin($id)
     {
         $ta = $this->helper->idTahunAktif();
-        $resident = Resident::where('id', $id)->where('idtahun', $this->helper->idTahunAktif())->first();
+        $resident = Resident::where('id', $id)->where('idtahun', $this->helper->idTahunAktif())
+                    ->where('jeniskelamin', (\Auth::user()->jeniskelamin))->first();
         $pencatatan = Pencatatan::where('idresident', $id)->where('idtahun', $this->helper->idTahunAktif())->get();
+
+        if($resident===NULL)
+            return redirect(route('senior.resident'));
 
         if($this->helper->isMobile())
             return view('m.senior.resident.poin', [
@@ -84,7 +93,7 @@ class ResidentController extends Controller
         $resident = Resident::where('idtahun', $ta)->where('id', $request->idresident)->first();
 
         if($resident->usroh->id!=\Auth::user()->usroh->id)
-            return redirect()->back();
+            return redirect(route('senior.resident'));
 
         $pencatatan = new Pencatatan;
         $pencatatan->idresident = $request->idresident;
@@ -96,21 +105,6 @@ class ResidentController extends Controller
         $pencatatan->save();
 
         return redirect()->back();
-    }
-    public function sortResidentByUsroh($resident)
-    {
-        $datas = array();
-        $usroh = Usroh::where('idtahun', $this->helper->idTahunAktif())->get();
-        foreach ($usroh as $key => $value) {
-            $data = array();
-            foreach ($resident as $k => $v) {
-                if($v->usroh->id==$value->id){
-                    array_push($data, $v);
-                }
-            }
-            $datas[$value->nama] = $data;
-        }
-        return $datas;
     }
 
     public function sortResidentByKamar($resident)
