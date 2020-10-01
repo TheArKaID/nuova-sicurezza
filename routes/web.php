@@ -32,9 +32,9 @@ Route::middleware('auth:senior')->group(function(){
 
     // Resident
     Route::get('/s/resident', "ResidentController@index")->name('senior.resident');
+    Route::post('/s/resident/tambahpoin', "ResidentController@tambahPoin")->name('senior.resident.poin.tambah');
     Route::get('/s/resident/{id}', "ResidentController@detail")->name('senior.resident.detail');
     Route::get('/s/resident/{id}/poin', "ResidentController@poin")->name('senior.resident.poin');
-    Route::post('/s/resident/tambahpoin', "ResidentController@tambahPoin")->name('senior.resident.poin.tambah');
 
     // Tengko
     Route::get('/s/tengko', "TengkoController@index")->name('senior.tengko');
@@ -51,43 +51,46 @@ Route::middleware('auth:senior')->group(function(){
     Route::get('/s/d-usroh', "Divman\UsrohController@index")->name('divman.usroh');
     Route::get('/s/d-usroh/tambah', "Divman\UsrohController@tambah")->name('divman.usroh.tambah');
     Route::post('/s/d-usroh/tambah', "Divman\UsrohController@tambahUsroh")->name('divman.usroh.tambah');
-    Route::get('/s/d-usroh/{id}', "Divman\UsrohController@detail")->name('divman.usroh.detail');
     Route::post('/s/d-usroh/simpan', "Divman\UsrohController@simpan")->name('divman.usroh.simpan');
     Route::get('/s/d-usroh/hapus/{id}', "Divman\UsrohController@hapus")->name('divman.usroh.hapus');
+    Route::get('/s/d-usroh/{id}', "Divman\UsrohController@detail")->name('divman.usroh.detail');
 
     // Kamar
     Route::get('/s/d-kamar', "Divman\KamarController@index")->name('divman.kamar');
     Route::get('/s/d-kamar/tambah', "Divman\KamarController@tambah")->name('divman.kamar.tambah');
     Route::post('/s/d-kamar/tambah', "Divman\KamarController@tambahKamar")->name('divman.kamar.tambah');
-    Route::get('/s/d-kamar/{id}', "Divman\KamarController@detail")->name('divman.kamar.detail');
     Route::post('/s/d-kamar/simpan', "Divman\KamarController@simpan")->name('divman.kamar.simpan');
     Route::get('/s/d-kamar/hapus/{id}', "Divman\KamarController@hapus")->name('divman.kamar.hapus');
+    Route::get('/s/d-kamar/{id}', "Divman\KamarController@detail")->name('divman.kamar.detail');
 
     // Senior
     Route::get('/s/d-senior', "Divman\SeniorController@index")->name('divman.senior');
     Route::get('/s/d-senior/tambah', "Divman\SeniorController@tambah")->name('divman.senior.tambah');
     Route::get('/s/d-senior/getkamar/{idusroh}', "Divman\SeniorController@getKamar")->name('divman.senior.getkamar');
     Route::post('/s/d-senior/tambah', "Divman\SeniorController@tambahSenior")->name('divman.senior.tambah');
-    Route::get('/s/d-senior/{id}', "Divman\SeniorController@detail")->name('divman.senior.detail');
     Route::post('/s/d-senior/simpan', "Divman\SeniorController@simpan")->name('divman.senior.simpan');
     Route::get('/s/d-senior/hapus/{id}', "Divman\SeniorController@hapus")->name('divman.senior.hapus');
+    Route::get('/s/d-senior/{id}', "Divman\SeniorController@detail")->name('divman.senior.detail');
 
     // Resident
     Route::get('/s/d-resident', "Divman\ResidentController@index")->name('divman.resident');
     Route::get('/s/d-resident/tambah', "Divman\ResidentController@tambah")->name('divman.resident.tambah');
     Route::get('/s/d-resident/getkamar/{idusroh}', "Divman\ResidentController@getKamar")->name('divman.resident.getkamar');
     Route::post('/s/d-resident/tambah', "Divman\ResidentController@tambahResident")->name('divman.resident.tambah');
-    Route::get('/s/d-resident/{id}', "Divman\ResidentController@detail")->name('divman.resident.detail');
     Route::post('/s/d-resident/simpan', "Divman\ResidentController@simpan")->name('divman.resident.simpan');
     Route::get('/s/d-resident/hapus/{id}', "Divman\ResidentController@hapus")->name('divman.resident.hapus');
+    Route::get('/s/d-resident/import', "Divman\ResidentController@import")->name('divman.resident.import');
+    Route::post('/s/d-resident/import', "Divman\ResidentController@verifyImport")->name('divman.resident.import');
+    Route::post('/s/d-resident/prosesImport',"Divman\ResidentController@prosesImport")->name('divman.resident.prosesimport');
+    Route::get('/s/d-resident/{id}', "Divman\ResidentController@detail")->name('divman.resident.detail');
 
     // Tengko
     Route::get('/s/d-tengko', "Divman\TengkoController@index")->name('divman.tengko');
     Route::get('/s/d-tengko/tambah', "Divman\TengkoController@tambah")->name('divman.tengko.tambah');
     Route::post('/s/d-tengko/tambah', "Divman\TengkoController@tambahTengko")->name('divman.tengko.tambah');
-    Route::get('/s/d-tengko/{id}', "Divman\TengkoController@detail")->name('divman.tengko.detail');
     Route::post('/s/d-tengko/simpan', "Divman\TengkoController@simpan")->name('divman.tengko.simpan');
     Route::get('/s/d-tengko/hapus/{id}', "Divman\TengkoController@hapus")->name('divman.tengko.hapus');
+    Route::get('/s/d-tengko/{id}', "Divman\TengkoController@detail")->name('divman.tengko.detail');
 
     // Tahun
     Route::get('/s/d-tahun', "Divman\TahunController@index")->name('divman.tahun');
