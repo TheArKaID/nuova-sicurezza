@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Resident;
 use App\Usroh;
 use App\Kamar;
+use Illuminate\Support\Facades\DB;
 
 class ResidentController extends Controller
 {    
@@ -242,10 +243,14 @@ class ResidentController extends Controller
                 }
 
                 $kamar = Kamar::where('idtahun', $this->helper->idTahunAktif())
+                        ->with('resident')
+                        ->with('senior')
                         ->where('nomor', $nomor)->first();
-                        
-                if($kamar==NULL)
+                
+                if($kamar==NULL || $kamar->senior!=NULL || $kamar->resident!=NULL) {
                     $kosong++; // Kosong +1 bila nomor kamar tidak sesuai dengan ID Usrohnya
+                    $kamar=NULL;
+                }
                     
                 $data['idkamar'] = $kamar!=NULL ? $kamar->id : NULL;
                 $data['nomor'] = $kamar!=NULL ? $kamar->nomor : NULL;
@@ -289,6 +294,33 @@ class ResidentController extends Controller
 
     public function prosesImport(Request $request)
     {
-        dd(Cache::get('residentimport', false));
+        $isfail = false;
+        $data = Cache::get('residentimport', false);
+        if(!$data) {
+            return redirect('divman.resident.import');
+        }
+
+        DB::beginTransaction();
+        try {
+            foreach ($data as $value) {
+                Resident::create([
+                    'idusroh' => $value['idusroh'],
+                    'idkamar' => $value['idkamar'],
+                    'idtahun' => $this->helper->idTahunAktif(),
+                    'nama' => $value['nama'],
+                    'nim' => $value['nim'],
+                    'jeniskelamin' => auth()->user()->jeniskelamin
+                ]);
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            $isfail = true;
+        }
+
+        if($isfail)
+            return redirect(route('divman.resident.import'))->with('gagal', 'Proses Import Gagal!');
+
+        return redirect(route('divman.resident'))->with('sukses', 'Data Resident Berhasil Diimport!');
     }
 }

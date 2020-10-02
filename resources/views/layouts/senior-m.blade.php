@@ -135,131 +135,21 @@
             <div class="app-main__outer" style="padding-bottom: unset;padding-left: unset">
                 <div class="app-main__inner" style="padding: 15px 15px 0;">
 
-                @if ($errors->any())
-                    <div class='mb-3 card text-white card-body bg-danger'>
-                        <h5 class='text-white card-title'>GAGAL!</h5>
-                        {{ $errors->first() }}
+                @if (session()->has('gagal'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <button type="button" class="close" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        <h5 class='text-white card-title'>Gagal!</h5>
+                        {{ session()->get('gagal') }}
                     </div>
                 @endif
                 
                 @if (session()->has('sukses'))
-                    <div class='mb-3 card text-white card-body bg-success'>
-                        <h5 class='text-white card-title'>BERHASIL!</h5>
-                        {{session()->get('sukses')}}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <button type="button" class="close" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        <h5 class='text-white card-title'>Berhasil!</h5>
+                        {{ session()->get('sukses') }}
                     </div>
                 @endif
-                
-                <?php 
-                    if($error){
-                        echo "<div class='mb-3 card text-white card-body bg-danger'>
-                        <h5 class='text-white card-title'>GAGAL!</h5>";
-                        switch ($error) {
-                            case 'login':
-                                echo "username atau password salah";
-                                break;
-                            case 'usroh':
-                                echo "id usroh tidak sesuai format";
-                                break;
-                            case 'usroh-available':
-                                echo "id usroh sudah terdaftar";
-                                break;
-                            case 'usroh-null':
-                                echo "data usroh tidak ditemukan";
-                                break;
-                            case 'resident':
-                                echo "nomor kamar tidak sesuai format";
-                                break;
-                            case 'resident-available':
-                                echo "kamar sudah ditempati";
-                                break;
-                            case 'resident-null':
-                                echo "data resident tidak ditemukan";
-                                break;
-                            case 'pelanggaran':
-                                echo "masukan poin harus angka";
-                                break;
-                            case 'pelanggaran-null':
-                                echo "data pelanggaran tidak ditemukan";
-                                break;
-                            case 'senior-available':
-                                echo "sr/asr di usroh tujuan sudah ada";
-                                break;
-                            case 'senior-null':
-                                echo "data senior tidak ditemukan";
-                                break;
-                            case 'tahun-1':
-                                echo "Tahun Awal harus lebih rendah 1 tahun dari Tahun Akhir";
-                                break;
-                            case 'tahun-available':
-                                echo "Tahun Ajaran sudah ada";
-                                break;
-                            case 'tahun-hapus':
-                                echo "Tahun sedang Aktif. Silahkan ubah Tahun Aktif Terlebih dahulu";
-                                break;
-                            case 'resident-fotosize':
-                                echo "Ukuran Foto maksimal 1 MB";
-                                break;
-                            case 'resident-fototype':
-                                echo "Type file harus .png";
-                                break;
-                            default:
-                                echo "";
-                                break;
-                            }
-                        echo "</div>";
-                    } elseif ($success) {
-                        echo "<div class='mb-3 card text-white card-body bg-success'>
-                            <h5 class='text-white card-title'>BERHASIL!</h5>";
-                        switch ($success) {
-                            case 'tahun-tambah':
-                                echo "Tahun Telah Ditambahkan";
-                                break;
-                            case 'tahun-update':
-                                echo "Tahun Telah Diubah";
-                                break;
-                            case 'tahun-hapus':
-                                echo "Tahun Telah Dihapus";
-                                break;
-                            case 'resident-tambah':
-                                echo "Resident Telah Ditambahkan";
-                                break;
-                            case 'resident-hapus':
-                                echo "Resident Telah Dihapus";
-                                break;
-                            case 'pelanggaran-tambah':
-                                echo "Pelanggaran Telah Ditambahkan";
-                                break;
-                            case 'pelanggaran-hapus':
-                                echo "Pelanggaran Telah Dihapus";
-                                break;
-                            case 'senior-hapus':
-                                echo "Senior Telah Dihapus";
-                                break;
-                            case 'senior-tambah':
-                                echo "Senior Telah Ditambahkan";
-                                break;
-                            case 'resident-import':
-                                echo "Data Resident Berhasil di Import";
-                                break;
-                            case 'pelanggaran-edit':
-                                echo "Data Pelanggaran Berhasil Diedit";
-                                break;
-                            case 'senior-edit':
-                                echo "Data Senior Berhasil Diedit";
-                                break;
-                            case 'usroh-edit':
-                                echo "Data Usroh Berhasil Diedit";
-                                break;
-                            case 'resident-edit':
-                                echo "Data Resident Berhasil Diedit";
-                                break;
-                            default:
-                                echo "";
-                                break;
-                        }
-                        echo "</div>";
-                    }
-                ?>
                     
                     @yield('content')
 
