@@ -55,16 +55,6 @@
                             </div>
                         </div>
                         <div class="position-relative row form-group">
-                            <label for="jeniskelamin" class="col-sm-2 col-form-label">*Jenis Kelamin</label>
-                            <div class="col-sm-10">
-                                <select name="jeniskelamin" id="jeniskelamin" class="form-control" required>
-                                    <option selected hidden disabled>Jenis Kelamin</option>
-                                    <option {{ $resident->jeniskelamin==1 ? "selected" : ""}} value="1">Laki-laki</option>
-                                    <option {{ $resident->jeniskelamin==0 ? "selected" : ""}} value="0">Perempuan</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="position-relative row form-group">
                             <label for="foto" class="col-sm-2 col-form-label">Foto</label>
                             <div class="col-md-10">
                                 <small>Saat ini</small>

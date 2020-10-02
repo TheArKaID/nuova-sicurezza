@@ -73,7 +73,6 @@ class ResidentController extends Controller
         $this->validate($request, [
             'nama' => 'required',
             'nim' => 'required|unique:resident,nim|digits:11',
-            'jeniskelamin' => 'required',
             'idusroh' => 'required',
             'idkamar' => 'required'
         ]);
@@ -89,7 +88,7 @@ class ResidentController extends Controller
         $resident->idkamar = $request->idkamar;
         $resident->nama = $request->nama;
         $resident->nim = $request->nim;
-        $resident->jeniskelamin = $request->jeniskelamin;
+        $resident->jeniskelamin = auth()->user->jeniskelamin;
         
         $resident->save();
         
@@ -134,7 +133,6 @@ class ResidentController extends Controller
         $this->validate($request, [
             'nama' => 'required',
             'nim' => 'required|digits:11',
-            'jeniskelamin' => 'required',
             'idusroh' => 'required',
             'idkamar' => 'required'
         ]);
@@ -157,7 +155,6 @@ class ResidentController extends Controller
         $resident->idkamar = $request->idkamar;
         $resident->nama = $request->nama;
         $resident->nim = $request->nim;
-        $resident->jeniskelamin = $request->jeniskelamin;
         
         $resident->save();
         
