@@ -48,7 +48,7 @@
                         </div>
                         <div class="position-relative row form-group">
                             <div class="col-sm-10 offset-sm-2">
-                                <button class="btn btn-secondary">Simpan</button>
+                                <button class="btn btn-success">Simpan</button>
                                 <a href="#" class="btn mr-2 mb-2 btn-danger" data-toggle="modal" data-target=".modalDelete" style="float: right">Hapus</a>
                             </div>
                         </div>
