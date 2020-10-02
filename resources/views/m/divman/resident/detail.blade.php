@@ -57,8 +57,12 @@
                         <div class="position-relative row form-group">
                             <label for="foto" class="col-sm-2 col-form-label">Foto</label>
                             <div class="col-md-10">
-                                <small>Saat ini</small>
-                                <img src="{{ asset('storage/foto/' .$tahun. '/resident/' .$resident->foto)}}" alt="" srcset="">
+                                @if (!$resident->foto)
+                                    <small>Anda belum menambahkan foto resident ini</small>
+                                @else
+                                    <small>Saat ini</small>
+                                    <img src="{{ asset('storage/foto/' .$tahun. '/resident/' .$resident->foto)}}" alt="" srcset="">
+                                @endif
                             </div>
                             <div class="col-sm-10">
                                 <small>Update Foto</small>
@@ -93,7 +97,7 @@
                         
                         <div class="position-relative row form-group">
                             <div class="col-sm-10 offset-sm-2">
-                                <button class="btn btn-secondary">Simpan</button>
+                                <button class="btn btn-success">Simpan</button>
                                 <a href="#" class="btn mr-2 mb-2 btn-danger" data-toggle="modal" data-target=".modalDelete" style="float: right">Hapus</a>
                             </div>
                         </div>
