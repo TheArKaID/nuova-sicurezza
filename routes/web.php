@@ -23,7 +23,7 @@ Route::post('/s/login', "Auth\SeniorAuthController@postLogin")->name('senior.log
 
 Route::middleware('auth:senior')->group(function(){
     Route::get('/s', "DashboardController@index");
-    Route::get('/s/logout', "Auth\SeniorAuthController@logout");
+    Route::get('/s/logout', "Auth\SeniorAuthController@logout")->name('senior.logout');
 
     // Senior
     Route::get('/s/senior', "SeniorController@index")->name('senior.senior');

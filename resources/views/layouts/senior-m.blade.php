@@ -99,15 +99,15 @@
                                             <i class="fa fa-user-tie fa-2x rounded-circle" width="42"></i>
                                             <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                         </a>
-                                        <div tabindex="-1" role="menu" aria-hidden="true"
-                                            class="dropdown-menu dropdown-menu-right" style="top: 35% !important">
-                                            <button type="button" tabindex="0" class="dropdown-item">User
-                                                Account</button>
-                                            <button type="button" tabindex="0" class="dropdown-item">Settings</button>
-                                            <h6 tabindex="-1" class="dropdown-header">Header</h6>
-                                            <button type="button" tabindex="0" class="dropdown-item">Actions</button>
+                                        <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right" style="top: 35% !important">
+                                            <a href="#"><button type="button" tabindex="0" class="dropdown-item">Pengaturan</button></a>
+                                            <h6 tabindex="-1" class="dropdown-header">Help</h6>
+                                            <a href="#"><button type="button" tabindex="0" class="dropdown-item">About</button></a>
+                                            <a href="#"><button type="button" tabindex="0" class="dropdown-item">Contact</button></a>
+                                            <a href="#"><button type="button" tabindex="0" class="dropdown-item">FAQ</button></a>
+                                            <a href="#"><button type="button" tabindex="0" class="dropdown-item">Privacy</button></a>
                                             <div tabindex="-1" class="dropdown-divider"></div>
-                                            <a href="index?proses=proses-logout" tabindex="0" class="dropdown-item">Logout</a>
+                                            <a href="{{ route('senior.logout') }}" tabindex="0" class="dropdown-item">Logout</a>
                                         </div>
                                     </div>
                                 </div>
