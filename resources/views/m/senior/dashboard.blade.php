@@ -96,7 +96,7 @@
                             <p style="font-size: .55rem;">Tengko</p>
                         </div>
                     </a>
-                    <a href="#3" onclick="loadui()">
+                    <a href="{{ route('divman.poin') }}" onclick="loadui()">
                         <div class="font-icon-wrapper font-icon-lg iconwrap-d">
                             <i class="pe-7s-note icon-gradient bg-mixed-hopes"></i>
                             <p style="font-size: .55rem;">Rekap Poin</p>

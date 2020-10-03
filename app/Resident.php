@@ -46,4 +46,19 @@ class Resident extends Model
     {
         return $this->belongsTo('App\Usroh', 'idusroh');
     }
+
+    public function pencatatan()
+    {
+        return $this->hasMany('App\Pencatatan', 'idresident', 'id');
+    }
+
+    public function getPoin()
+    {
+        $pencatatan = $this->pencatatan;
+        $poin = 0;
+        foreach ($pencatatan as $p) {
+            $poin+=$p->tengko->poin;
+        }
+        return $poin;
+    }
 }
