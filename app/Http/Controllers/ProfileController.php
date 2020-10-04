@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use App\Helpers\Helper;
 use App\Senior;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -34,5 +35,74 @@ class ProfileController extends Controller
             'profile' => $senior
             
         ]);
+    }
+
+    public function simpan(Request $request)
+    {
+        $message = [
+            'required' => Str::upper(':attribute').' Harus Diisi',
+            'unique' => Str::upper(':attribute').' Telah Digunakan',
+            'digits' => Str::upper(':attribute').' Harus Berjumlah 11',
+            'mimes' => Str::upper(':attribute').' Harus JPG, JPEG atau PNG',
+            'max' => Str::upper(':attribute').' Tidak boleh lebih dari 2mb',
+        ];
+
+        $this->validate($request, [
+            'nama' => 'required',
+            'nim' => 'required|unique:resident,nim|digits:11',
+            'password' => 'required',
+        ], $message);
+
+        $senior = Senior::find(auth()->user()->id);
+
+        // Verifiy Password
+        if(!password_verify($request->password, $senior->password)) {
+            return redirect()->bacK()->withErrors(['Password Salah']);
+        }
+
+        // Verifiy Ketika Ganti Password
+        if($request->newpassword || $request->renewpassword) {
+            if(Str::length($request->newpassword)<8) {
+                return redirect()->bacK()->withErrors(['Password Baru Minimal 8 Karakter!']);
+            } else {
+                if($request->newpassword!==$request->renewpassword) {
+                    return redirect()->bacK()->withErrors(['Password Baru Tidak Sama!']);
+                } else {
+                    $senior->password = Hash::make($request->newpassword);
+                }
+            }
+        }
+        
+        // Verifiy Ketika Tambah/Ganti Passcode
+        if($request->passcode || $request->repasscode) {
+            if(Str::length($request->passcode)<6) {
+                return redirect()->back()->withErrors(['Passcode Minimal 6 Angka!']);
+            } else {
+                if($request->passcode!==$request->repasscode) {
+                    return redirect()->back()->withErrors(['Passcode Tidak Sama!']);
+                } else {
+                    if(!(intval($request->passcode) && intval($request->repasscode))) {
+                        return redirect()->back()->withErrors(['Passcode Harus Berupa Angka']);
+                    }
+                    $senior->passcode = $request->passcode;
+                }
+            }
+        }
+
+        // Foto        
+        if($request->hasFile('foto')){
+            $this->validate($request, ['foto' => 'mimes:jpeg,jpg,png|max:2048',], $message);
+            $file = $request->file('foto');
+            $name = $senior->id .".jpg";
+            $tahun = Str::replaceFirst('/', '-', $this->helper->tahunAktif());
+            $file->move('storage/foto/' .$tahun. "/senior/", $name);
+            $senior->foto = $name;
+        }
+
+        $senior->nama = $request->nama;
+        $senior->nim = $request->nim;
+        $senior->save();
+        
+        return redirect()->back()->with(['sukses' => 'Profile Berhasil Diperbarui']);
     }
 }
