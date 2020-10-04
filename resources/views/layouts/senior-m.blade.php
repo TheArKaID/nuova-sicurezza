@@ -147,8 +147,8 @@
                 
                 @if (session()->has('sukses'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <button type="button" class="close" aria-label="Close"><span aria-hidden="true">×</span></button>
-                        <h5 class='text-white card-title'>Berhasil!</h5>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        <h5 class='card-title'>Berhasil!</h5>
                         {{ session()->get('sukses') }}
                     </div>
                 @endif
