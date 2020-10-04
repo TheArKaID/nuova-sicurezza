@@ -100,7 +100,7 @@
                                             <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                         </a>
                                         <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right" style="top: 35% !important">
-                                            <a href="#"><button type="button" tabindex="0" class="dropdown-item">Pengaturan</button></a>
+                                            <a href="{{ route('senior.profile') }}"><button type="button" tabindex="0" class="dropdown-item">Profile</button></a>
                                             <h6 tabindex="-1" class="dropdown-header">Help</h6>
                                             <a href="#"><button type="button" tabindex="0" class="dropdown-item">About</button></a>
                                             <a href="#"><button type="button" tabindex="0" class="dropdown-item">Contact</button></a>

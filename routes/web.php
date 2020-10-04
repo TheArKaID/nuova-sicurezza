@@ -44,6 +44,9 @@ Route::middleware('auth:senior')->group(function(){
     Route::get('/s/usroh', "UsrohController@index")->name('senior.usroh');
     Route::get('/s/usroh/{id}', "UsrohController@detail")->name('senior.usroh.detail');
 
+    // Profile
+    Route::get('/s/profile', "ProfileController@index")->name('senior.profile');
+
     /**
      * Divisi Keamanan
      */
