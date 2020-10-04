@@ -106,16 +106,11 @@
                             <input type="password" name="password" class="form-control" placeholder="Password" required>
                         </div>
                         <div class="col-md-12">
-                            <button type="submit" class="btn btn-success mt-3">Simpan</button>
+                            <button type="submit" class="btn btn-success mt-3" onclick="loadui()">Simpan</button>
                         </div>
                     </div>
                 </form>
             </div>
         <div>
     </div>
-@endsection
-
-@section('scripts')
-<script>
-</script>    
 @endsection
