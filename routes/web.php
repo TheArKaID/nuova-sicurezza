@@ -94,6 +94,7 @@ Route::middleware('auth:senior')->group(function(){
 
     // Rekap
     Route::get('/s/d-poin', "Divman\PoinController@index")->name('divman.poin');
+    Route::get('/s/d-poin/download', "Divman\PoinController@download")->name('divman.poin.download');
 
     // Tahun
     Route::get('/s/d-tahun', "Divman\TahunController@index")->name('divman.tahun');

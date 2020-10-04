@@ -29,7 +29,9 @@
         <div class="col-lg-12">
             <div class="main-card mb-3 card">
                 <div class="card-body">
-                    <a href="{{route('divman.kamar.tambah')}}" class="btn btn-success btn-sm" style="float: right"><i class="fa fa-plus-square"></i></a>
+                    <a href="{{route('divman.poin.download')}}" class="btn btn-success" style="float: left">
+                        <i class="fa fa-file-download"></i> Rekap
+                    </a>
                     <table class="mb-0 table table-hover table-responsive">
                         <thead>
                         <tr>
