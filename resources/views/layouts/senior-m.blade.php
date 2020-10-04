@@ -135,12 +135,14 @@
             <div class="app-main__outer" style="padding-bottom: unset;padding-left: unset">
                 <div class="app-main__inner" style="padding: 15px 15px 0;">
 
-                @if (session()->has('gagal'))
+                @if ($errors->any())
+                    @foreach ($errors->all() as $error)
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <button type="button" class="close" aria-label="Close"><span aria-hidden="true">×</span></button>
-                        <h5 class='text-white card-title'>Gagal!</h5>
-                        {{ session()->get('gagal') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        <h5 class='card-title'>Gagal!</h5>
+                        {{ $error }}
                     </div>
+                    @endforeach
                 @endif
                 
                 @if (session()->has('sukses'))
