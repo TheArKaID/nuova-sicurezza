@@ -29,8 +29,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="main-card mb-3 card">
-                <form action="{{ route('senior.profile.save') }}" method="post" enctype="multipart/form-data">
-                    {{ csrf_field() }}
+                <form action="/" method="post">
                     <div class="card-body">
                         <div id="accordion" class="accordion-wrapper mb-3">
                             <div class="card">
@@ -44,9 +43,9 @@
                                         <label>Username</label>
                                         <input type="text" class="form-control" value="{{ $profile->username }}" disabled>
                                         <label>Nama</label>
-                                        <input type="text" name="nama" class="form-control" value="{{ $profile->nama }}" required>
+                                        <input type="text" class="form-control" value="{{ $profile->nama }}" required>
                                         <label>NIM</label>
-                                        <input type="text" name="nim" class="form-control" value="{{ $profile->nim }}" required>
+                                        <input type="text" class="form-control" value="{{ $profile->nim }}" required>
 
                                         <label for="foto" class="col-sm-2 col-form-label">Foto</label>
                                         <div class="col-md-10">
@@ -59,7 +58,7 @@
                                         </div>
                                         <div class="col-sm-10">
                                             <small>Update Foto</small>
-                                            <input name="foto" placeholder="Foto" type="file" class="form-control">
+                                            <input name="foto" id="foto" placeholder="Foto" type="file" class="form-control">
                                             <small>File JPG, JPEG, PNG | Max Size : 2mb</small>
                                         </div>
                                     </div>
@@ -75,9 +74,9 @@
                                     <div class="card-body">
                                         <p><small style="color: blue">Abaikan jika tidak ingin Mengganti Password</small></p>
                                         <label for="newpassword">New Password</label>
-                                        <input type="password" name="newpassword" class="form-control" placeholder="Password Baru">
+                                        <input type="password" class="form-control" placeholder="Password Baru">
                                         <label for="renewpassword">Re New Password</label>
-                                        <input type="password" name="renewpassword" class="form-control" placeholder="Ulangi Password">
+                                        <input type="password" class="form-control" placeholder="Ulangi Password">
                                     </div>
                                 </div>
                             </div>
@@ -89,12 +88,11 @@
                                 </button>
                                 <div data-parent="#accordion" id="collapsePasscode" class="collapse">
                                     <div class="card-body">
-                                        <p><small style="color: blue"><i>Quick Login</i> dengan Passcode</small></p>
+                                        <p><small style="color: blue">Quick Login dengan Passcode</small></p>
                                         <label for="passcode">Passcode</label>
-                                        <input type="number" name="passcode" minlength="6" maxlength="6" class="form-control" placeholder="Passcode">
+                                        <input type="number" minlength="6" maxlength="6" class="form-control" placeholder="Passcode">
                                         <label for="repasscode">Re Passcode</label>
-                                        <input type="number" name="repasscode" minlength="6" maxlength="6" class="form-control" placeholder="Ulangi Passcode">
-                                        <p><small style="color: {{ $profile->passcode ? 'green' : 'red' }}">{{ $profile->passcode ? 'Passcode Terpasang' : 'Passcode Tidak Dipasang'}}</small></p>
+                                        <input type="number" minlength="6" maxlength="6" class="form-control" placeholder="Ulangi Passcode">
                                     </div>
                                 </div>
                             </div>
@@ -103,10 +101,10 @@
                     <div class="card-body" style="border-top: 1px solid rgba(26,54,126,0.125)">
                         <h5><label>Konfirmasi Password</label></h5>
                         <div class="col-md-12">
-                            <input type="password" name="password" class="form-control" placeholder="Password" required>
+                            <input type="password" class="form-control" placeholder="Password" required>
                         </div>
                         <div class="col-md-12">
-                            <button type="submit" class="btn btn-success mt-3">Simpan</button>
+                            <button class="btn btn-success">Simpan</button>
                         </div>
                     </div>
                 </form>
@@ -116,6 +114,13 @@
 @endsection
 
 @section('scripts')
+
 <script>
+    $(document).ready(function($) {
+        $(".clickable-row").click(function() {
+            window.location = $(this).data("url");
+            $loadingui.show();
+        });
+    });
 </script>    
 @endsection

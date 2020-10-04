@@ -46,7 +46,6 @@ Route::middleware('auth:senior')->group(function(){
 
     // Profile
     Route::get('/s/profile', "ProfileController@index")->name('senior.profile');
-    Route::post('/s/profile/simpan', "ProfileController@simpan")->name('senior.profile.save');
 
     /**
      * Divisi Keamanan
