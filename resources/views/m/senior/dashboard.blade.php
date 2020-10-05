@@ -124,39 +124,40 @@
         <div class="col-lg-12">
             <div class="main-card mb-3 card">
                 <div class="card-body">
+                    <h5>Resident</h5>
                     <div class="row">
                         <div class="col-md-6 col-xl-4">
-                            <div class="card mb-3 widget-content bg-dark-red">
+                            <div class="card mb-3 widget-content bg-primary">
                                 <div class="widget-content-wrapper text-white">
                                     <div class="widget-content-left">
                                         <div class="widget-heading">Resident Putra</div>
                                     </div>
                                     <div class="widget-content-right">
-                                        <div class="widget-numbers text-white"><span>AAAA</span></div>
+                                        <div class="widget-numbers text-white"><span>{{ $rputra }}</span></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-xl-4">
-                            <div class="card mb-3 widget-content bg-grow-early">
+                            <div class="card mb-3 widget-content bg-warning">
                                 <div class="widget-content-wrapper text-white">
                                     <div class="widget-content-left">
                                         <div class="widget-heading">Resident Putri</div>
                                     </div>
                                     <div class="widget-content-right">
-                                        <div class="widget-numbers text-white"><span>AAAA</span></div>
+                                        <div class="widget-numbers text-white"><span>{{ $rputri }}</span></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-xl-4">
-                            <div class="card mb-3 widget-content bg-mean-fruit">
-                                <div class="widget-content-wrapper text-white">
+                            <div class="card mb-3 widget-content bg-heavy-rain">
+                                <div class="widget-content-wrapper text-dark">
                                     <div class="widget-content-left">
                                         <div class="widget-heading">Total Resident</div>
                                     </div>
                                     <div class="widget-content-right">
-                                        <div class="widget-numbers text-white"><span>AAAA</span></div>
+                                        <div class="widget-numbers text-dark"><span>{{ $resident }}</span></div>
                                     </div>
                                 </div>
                             </div>
