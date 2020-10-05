@@ -29,7 +29,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="main-card mb-3 card">
-                <form action="{{ route('senior.profile.save') }}" method="post" enctype="multipart/form-data">
+                <form id="formProfile" action="{{ route('senior.profile.save') }}" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="card-body">
                         <div id="accordion" class="accordion-wrapper mb-3">
@@ -106,11 +106,19 @@
                             <input type="password" name="password" class="form-control" placeholder="Password" required>
                         </div>
                         <div class="col-md-12">
-                            <button type="submit" class="btn btn-success mt-3" onclick="loadui()">Simpan</button>
+                            <button type="submit" class="btn btn-success mt-3">Simpan</button>
                         </div>
                     </div>
                 </form>
             </div>
         <div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $('#formProfile').on('submit', function () {
+            loadui();
+        })
+    </script>
 @endsection
