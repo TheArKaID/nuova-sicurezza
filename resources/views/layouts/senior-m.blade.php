@@ -53,7 +53,7 @@
             <div class="app-header__logo" style="width: auto; display:flex">
                 <div class="logo-src">
                     @if (!Request::is('s'))
-                        <a href="/s">
+                        <a href="/s" onclick="loadui()">
                             <h5>Sicurezza</h5>
                         </a>
                     @endif
@@ -62,11 +62,11 @@
             <div class="app-header__mobile-menu">
                 <div class="row">
                     @if (!Request::is('s'))
-                        <a href="{{$url}}" class="btn btn-warning" style="line-height: 1">
+                        <a href="{{$url}}" class="btn btn-warning" style="line-height: 1" onclick="loadui()">
                             <i class='fa fa-arrow-left'></i>
                         </a>
                     @else
-                        <a href="/s">
+                        <a href="/s" onclick="loadui()">
                             <h5>Sicurezza</h5>
                         </a>
                     @endif
@@ -100,14 +100,14 @@
                                             <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                         </a>
                                         <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right" style="top: 35% !important">
-                                            <a href="{{ route('senior.profile') }}"><button type="button" tabindex="0" class="dropdown-item">Profile</button></a>
-                                            <h6 tabindex="-1" class="dropdown-header">Help</h6>
-                                            <a href="#"><button type="button" tabindex="0" class="dropdown-item">About</button></a>
-                                            <a href="#"><button type="button" tabindex="0" class="dropdown-item">Contact</button></a>
-                                            <a href="#"><button type="button" tabindex="0" class="dropdown-item">FAQ</button></a>
-                                            <a href="#"><button type="button" tabindex="0" class="dropdown-item">Privacy</button></a>
+                                            <a href="{{ route('senior.profile') }}" onclick="loadui()"><button type="button" tabindex="0" class="dropdown-item">Profile</button></a>
+                                            <h6 tabindex="-1" class="dropdown-header"> - Help - </h6>
+                                            <a href="#"><button type="button" tabindex="0" class="dropdown-item" onclick="loadui()">About</button></a>
+                                            <a href="#"><button type="button" tabindex="0" class="dropdown-item" onclick="loadui()">Contact</button></a>
+                                            <a href="#"><button type="button" tabindex="0" class="dropdown-item" onclick="loadui()">FAQ</button></a>
+                                            <a href="#"><button type="button" tabindex="0" class="dropdown-item" onclick="loadui()">Privacy</button></a>
                                             <div tabindex="-1" class="dropdown-divider"></div>
-                                            <a href="{{ route('senior.logout') }}" tabindex="0" class="dropdown-item">Logout</a>
+                                            <a href="{{ route('senior.logout') }}" tabindex="0" class="dropdown-item" onclick="loadui()">Logout</a>
                                         </div>
                                     </div>
                                 </div>
@@ -189,6 +189,9 @@
         });
         function loadui() {
             $loadingui.show();
+            setTimeout(() => {
+                $loadingui.hide();
+            }, 10000);
         }
     </script>
     @yield('scripts')
