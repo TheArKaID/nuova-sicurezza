@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Helpers\Helper;
 use App\Tengko;
-use App\Resident;
-use App\Pencatatan;
 
 class TengkoController extends Controller
 {
@@ -13,7 +12,7 @@ class TengkoController extends Controller
 
     public function __construct()
     {
-        $this->helper = new \Helper;
+        $this->helper = new Helper;
         $this->middleware('auth:senior');
     }
 

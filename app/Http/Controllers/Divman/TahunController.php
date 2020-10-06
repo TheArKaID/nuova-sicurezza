@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Divman;
 
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -14,7 +15,7 @@ class TahunController extends Controller
     
     public function __construct()
     {
-        $this->helper = new \Helper;
+        $this->helper = new Helper;
         $this->middleware('auth:senior');
         $this->middleware(function ($request, $next) {
             if(!Auth::user()->isdivman)
@@ -62,7 +63,7 @@ class TahunController extends Controller
         }
         
         $tahun = new Tahun;
-        $tahun = $tahunajaran;
+        $tahun->tahunajaran = $tahunajaran;
         $tahun->save();
         return redirect()->back()->with('sukses', 'Data Tahun Berhasil Ditambahkan');
     }

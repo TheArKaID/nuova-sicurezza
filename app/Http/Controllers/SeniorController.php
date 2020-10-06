@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use Illuminate\Support\Facades\Cache;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Validator;
-use App\Usroh;
-use App\Tahun;
+use Illuminate\Support\Str;
 use App\Senior;
 
 class SeniorController extends Controller
@@ -16,7 +14,7 @@ class SeniorController extends Controller
 
     public function __construct()
     {
-        $this->helper = new \Helper;
+        $this->helper = new Helper;
         $this->middleware('auth:senior');
     }
 
@@ -46,7 +44,7 @@ class SeniorController extends Controller
     public function detail($id)
     {
         $ta = $this->helper->idTahunAktif();
-        $tahun = \Str::replaceFirst('/', '-', $this->helper->tahunAktif());
+        $tahun = Str::replaceFirst('/', '-', $this->helper->tahunAktif());
         $senior = Senior::where('id', $id)->where('idtahun', $this->helper->idTahunAktif())->first();
         
         if($this->helper->isMobile())

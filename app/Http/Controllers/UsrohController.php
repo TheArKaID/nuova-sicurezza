@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use App\Helpers\Helper;
 use App\Usroh;
 use App\Senior;
 use App\Resident;
@@ -11,13 +14,13 @@ class UsrohController extends Controller
 {
     public function __construct()
     {
-        $this->helper = new \Helper;
+        $this->helper = new Helper;
         $this->middleware('auth:senior');
     }
 
     public function index()
     {
-        $is = \Auth::user()->jeniskelamin==1 ? "=" : "!=";
+        $is = Auth::user()->jeniskelamin==1 ? "=" : "!=";
         $ta = $this->helper->idTahunAktif();
         $tahun = $this->helper->tahunAktif();
         $usroh = Usroh::where('idtahun', $ta)->where('gedung', $is, 'U')->get();
@@ -36,8 +39,8 @@ class UsrohController extends Controller
 
     public function detail($id)
     {
-        $is = \Auth::user()->jeniskelamin==1 ? "=" : "!=";
-        $tahun = \Str::replaceFirst('/', '-', $this->helper->tahunAktif());
+        $is = Auth::user()->jeniskelamin==1 ? "=" : "!=";
+        $tahun = Str::replaceFirst('/', '-', $this->helper->tahunAktif());
         $usroh = Usroh::where('id', $id)->where('gedung', $is, 'U')
                     ->where('idtahun', $this->helper->idTahunAktif())->first();
 

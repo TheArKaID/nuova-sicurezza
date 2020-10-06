@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers\Divman;
 
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Senior;
 use App\Usroh;
+use Illuminate\Support\Facades\Hash;
 
 class SeniorController extends Controller
 {
@@ -16,7 +19,7 @@ class SeniorController extends Controller
     
     public function __construct()
     {
-        $this->helper = new \Helper;
+        $this->helper = new Helper;
         $this->middleware('auth:senior');
         $this->middleware(function ($request, $next) {
             if(!Auth::user()->isdivman)
@@ -94,7 +97,7 @@ class SeniorController extends Controller
         $senior->nim = $request->nim;
         $senior->jeniskelamin = $request->jeniskelamin;
         $senior->username = $request->username;
-        $senior->password = \Hash::make($request->password);
+        $senior->password = Hash::make($request->password);
         $senior->isdivman = $request->isdivman;
         $senior->status = $request->status;
         
@@ -106,7 +109,7 @@ class SeniorController extends Controller
             $file = $request->file('foto');
             $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
             $name = $senior->id .".". $ext;
-            $tahun = \Str::replaceFirst('/', '-', $this->helper->tahunAktif());
+            $tahun = Str::replaceFirst('/', '-', $this->helper->tahunAktif());
             $file->move('storage/foto/' .$tahun. "/senior/", $name);
             $senior->foto = $name;
             $senior->save();
@@ -118,7 +121,7 @@ class SeniorController extends Controller
     public function detail($id)
     {
         $ta = $this->helper->idTahunAktif();
-        $tahun = \Str::replaceFirst('/', '-', $this->helper->tahunAktif());
+        $tahun = Str::replaceFirst('/', '-', $this->helper->tahunAktif());
         $senior = Senior::where('id', $id)->where('idtahun', $this->helper->idTahunAktif())->first();
         $usroh = Usroh::where('idtahun', $ta)->get();
         
@@ -161,7 +164,7 @@ class SeniorController extends Controller
             if($request->password!=$request->repassword)
                 return redirect()->back()->withInput()->withErrors('Password dan Repassword tidak sama!');
 
-            $senior->password = \Hash::make($request->password);
+            $senior->password = Hash::make($request->password);
         }
 
         // Foto
@@ -170,7 +173,7 @@ class SeniorController extends Controller
             $file = $request->file('foto');
             $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
             $name = $request->id .".". $ext;
-            $tahun = \Str::replaceFirst('/', '-', $this->helper->tahunAktif());
+            $tahun = Str::replaceFirst('/', '-', $this->helper->tahunAktif());
             $file->move('storage/foto/' .$tahun. "/senior/", $name);
             $senior->foto = $name;
         }
@@ -195,7 +198,7 @@ class SeniorController extends Controller
         $senior = Senior::where('id', $id)->where('idtahun', $this->helper->idTahunAktif())->first();
         
         if($senior->foto){
-            $tahun = \Str::replaceFirst('/', '-', $this->helper->tahunAktif());
+            $tahun = Str::replaceFirst('/', '-', $this->helper->tahunAktif());
             Storage::delete('public/foto/' .$tahun. '/senior/' .$senior->foto);
         }
         
