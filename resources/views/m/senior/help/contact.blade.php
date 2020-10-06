@@ -59,7 +59,7 @@
                                 <div class="widget-content-left flex2">
                                     <div class="widget-heading">Muhammad Miftah</div>
                                     <div class="widget-subheading opacity-10">
-                                        <span><b class="text-primary">+62 896 9190 8367</b> (WA))</span>
+                                        <span><b class="text-primary">+62 896 9190 8367</b> (WA)</span>
                                     </div>
                                 </div>
                             </div>
