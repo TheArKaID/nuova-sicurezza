@@ -25,7 +25,9 @@ class TengkoController extends Controller
     public function index()
     {
         $ta = $this->helper->idTahunAktif();
-        $tengko = Tengko::where('idtahun', $ta)->get();
+        $tengko = Tengko::where('idtahun', $ta)
+            ->where('jeniskelamin', Auth::user()->jeniskelamin)->get();
+
         $tahun = $this->helper->tahunAktif();
         if($this->helper->isMobile())
             return view('m.divman.tengko.index', [
@@ -66,6 +68,7 @@ class TengkoController extends Controller
         $tengko->tipe = $request->tipe;
         $tengko->penjelasan = $request->penjelasan;
         $tengko->poin = $request->poin;
+        $tengko->jeniskelamin = Auth::user()->jeniskelamin;
         $tengko->save();
         
         return redirect(route('divman.tengko'));
@@ -73,7 +76,9 @@ class TengkoController extends Controller
 
     public function detail($id)
     {
-        $tengko = Tengko::where('id', $id)->where('idtahun', $this->helper->idTahunAktif())->first();
+        $tengko = Tengko::where('id', $id)
+            ->where('idtahun', $this->helper->idTahunAktif())
+            ->where('jeniskelamin', Auth::user()->jeniskelamin)->first();
         
         if($this->helper->isMobile())
             return view('m.divman.tengko.detail', [
@@ -93,7 +98,9 @@ class TengkoController extends Controller
             'poin' => 'required|numeric'
         ]);
 
-        $tengko = Tengko::where('id', $request->id)->where('idtahun', $this->helper->idTahunAktif())->first();
+        $tengko = Tengko::where('id', $request->id)
+            ->where('idtahun', $this->helper->idTahunAktif())
+            ->where('jeniskelamin', Auth::user()->jeniskelamin)->first();
         $tengko->update($request->all());
 
         return redirect(route('divman.tengko'));
@@ -101,7 +108,9 @@ class TengkoController extends Controller
 
     public function hapus($id)
     {
-        $tengko = Tengko::where('id', $id)->where('idtahun', $this->helper->idTahunAktif())->first();
+        $tengko = Tengko::where('id', $id)
+            ->where('idtahun', $this->helper->idTahunAktif())
+            ->where('jeniskelamin', Auth::user()->jeniskelamin)->first();
         $tengko->delete();
         
         return redirect(route('divman.tengko'));

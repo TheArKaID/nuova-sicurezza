@@ -32,7 +32,8 @@ class PoinController extends Controller
         $ta = $this->helper->idTahunAktif();
         $tahun = $this->helper->tahunAktif();
 
-        $resident = Resident::where('resident.idtahun', $ta)->paginate(16);
+        $resident = Resident::where('resident.idtahun', $ta)
+            ->where('jeniskelamin', Auth::user()->jeniskelamin)->paginate(16);
 
         if($this->helper->isMobile())
             return view('m.divman.poin.index', [
@@ -49,7 +50,8 @@ class PoinController extends Controller
     
     public function download()
     {
-        $resident = Resident::where('resident.idtahun', $this->helper->idTahunAktif())->get();
+        $resident = Resident::where('resident.idtahun', $this->helper->idTahunAktif())
+            ->where('jeniskelamin', Auth::user()->jeniskelamin)->get();
 
         $spreadsheet = new Spreadsheet();
 

@@ -32,7 +32,9 @@ class SeniorController extends Controller
     public function index()
     {
         $ta = $this->helper->idTahunAktif();
-        $senior = Senior::where('idtahun', $ta)->get();
+        $senior = Senior::where('idtahun', $ta)
+            ->where('jeniskelamin', Auth::user()->jeniskelamin)->get();
+
         $senior = $this->sortSenior($senior);
         $tahun = $this->helper->tahunAktif();
         if($this->helper->isMobile())
@@ -51,7 +53,9 @@ class SeniorController extends Controller
     {
         $ta = $this->helper->idTahunAktif();
         $tahun = $this->helper->tahunAktif();
-        $usroh = Usroh::where('idtahun', $ta)->get();
+        $usroh = Usroh::where('idtahun', $ta)
+            ->where('jeniskelamin', Auth::user()->jeniskelamin)->get();
+
         if($this->helper->isMobile())
             return view('m.divman.senior.tambah', [
                 'tahun' => $tahun,
@@ -122,8 +126,11 @@ class SeniorController extends Controller
     {
         $ta = $this->helper->idTahunAktif();
         $tahun = Str::replaceFirst('/', '-', $this->helper->tahunAktif());
-        $senior = Senior::where('id', $id)->where('idtahun', $this->helper->idTahunAktif())->first();
-        $usroh = Usroh::where('idtahun', $ta)->get();
+        $senior = Senior::where('id', $id)
+            ->where('idtahun', $this->helper->idTahunAktif())
+            ->where('jeniskelamin', Auth::user()->jeniskelamin)->first();
+        $usroh = Usroh::where('idtahun', $ta)
+            ->where('jeniskelamin', Auth::user()->jeniskelamin)->get();
         
         if($this->helper->isMobile())
             return view('m.divman.senior.detail', [
@@ -152,7 +159,9 @@ class SeniorController extends Controller
             'idkamar' => 'required'
         ]);
 
-        $senior = Senior::where('id', $request->id)->where('idtahun', $this->helper->idTahunAktif())->first();
+        $senior = Senior::where('id', $request->id)
+            ->where('idtahun', $this->helper->idTahunAktif())
+            ->where('jeniskelamin', Auth::user()->jeniskelamin)->first();
 
         // Password
         if($request->password || $request->repassword){
@@ -195,7 +204,9 @@ class SeniorController extends Controller
 
     public function hapus($id)
     {
-        $senior = Senior::where('id', $id)->where('idtahun', $this->helper->idTahunAktif())->first();
+        $senior = Senior::where('id', $id)
+            ->where('idtahun', $this->helper->idTahunAktif())
+            ->where('jeniskelamin', Auth::user()->jeniskelamin)->first();
         
         if($senior->foto){
             $tahun = Str::replaceFirst('/', '-', $this->helper->tahunAktif());
@@ -210,6 +221,7 @@ class SeniorController extends Controller
     public function getKamar($idusroh)
     {
         $kamar = DB::table('kamar')
+            ->where('kamar.jeniskelamin', Auth::user()->jeniskelamin)
             ->select('kamar.id', 'kamar.nomor')
             ->leftJoin('resident', 'kamar.id', '=', 'resident.idkamar')
             ->leftJoin('senior', 'kamar.id', '=', 'senior.idkamar')

@@ -33,10 +33,12 @@ class ResidentController extends Controller
     {
         $ta = $this->helper->idTahunAktif();
         $resident = Resident::where('resident.idtahun', $ta)
+                    ->where('resident.jeniskelamin', Auth::user()->jeniskelamin)
                     ->join('kamar', 'resident.idkamar', '=', 'kamar.id')
                     ->select('resident.*')
                     ->orderBy('kamar.nomor')
                     ->paginate(16);
+
         $tahun = $this->helper->tahunAktif();
         if($this->helper->isMobile())
             return view('m.divman.resident.index', [
@@ -53,8 +55,10 @@ class ResidentController extends Controller
     public function tambah()
     {
         $ta = $this->helper->idTahunAktif();
-        $usroh = Usroh::where('idtahun', $ta)->get();
+        $usroh = Usroh::where('idtahun', $ta)
+            ->where('jeniskelamin', Auth::user()->jeniskelamin)->get();
         $tahun = $this->helper->tahunAktif();
+
         if($this->helper->isMobile())
             return view('m.divman.resident.tambah', [
                 'tahun' => $tahun,
@@ -79,7 +83,7 @@ class ResidentController extends Controller
 
         // Password
         if($request->password!=$request->repassword)
-            return redirect()->back()->withInput()->withErrors('Password dan Repassword tidak sama!');
+            return redirect()->back()->withInput()->withErrors(['Password dan Repassword tidak sama!']);
 
         $resident = new Resident;
 
@@ -88,7 +92,7 @@ class ResidentController extends Controller
         $resident->idkamar = $request->idkamar;
         $resident->nama = $request->nama;
         $resident->nim = $request->nim;
-        $resident->jeniskelamin = auth()->user->jeniskelamin;
+        $resident->jeniskelamin = Auth::user()->jeniskelamin;
         
         $resident->save();
         
@@ -111,8 +115,13 @@ class ResidentController extends Controller
     {
         $ta = $this->helper->idTahunAktif();
         $tahun = Str::replaceFirst('/', '-', $this->helper->tahunAktif());
-        $resident = Resident::where('id', $id)->where('idtahun', $this->helper->idTahunAktif())->first();
-        $usroh = Usroh::where('idtahun', $ta)->get();
+        $resident = Resident::where('id', $id)
+            ->where('idtahun', $this->helper->idTahunAktif())
+            ->where('jeniskelamin', Auth::user()->jeniskelamin)->first();
+
+        $usroh = Usroh::where('idtahun', $ta)
+            ->where('jeniskelamin', Auth::user()->jeniskelamin)->get();
+
         if($this->helper->isMobile())
             return view('m.divman.resident.detail', [
                 'resident' => $resident,
@@ -137,7 +146,9 @@ class ResidentController extends Controller
             'idkamar' => 'required'
         ]);
 
-        $resident = Resident::where('id', $request->id)->where('idtahun', $this->helper->idTahunAktif())->first();
+        $resident = Resident::where('id', $request->id)
+            ->where('idtahun', $this->helper->idTahunAktif())
+            ->where('jeniskelamin', Auth::user()->jeniskelamin)->first();
 
         // Foto
         if($request->hasFile('foto')){
@@ -163,7 +174,9 @@ class ResidentController extends Controller
 
     public function hapus($id)
     {
-        $resident = Resident::where('id', $id)->where('idtahun', $this->helper->idTahunAktif())->first();
+        $resident = Resident::where('id', $id)
+            ->where('idtahun', $this->helper->idTahunAktif())
+            ->where('jeniskelamin', Auth::user()->jeniskelamin)->first();
         
         if($resident->foto){
             $tahun = Str::replaceFirst('/', '-', $this->helper->tahunAktif());
@@ -240,6 +253,7 @@ class ResidentController extends Controller
                 }
 
                 $kamar = Kamar::where('idtahun', $this->helper->idTahunAktif())
+                        ->where('jeniskelamin', Auth::user()->jeniskelamin)
                         ->with('resident')
                         ->with('senior')
                         ->where('nomor', $nomor)->first();
@@ -281,6 +295,7 @@ class ResidentController extends Controller
     public function getKamar($idusroh)
     {
         $kamar = Kamar::where('idtahun', $this->helper->idTahunAktif())
+                    ->where('jeniskelamin', Auth::user()->jeniskelamin)
                     ->where('idusroh', $idusroh)
                     ->doesntHave('resident')->doesntHave('senior')
                     ->get();
@@ -306,7 +321,7 @@ class ResidentController extends Controller
                     'idtahun' => $this->helper->idTahunAktif(),
                     'nama' => $value['nama'],
                     'nim' => $value['nim'],
-                    'jeniskelamin' => auth()->user()->jeniskelamin
+                    'jeniskelamin' => Auth::user()->jeniskelamin
                 ]);
             }
             DB::commit();

@@ -27,9 +27,10 @@ class KamarController extends Controller
 
     public function index()
     {
-        $ta = $this->helper->idTahunAktif();
         $tahun = $this->helper->tahunAktif();
-        $kamar = Kamar::where('idtahun', $ta)->get();
+        $kamar = Kamar::where('idtahun', $this->helper->idTahunAktif())
+            ->where('jeniskelamin', Auth::user()->jeniskelamin)->get();
+            
         if($this->helper->isMobile())
             return view('m.divman.kamar.index', [
                 'tahun' => $tahun,
@@ -44,9 +45,10 @@ class KamarController extends Controller
 
     public function tambah()
     {
-        $ta = $this->helper->idTahunAktif();
         $tahun = $this->helper->tahunAktif();
-        $usroh = Usroh::where('idtahun', $this->helper->idTahunAktif())->get();
+        $usroh = Usroh::where('idtahun', $this->helper->idTahunAktif())
+            ->where('jeniskelamin', Auth::user()->jeniskelamin)->get();
+
         if($this->helper->isMobile())
             return view('m.divman.kamar.tambah', [
                 'tahun' => $tahun,
@@ -70,6 +72,7 @@ class KamarController extends Controller
         $kamar->idtahun = $this->helper->idTahunAktif();
         $kamar->nomor = $request->nomor;
         $kamar->idusroh = $request->idusroh;
+        $kamar->jeniskelamin = Auth::user()->jeniskelamin;
         $kamar->save();
         
         return redirect(route('divman.kamar'));
@@ -77,8 +80,16 @@ class KamarController extends Controller
 
     public function detail($id)
     {
-        $kamar = Kamar::where('id', $id)->where('idtahun', $this->helper->idTahunAktif())->first();
-        $usroh = Usroh::where('idtahun', $this->helper->idTahunAktif())->get();
+        $kamar = Kamar::where('id', $id)
+            ->where('jeniskelamin', Auth::user()->jeniskelamin)
+            ->where('idtahun', $this->helper->idTahunAktif())->first();
+
+        if($kamar===NULL) {
+            return redirect()->back()->withErrors(['Kamar Tidak Ditemukan!']);
+        }
+
+        $usroh = Usroh::where('idtahun', $this->helper->idTahunAktif())
+            ->where('jeniskelamin', Auth::user()->jeniskelamin)->get();
         
         if($this->helper->isMobile())
             return view('m.divman.kamar.detail', [
@@ -94,23 +105,39 @@ class KamarController extends Controller
 
     public function simpan(Request $request)
     {
+        $messages = ['required' => ':attribute Harus Diisi!'];
+
         $this->validate($request, [
             'nomor' => 'required',
             'idusroh' => 'required'
-        ]);
+        ], $messages);
 
-        $kamar = Kamar::where('id', $request->id)->where('idtahun', $this->helper->idTahunAktif())->first();
+        $kamar = Kamar::where('id', $request->id)
+            ->where('jeniskelamin', Auth::user()->jeniskelamin)
+            ->where('idtahun', $this->helper->idTahunAktif())->first();
+        
+        if($kamar===NULL) {
+            return redirect()->back()->withErrors(['Kamar Tidak Ditemukan']);
+        }
+
         $kamar->update($request->all());
 
-        return redirect(route('divman.kamar'));
+        return redirect(route('divman.kamar'))->with(['sukses' => 'Data Berhasil Disimpan!']);
     }
     
     public function hapus($id)
     {
-        $kamar = Kamar::where('id', $id)->where('idtahun', $this->helper->idTahunAktif())->first();
+        $kamar = Kamar::where('id', $id)
+            ->where('jeniskelamin', Auth::user()->jeniskelamin)
+            ->where('idtahun', $this->helper->idTahunAktif())->first();
+
+        if($kamar===NULL) {
+            return redirect()->back()->withErrors(['Kamar Tidak Ditemukan']);
+        }
+
         $kamar->delete();
         
-        return redirect(route('divman.kamar'));
+        return redirect(route('divman.kamar'))->with(['Kamar Berhasil Dihapus!']);
     }
 
 }
