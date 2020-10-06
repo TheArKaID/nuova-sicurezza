@@ -1,5 +1,14 @@
 @extends('layouts.senior-m')
 
+@section('styles')
+<style>
+    p {
+        text-align: justify;
+        text-justify: inter-word;
+    }
+</style>
+@endsection
+
 @section('content')
     <div class="row">
         <div class="col-lg-12">
@@ -25,8 +34,10 @@
                         <div class="widget-content p-0">
                             <div class="widget-content-wrapper">
                                 <div class="card-body">
-                                    Apabila anda memiliki Pertanyaan, Kritik ataupun Saran, 
-                                    silahkan menghubungi nomor di bawah ini
+                                    <p>
+                                        Apabila anda memiliki Pertanyaan, Kritik ataupun Saran, 
+                                        silahkan menghubungi nomor di bawah ini
+                                    </p>
                                 </div>
                             </div>
                         </div>

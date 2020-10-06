@@ -1,5 +1,14 @@
 @extends('layouts.senior-m')
 
+@section('styles')
+<style>
+    p {
+        text-align: justify;
+        text-justify: inter-word;
+    }
+</style>
+@endsection
+
 @section('content')
     <div class="row">
         <div class="col-lg-12">

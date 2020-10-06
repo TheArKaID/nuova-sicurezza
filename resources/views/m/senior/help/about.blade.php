@@ -2,10 +2,6 @@
 
 @section('styles')
 <style>
-    img {
-        width: inherit;
-        height: inherit;
-    }
     p {
         text-align: justify;
         text-justify: inter-word;
