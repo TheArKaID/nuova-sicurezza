@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Cache;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 use App\Senior;
+use Illuminate\Support\Facades\Auth;
 
 class SeniorController extends Controller
 {
@@ -20,7 +21,8 @@ class SeniorController extends Controller
     public function index()
     {
         $ta = $this->helper->idTahunAktif();
-        $senior = Senior::where('idtahun', $ta)->where('jeniskelamin', (Cache::get('seniorstatus')))->get();
+        $senior = Senior::where('idtahun', $ta)
+            ->where('jeniskelamin', (session('seniorstatus', Auth::user()->jeniskelamin)))->get();
         $senior = $this->sortSenior($senior);
         $tahun = $this->helper->tahunAktif();
         if($this->helper->isMobile())
@@ -36,7 +38,11 @@ class SeniorController extends Controller
     
     public function indexX()
     {
-        Cache::put('seniorstatus', !(Cache::get('seniorstatus')));
+        if(is_bool(session('seniorstatus', false))) {
+            session(['seniorstatus' => Auth::user()->jeniskelamin]);
+        } else {
+            session(['seniorstatus' => !session('seniorstatus')]);
+        }
         return redirect(route('senior.senior'));
     }
 
