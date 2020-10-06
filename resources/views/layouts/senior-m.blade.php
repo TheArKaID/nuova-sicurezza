@@ -102,10 +102,10 @@
                                         <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right" style="top: 35% !important">
                                             <a href="{{ route('senior.profile') }}" onclick="loadui()"><button type="button" tabindex="0" class="dropdown-item">Profile</button></a>
                                             <h6 tabindex="-1" class="dropdown-header"> - Help - </h6>
-                                            <a href="#"><button type="button" tabindex="0" class="dropdown-item" onclick="loadui()">About</button></a>
-                                            <a href="#"><button type="button" tabindex="0" class="dropdown-item" onclick="loadui()">Contact</button></a>
-                                            <a href="#"><button type="button" tabindex="0" class="dropdown-item" onclick="loadui()">FAQ</button></a>
-                                            <a href="#"><button type="button" tabindex="0" class="dropdown-item" onclick="loadui()">Privacy</button></a>
+                                            <a href="{{ route('senior.help.about') }}"><button type="button" tabindex="0" class="dropdown-item" onclick="loadui()">About</button></a>
+                                            <a href="{{ route('senior.help.contact') }}"><button type="button" tabindex="0" class="dropdown-item" onclick="loadui()">Contact</button></a>
+                                            <a href="{{ route('senior.help.faq') }}"><button type="button" tabindex="0" class="dropdown-item" onclick="loadui()">FAQ</button></a>
+                                            <a href="{{ route('senior.help.privacy') }}"><button type="button" tabindex="0" class="dropdown-item" onclick="loadui()">Privacy</button></a>
                                             <div tabindex="-1" class="dropdown-divider"></div>
                                             <a href="{{ route('senior.logout') }}" tabindex="0" class="dropdown-item" onclick="loadui()">Logout</a>
                                         </div>
