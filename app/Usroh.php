@@ -32,7 +32,7 @@ class Usroh extends Model
     /**
      * @var array
      */
-    protected $fillable = ['idtahun', 'nama', 'lantai', 'gedung', 'created_at', 'updated_at'];
+    protected $fillable = ['idtahun', 'nama', 'jeniskelamin', 'lantai', 'gedung', 'created_at', 'updated_at'];
 
     public function kamar()
     {
