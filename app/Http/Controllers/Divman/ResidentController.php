@@ -20,7 +20,7 @@ class ResidentController extends Controller
     public function __construct()
     {
         $this->helper = new Helper;
-        $this->middleware('auth:senior');
+        
         $this->middleware(function ($request, $next) {
             if(!Auth::user()->isdivman)
                 return redirect('/s');

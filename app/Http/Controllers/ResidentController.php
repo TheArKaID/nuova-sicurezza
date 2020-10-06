@@ -18,7 +18,6 @@ class ResidentController extends Controller
     public function __construct()
     {
         $this->helper = new Helper;
-        $this->middleware('auth:senior');
     }
 
     public function index()
