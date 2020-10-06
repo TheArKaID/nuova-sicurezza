@@ -26,9 +26,6 @@ class DashboardController extends Controller
         $rputra = $this->getResidentPutra();
         $rputri = $this->getResidentPutri();
 
-        // Frekuensi Poin
-        $fpoin = $this->getPoinFrekuen();
-
         if($this->helper->isMobile())
             return view('m.senior.dashboard', [
                 'resident' => $resident,
@@ -74,24 +71,5 @@ class DashboardController extends Controller
         }
 
         return $rputri;
-    }
-
-    public function getPoinFrekuen()
-    {
-        $pencatatan = Pencatatan::where('idtahun', $this->helper->idTahunAktif())->get();
-
-        // Hitung jumlah dari masing" pelanggaran
-        $countedP = [];
-        foreach ($pencatatan as $p) {
-            $countedP[$p->idtengko] = (array_key_exists($p->idtengko, $countedP) ? $countedP[$p->idtengko] : 0) + 1;
-        }
-  
-        // Sort hasil jumlah
-        arsort($countedP);
-
-        // Ambil 5 teratas
-        $top5P = array_slice($countedP, 0, 5, true);
-        
-         return $top5P;
     }
 }
