@@ -51,6 +51,7 @@
                             <th>Poin</th>
                             <th>Tanggal</th>
                             <th>Oleh</th>
+                            <th>Action</th>
                         </thead>
                         <tbody>
                             @php
@@ -73,6 +74,9 @@
                                 <td>{{ $p->tengko->poin }}</td>
                                 <td>{{ $p->tanggal }}</td>
                                 <td>{{ $p->senior->nama }}</td>
+                                <td>
+                                <a href="#" class="btn mr-2 mb-2 btn-danger" data-toggle="modal" id="setDelete" data-url="{{ route('senior.resident.poin.hapus', $p->id) }}" data-target="#modalDelete" style="float: right">Hapus</a>
+                                </td>
                             </tr>
                             @endforeach
                             @else
@@ -87,6 +91,7 @@
 @endsection
 
 @section('modals')
+@if ($resident->usroh->id==Auth::user()->usroh->id)
 <div class="modal fade" id="modalTambahPoin" tabindex="-1" role="dialog" aria-labelledby="modalTambahPoinLabel" style="display: none;" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -140,14 +145,31 @@
         </div>
     </div>
 </div>
+@endif
+
+<div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Hapus Catatan ini ?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>PERHATIAN! Penghapusan tidak dapat dibatalkan!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                <a href="#" id="btnDelete" class="btn btn-danger">Hapus</a>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
+
 @section('scripts')
     <script>
-
-        function loadui() {
-            $loadingui.show();
-        }
-
         $("select[name='tipe'").on('change', function () {
             loadData();
             var tipe = this.value;
@@ -180,5 +202,14 @@
             $('select[id="idtengko"]').empty();
             $('select[id="idtengko"]').append('<option selected hidden disabled>Pilih Pelanggaran</option>');
         }
+
+        $('#setDelete').on('click', function () {
+            $('#btnDelete').attr('href', $(this).data("url"));
+        })
+
+        $('#btnDelete').on('click', function () {
+            loadui();
+        })
+        
     </script>
 @endsection

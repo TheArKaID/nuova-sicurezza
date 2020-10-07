@@ -109,6 +109,22 @@ class ResidentController extends Controller
         return redirect()->back();
     }
 
+    public function hapusPoin($idpoin)
+    {
+        $pencatatan = Pencatatan::where('id', $idpoin)->with('resident')->first();
+        if(!$pencatatan) {
+            return redirect(route('senior.resident'))->withErrors(['Maaf, Data Tidak Ditemukan!']);
+        }
+
+        if(!($pencatatan->resident->usroh->id==Auth::user()->usroh->id)){
+            return redirect(route('senior.resident'))->withErrors(['Maaf, Data Tidak Ditemukan!']);
+        }
+        
+        $pencatatan->delete();
+
+        return redirect()->back()->with(['sukses' => 'Data Berhasil Dihapus!']);
+    }
+
     public function sortResidentByKamar($resident)
     {
         for ($j=0; $j < count($resident); $j++) { 
