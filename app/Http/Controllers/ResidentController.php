@@ -10,6 +10,7 @@ use App\Usroh;
 use App\Pencatatan;
 use App\Tengko;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ResidentController extends Controller
 {    
@@ -23,9 +24,14 @@ class ResidentController extends Controller
     public function index()
     {
         $tahun = $this->helper->tahunAktif();
-        $resident = Resident::where('idtahun', $this->helper->idTahunAktif())
-                    ->where('jeniskelamin', (Auth::user()->jeniskelamin))->paginate(16);
-        $resident = $this->sortResidentByKamar($resident);
+
+        $resident = Resident::where('resident.idtahun', $this->helper->idTahunAktif())
+            ->where('resident.jeniskelamin', (Auth::user()->jeniskelamin))
+            ->where('resident.idusroh', '=', Auth::user()->usroh->id)->get();
+            
+        if($resident!==null)
+            $resident = $this->sortResidentByKamar($resident);
+            
         if($this->helper->isMobile())
             return view('m.senior.resident.index', [
                 'resident'=> $resident,

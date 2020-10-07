@@ -22,7 +22,7 @@
                             <i class="pe-7s-home icon-gradient bg-mean-fruit">
                             </i>
                         </div>
-                        <div>Resident {{$tahun}}</div>
+                        <div>Resident {{Auth::user()->usroh->nama}}</div>
                     </div>
                 </div>
             </div>
@@ -39,21 +39,24 @@
                             <th>#</th>
                             <th>Kamar</th>
                             <th>Nama</th>
-                            <th>Usroh</th>
+                            <th>NIM</th>
                         </tr>
                         </thead>
                         <tbody>
-                            @foreach ($resident as $row => $r)
-                                <tr class='clickable-row' data-url='{{ route('senior.resident.detail', $r->id)}}'>
-                                    <th scope="row">{{$resident->firstItem() + $row}}</th>
-                                    <td>{{$r->kamar->nomor}}</td>
-                                    <td>{{$r->nama}}</td>
-                                    <td>{{$r->usroh->nama}}</td>
-                                </tr>
-                            @endforeach
+                            @if ($resident!==null)
+                                @foreach ($resident as $row => $r)
+                                    <tr class='clickable-row' data-url='{{ route('senior.resident.detail', $r->id)}}'>
+                                        <th scope="row">{{$row+1}}</th>
+                                        <td>{{$r->kamar->nomor}}</td>
+                                        <td>{{$r->nama}}</td>
+                                        <td>{{$r->nim}}</td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                <tr><td colspan="4" style="text-align: center"><i>Tidak ada Resident</i></td></tr>
+                            @endif  
                         </tbody>
                     </table>
-                    {{$resident->links()}}
                 </div>
             </div>
         <div>
