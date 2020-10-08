@@ -32,10 +32,11 @@
                     <div class="alert alert-primary fade show" role="alert">
                         <h5 class="alert-heading">Poin Khusus</h5>
                         <p>
-                            <form action="#" method="post">
+                            <form action="{{ route('divman.pengaturan.save.ponsus') }}" method="post">
+                                {{ csrf_field() }}
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <input class="form-control" type="number" name="ponsus" id="ponsus" value="{{ $pengaturan->ponsus }}">
+                                        <input class="form-control" max="999999" min="100000" type="number" name="ponsus" id="ponsus" value="{{ $pengaturan->ponsus }}">
                                     </div>
                                     <div class="col-md-12">
                                         <button class="btn btn-primary col-md-12" type="submit">Simpan</button>

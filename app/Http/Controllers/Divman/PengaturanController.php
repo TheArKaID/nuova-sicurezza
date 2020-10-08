@@ -38,11 +38,24 @@ class PengaturanController extends Controller
         ]);
     }
 
-    public function refreshToken(Request $request)
+    public function refreshToken()
     {
         $newtoken = rand(100000, 999999);
         $pengaturan = Pengaturan::first();
         $pengaturan->resettoken = $newtoken;
+        $pengaturan->save();
+
+        return redirect()->back();
+    }
+
+    public function savePonsus(Request $request)
+    {
+        $this->validate($request, [
+            'ponsus' => 'required|digits:6'
+        ]);
+
+        $pengaturan = Pengaturan::first();
+        $pengaturan->ponsus = $request->ponsus;
         $pengaturan->save();
 
         return redirect()->back();

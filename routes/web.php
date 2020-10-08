@@ -118,6 +118,7 @@ Route::middleware('auth:senior')->group(function(){
     // Pengaturan
     Route::get('/s/d-pengaturan', "Divman\PengaturanController@index")->name('divman.pengaturan');
     Route::get('/s/d-pengaturan/refresh-token', 'Divman\PengaturanController@refreshToken')->name('divman.pengaturan.refresh.token');
+    Route::post('/s/d-pengaturan/save-ponsus', "Divman\PengaturanController@savePonsus")->name('divman.pengaturan.save.ponsus');
 
 });
 
