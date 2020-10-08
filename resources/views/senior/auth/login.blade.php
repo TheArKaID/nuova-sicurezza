@@ -9,6 +9,11 @@
 <div class="col-md-4 centered">
     <div class="card">
         <div class="card-body"><h5 class="card-title">Login</h5>
+            @if (session()->has('berhasil'))
+                <span class="text-success" style="display: block" role="alert">
+                    <strong>{{ session('berhasil') }}</strong>
+                </span>
+            @endif
             <div>
                 <form class="form-inline" style="display: inline-block" action="{{route('senior.login.post')}}" method="POST">
                     {{ csrf_field() }}

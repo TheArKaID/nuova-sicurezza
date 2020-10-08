@@ -74,17 +74,15 @@ class SeniorAuthController extends Controller
         $token = Pengaturan::first();
 
         if(($token->resettoken!=$request->resettoken) || $senior===null){
-            $token->resettoken = rand(100000, 999999);
-            $token->save();
-
-            return redirect()->back()->withErrors(['Gagal. Pastikan Username dan Token Benar. Token telah Berubah.']);
+            session()->flash('error', 'Gagal. Pastikan Username dan Token Benar.');
+            return redirect()->back();
         }
         
         $token->resettoken = rand(100000, 999999);
         $token->save();
 
         session(['username' => $request->username]);
-        session()->flash('restoken', true);
+        session(['restoken' => true]);
         return redirect(route('senior.resetpassword'));
     }
 
@@ -107,17 +105,20 @@ class SeniorAuthController extends Controller
         ]);
 
         if($request->newpassword!==$request->renewpassword) {
-            return redirect(route('senior.forgotpassword'))->withErrors(['Password Tidak sama']);
+            session()->flash('error', 'Password Tidak sama');
+            return redirect()->back();
         }
 
         $username = session('username', false);
 
         if($username) {
+            session_unset();
             $helper = new Helper;
             $senior = Senior::where('username', $username)->where('idtahun', $helper->idTahunAktif())->first();
             $senior->password = Hash::make($request->newpassword);
             $senior->save();
 
+            session()->flash('berhasil', 'Password Berhasil Direset. Silahkan Login');
             return redirect(route('senior.login'));
         }
     }
