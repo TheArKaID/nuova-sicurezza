@@ -31,6 +31,6 @@ class Pengaturan extends Model
     /**
      * @var array
      */
-    protected $fillable = ['isnominasiaktif', 'ponsus', 'tahunaktif', 'created_at', 'updated_at'];
+    protected $fillable = ['isnominasiaktif', 'ponsus', 'resettoken', 'tahunaktif', 'created_at', 'updated_at'];
 
 }
