@@ -149,7 +149,6 @@
         </div>
     </div>
 </div>
-@endif
 
 <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-sm">
@@ -170,6 +169,8 @@
         </div>
     </div>
 </div>
+@endif
+
 @endsection
 
 @section('scripts')

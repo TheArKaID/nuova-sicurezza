@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Helpers\Helper;
+use App\Pencatatan;
 use App\Usroh;
 use App\Senior;
 use App\Resident;
@@ -96,6 +97,29 @@ class UsrohController extends Controller
         return view('senior.usroh.resident', [
             'resident' => $resident,
             'tahun' => $this->helper->tahunAktif()
+        ]);
+    }
+
+    public function residentPoin($id, $idr)
+    {
+        $resident = Resident::where('id', $idr)->where('idusroh', $id)
+                    ->where('jeniskelamin', Auth::user()->jeniskelamin)
+                    ->where('idtahun', $this->helper->idTahunAktif())
+                    ->where('jeniskelamin', (Auth::user()->jeniskelamin))->first();
+        $pencatatan = Pencatatan::where('idresident', $idr)->where('idtahun', $this->helper->idTahunAktif())->get();
+
+        if($resident===NULL)
+            return redirect(route('senior.resident'));
+
+        if($this->helper->isMobile())
+            return view('m.senior.usroh.poin', [
+                'resident' => $resident,
+                'pencatatan' => $pencatatan
+            ]);
+        
+        return view('senior.usroh.poin', [
+            'resident' => $resident,
+            'pencatatan' => $pencatatan
         ]);
     }
 
