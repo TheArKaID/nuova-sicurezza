@@ -44,6 +44,7 @@ Route::middleware('auth:senior')->group(function(){
     // Usroh
     Route::get('/s/usroh', "UsrohController@index")->name('senior.usroh');
     Route::get('/s/usroh/{id}', "UsrohController@detail")->name('senior.usroh.detail');
+    Route::get('/s/usroh/{id}/{idr}', "UsrohController@resident")->name('senior.usroh.detail.resident');
 
     // Profile
     Route::get('/s/profile', "ProfileController@index")->name('senior.profile');

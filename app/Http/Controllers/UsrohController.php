@@ -77,6 +77,28 @@ class UsrohController extends Controller
         ]);
     }
 
+    public function resident($id, $idr)
+    {
+        $resident = Resident::where('id', $idr)->where('idusroh', $id)
+            ->where('jeniskelamin', Auth::user()->jeniskelamin)
+            ->where('idtahun', $this->helper->idTahunAktif())->first();
+        
+        if($resident===null) {
+            return redirect()->back()->withErrors(['Data Tidak Ditemukan!']);
+        }
+        
+        if($this->helper->isMobile())
+            return view('m.senior.usroh.resident', [
+                'resident' => $resident,
+                'tahun' => $this->helper->tahunAktif()
+            ]);
+
+        return view('senior.usroh.resident', [
+            'resident' => $resident,
+            'tahun' => $this->helper->tahunAktif()
+        ]);
+    }
+
     // Sort By Nomor Kamar
     public function sortResident($residents)
     {

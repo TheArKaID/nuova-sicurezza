@@ -71,7 +71,7 @@
                             <table class="align-middle mb-0 table table-borderless table-striped table-hover">
                                 <tbody>
                                 @foreach ($resident as $r)
-                                    <tr class='clickable-row' data-url='{{route('senior.resident.detail', $r->id)}}'>
+                                    <tr class='clickable-row' data-url='{{ route('senior.usroh.detail.resident', ['id' => $usroh->id, 'idr' => $r->id]) }}'>
                                         <td class="text-center text-muted">{{$r->kamar->nomor}}</td>
                                         <td>
                                             <div class="widget-content p-0">
@@ -106,7 +106,7 @@
     $(document).ready(function($) {
         $(".clickable-row").click(function() {
             window.location = $(this).data("url");
-            $loadingui.show();
+            loadiu();
         });
     });
 </script>    
