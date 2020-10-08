@@ -49,7 +49,8 @@
                     <div class="alert alert-warning fade show" role="alert">
                         <h5 class="alert-heading">Reset Password Token</h5>
                         <p>
-                            <form action="#" method="post">
+                            <form action="{{ route('divman.pengaturan.refresh.token') }}" method="get">
+                                {{ csrf_field() }}
                                 <div class="form-group">
                                     <div class="col-md-12">
                                         <input class="form-control" type="number" value="{{ $pengaturan->resettoken }}" disabled>

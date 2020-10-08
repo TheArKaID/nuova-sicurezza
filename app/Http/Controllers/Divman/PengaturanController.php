@@ -37,4 +37,14 @@ class PengaturanController extends Controller
             'pengaturan' => $pengaturan
         ]);
     }
+
+    public function refreshToken(Request $request)
+    {
+        $newtoken = rand(100000, 999999);
+        $pengaturan = Pengaturan::first();
+        $pengaturan->resettoken = $newtoken;
+        $pengaturan->save();
+
+        return redirect()->back();
+    }
 }
