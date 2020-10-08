@@ -8,6 +8,7 @@ use App\Pengaturan;
 use App\Senior;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Validator;
 
 class SeniorAuthController extends Controller
@@ -79,7 +80,45 @@ class SeniorAuthController extends Controller
             return redirect()->back()->withErrors(['Gagal. Pastikan Username dan Token Benar. Token telah Berubah.']);
         }
         
-        session()->flash('restoken', $request->resettoken);
+        $token->resettoken = rand(100000, 999999);
+        $token->save();
+
+        session(['username' => $request->username]);
+        session()->flash('restoken', true);
         return redirect(route('senior.resetpassword'));
+    }
+
+    public function resetPassword()
+    {
+        $istoken = session('restoken', false);
+
+        if($istoken) {
+            return view('senior.auth.reset');
+        } else {
+            return redirect(route('senior.login'));
+        }
+    }
+
+    public function postResetPassword(Request $request)
+    {
+        $this->validate($request, [
+            'newpassword' => 'required|digits:8',
+            'renewpassword' => 'required|digits:8'
+        ]);
+
+        if($request->newpassword!==$request->renewpassword) {
+            return redirect(route('senior.forgotpassword'))->withErrors(['Password Tidak sama']);
+        }
+
+        $username = session('username', false);
+
+        if($username) {
+            $helper = new Helper;
+            $senior = Senior::where('username', $username)->where('idtahun', $helper->idTahunAktif())->first();
+            $senior->password = Hash::make($request->newpassword);
+            $senior->save();
+
+            return redirect(route('senior.login'));
+        }
     }
 }

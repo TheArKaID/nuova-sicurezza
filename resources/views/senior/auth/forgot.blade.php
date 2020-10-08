@@ -8,7 +8,7 @@
 <div class="col-md-4"></div>
 <div class="col-md-4 centered">
     <div class="card">
-        <div class="card-body"><h5 class="card-title">Reset Password</h5>
+        <div class="card-body"><h5 class="card-title">Forgot Password</h5>
             <div>
                 <form class="form-inline" style="display: inline-block" action="{{route('senior.forgotpassword.post')}}" method="POST">
                     {{ csrf_field() }}
