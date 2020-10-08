@@ -43,7 +43,7 @@
                         </thead>
                         <tbody>
                             @foreach ($resident as $row => $r)
-                                <tr class='clickable-row' data-url='#'>
+                                <tr>
                                     <td>{{ $resident->firstItem()+$row }}</td>
                                     <td>{{ $r->nama }}</td>
                                     <td>{{ $r->kamar->nomor }}</td>
@@ -57,15 +57,4 @@
             </div>
         <div>
     </div>
-@endsection
-
-@section('scripts')
-<script>
-    $(document).ready(function($) {
-        $(".clickable-row").click(function() {
-            loadui();
-            window.location = $(this).data("url");
-        });
-    });
-</script>    
 @endsection
