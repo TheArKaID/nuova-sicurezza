@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Divman;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
+use App\Pengaturan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,14 +26,15 @@ class PengaturanController extends Controller
 
     public function index()
     {
+        $pengaturan = Pengaturan::first();
         
         if($this->helper->isMobile())
             return view('m.divman.pengaturan.index', [
-                
+                'pengaturan' => $pengaturan
             ]);
 
         return view('divman.pengaturan.index', [
-            
+            'pengaturan' => $pengaturan
         ]);
     }
 }
