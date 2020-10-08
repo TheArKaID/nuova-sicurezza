@@ -20,6 +20,9 @@ Route::get('/', function () {
 
 Route::get('/s/login', "Auth\SeniorAuthController@login")->name('senior.login');
 Route::post('/s/login', "Auth\SeniorAuthController@postLogin")->name('senior.login.post');
+Route::get('/s/forgot-password', "Auth\SeniorAuthController@forgotPassword")->name('senior.forgotpassword');
+Route::post('/s/forgot-password', "Auth\SeniorAuthController@postForgotPassword")->name('senior.forgotpassword.post');
+Route::get('/s/reset-password', "Auth\SeniorAuthController@resetPassword")->name('senior.resetpassword');
 
 Route::middleware('auth:senior')->group(function(){
     Route::get('/s', "DashboardController@index");
