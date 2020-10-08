@@ -113,7 +113,11 @@ Route::middleware('auth:senior')->group(function(){
     Route::get('/s/d-tahun', "Divman\TahunController@index")->name('divman.tahun');
     Route::post('/s/d-tahun/add', "Divman\TahunController@tambahTahun")->name('divman.tahun.add');
     Route::post('/s/d-tahun/set', "Divman\TahunController@setTahun")->name('divman.tahun.set');
-    Route::post('/s/d-tahun/delete', "Divman\TahunController@hapusTahun")->name('divman.tahun.delete');      
+    Route::post('/s/d-tahun/delete', "Divman\TahunController@hapusTahun")->name('divman.tahun.delete');
+
+    // Pengaturan
+    Route::get('/s/d-pengaturan', "Divman\PengaturanController@index")->name('divman.pengaturan');
+    
 });
 
 /**

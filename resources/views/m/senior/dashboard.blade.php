@@ -108,7 +108,7 @@
                         <p style="font-size: .55rem;">Tahun</p>
                     </div>
                     </a>
-                    <a href="#3" onclick="loadui()">
+                    <a href="{{ route('divman.pengaturan')}}" onclick="loadui()">
                     <div class="font-icon-wrapper font-icon-lg iconwrap-d">
                         <i class="pe-7s-settings icon-gradient bg-strong-bliss"></i>
                         <p style="font-size: .55rem;">Pengaturan</p>
