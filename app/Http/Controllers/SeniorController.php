@@ -39,9 +39,9 @@ class SeniorController extends Controller
     public function indexX()
     {
         if(is_bool(session('seniorstatus', false))) {
-            session(['seniorstatus' => Auth::user()->jeniskelamin]);
+            session(['seniorstatus' => Auth::user()->jeniskelamin===0 ? 1 : 0]);
         } else {
-            session(['seniorstatus' => !session('seniorstatus')]);
+            session(['seniorstatus' => session('seniorstatus')===0 ? 1: 0]);
         }
         return redirect(route('senior.senior'));
     }
