@@ -39,13 +39,13 @@ class UsrohController extends Controller
 
     public function detail($id)
     {
-        $is = Auth::user()->jeniskelamin==1 ? "=" : "!=";
         $tahun = Str::replaceFirst('/', '-', $this->helper->tahunAktif());
         $usroh = Usroh::where('id', $id)->where('idtahun', $this->helper->idTahunAktif())
             ->where('jeniskelamin', Auth::user()->jeniskelamin)->first();
 
-        if($usroh===NULL)
-            return redirect(route('senior.usroh'));
+        if($usroh===NULL){
+            return redirect(route('senior.usroh'))->withErrors(['Usroh Tidak Ditemukan!']);
+        }
 
         $resident = Resident::where('idusroh', $id)
                             ->where('idtahun', $this->helper->idTahunAktif())->get();
@@ -58,9 +58,6 @@ class UsrohController extends Controller
                 $senior[0] = $s;
             $senior[1] = $s;
         }
-        
-        if($usroh==null)
-            return redirect()->back();
 
         if($this->helper->isMobile())
             return view('m.senior.usroh.detail', [
@@ -85,7 +82,7 @@ class UsrohController extends Controller
             ->where('idtahun', $this->helper->idTahunAktif())->first();
         
         if($resident===null) {
-            return redirect()->back()->withErrors(['Data Tidak Ditemukan!']);
+            return redirect()->back()->withErrors(['Resident Tidak Ditemukan!']);
         }
         
         if($this->helper->isMobile())
@@ -104,12 +101,13 @@ class UsrohController extends Controller
     {
         $resident = Resident::where('id', $idr)->where('idusroh', $id)
                     ->where('jeniskelamin', Auth::user()->jeniskelamin)
-                    ->where('idtahun', $this->helper->idTahunAktif())
-                    ->where('jeniskelamin', (Auth::user()->jeniskelamin))->first();
-        $pencatatan = Pencatatan::where('idresident', $idr)->where('idtahun', $this->helper->idTahunAktif())->get();
+                    ->where('idtahun', $this->helper->idTahunAktif())->first();
+                    
+        if($resident===NULL){
+            return redirect(route('senior.usroh'))->withErrors(['Usroh Tidak Ditemukan!']);
+        }
 
-        if($resident===NULL)
-            return redirect(route('senior.resident'));
+        $pencatatan = Pencatatan::where('idresident', $idr)->where('idtahun', $this->helper->idTahunAktif())->get();
 
         if($this->helper->isMobile())
             return view('m.senior.usroh.poin', [

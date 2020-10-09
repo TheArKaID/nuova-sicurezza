@@ -51,8 +51,9 @@ class ResidentController extends Controller
                     ->where('jeniskelamin', (Auth::user()->jeniskelamin))
                     ->where('idtahun', $this->helper->idTahunAktif())->first();
         
-        if($resident===NULL)
-            return redirect(route('senior.resident'));
+        if($resident===NULL) {
+            return redirect(route('senior.resident'))->withErrors(['Resident Tidak Ditemukan!']);
+        }
 
         if($this->helper->isMobile())
             return view('m.senior.resident.detail', [
@@ -68,13 +69,14 @@ class ResidentController extends Controller
     
     public function poin($id)
     {
-        $ta = $this->helper->idTahunAktif();
         $resident = Resident::where('id', $id)->where('idtahun', $this->helper->idTahunAktif())
                     ->where('jeniskelamin', (Auth::user()->jeniskelamin))->first();
-        $pencatatan = Pencatatan::where('idresident', $id)->where('idtahun', $this->helper->idTahunAktif())->get();
+                    
+        if($resident===NULL) {
+            return redirect(route('senior.resident'))->withErrors(['Resident Tidak Ditemukan!']);
+        }
 
-        if($resident===NULL)
-            return redirect(route('senior.resident'));
+        $pencatatan = Pencatatan::where('idresident', $id)->where('idtahun', $this->helper->idTahunAktif())->get();
 
         if($this->helper->isMobile())
             return view('m.senior.resident.poin', [
@@ -98,10 +100,18 @@ class ResidentController extends Controller
         ]);
         
         $tengko = Tengko::where('idtahun', $ta)->where('id', $request->idtengko)->first();
-        $resident = Resident::where('idtahun', $ta)->where('id', $request->idresident)->first();
+        if($tengko===NULL) {
+            return redirect(route('senior.resident'))->withErrors(['Tengko Tidak Ditemukan!']);
+        }
 
-        if($resident->usroh->id!=Auth::user()->usroh->id)
-            return redirect(route('senior.resident'));
+        $resident = Resident::where('idtahun', $ta)->where('id', $request->idresident)->first();
+        if($resident===NULL) {
+            return redirect(route('senior.resident'))->withErrors(['Resident Tidak Ditemukan!']);
+        }
+
+        if($resident->usroh->id!=Auth::user()->usroh->id){
+            return redirect(route('senior.resident'))->withErrors(['Resident Tidak Ditemukan!']);
+        }
 
         $pencatatan = new Pencatatan;
         $pencatatan->idresident = $request->idresident;
@@ -112,13 +122,13 @@ class ResidentController extends Controller
         $pencatatan->tanggal = $request->tanggal;
         $pencatatan->save();
 
-        return redirect()->back();
+        return redirect()->back()->with(['sukses' => "Catatan Poin Telah Ditambahkan!"]);
     }
 
     public function hapusPoin($idpoin)
     {
         $pencatatan = Pencatatan::where('id', $idpoin)->with('resident')->first();
-        if(!$pencatatan) {
+        if($pencatatan===NULL) {
             return redirect(route('senior.resident'))->withErrors(['Maaf, Data Tidak Ditemukan!']);
         }
 

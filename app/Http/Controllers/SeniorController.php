@@ -48,10 +48,13 @@ class SeniorController extends Controller
 
     public function detail($id)
     {
-        $ta = $this->helper->idTahunAktif();
         $tahun = Str::replaceFirst('/', '-', $this->helper->tahunAktif());
         $senior = Senior::where('id', $id)->where('idtahun', $this->helper->idTahunAktif())->first();
         
+        if($senior===null) {
+            return redirect(route('senior.senior'))->withErrors(['Senior Tidak Ditemukan!']);
+        }
+
         if($this->helper->isMobile())
             return view('m.senior.senior.detail', [
                 'senior' => $senior,
