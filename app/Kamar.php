@@ -41,12 +41,12 @@ class Kamar extends Model
 
     public function resident()
     {
-        return $this->hasMany('App\Resident', 'idkamar');
+        return $this->hasOne('App\Resident', 'idkamar');
     }
     
     public function senior()
     {
-        return $this->hasOneThrough('App\Usroh', 'App\Senior', 'idkamar', 'id', 'id');
+        return $this->hasOne('App\Senior', 'idkamar');
     }
 
     protected static function booted() {
