@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Divman;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
+use App\Kamar;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -220,16 +220,12 @@ class SeniorController extends Controller
 
     public function getKamar($idusroh)
     {
-        $kamar = DB::table('kamar')
-            ->where('kamar.jeniskelamin', Auth::user()->jeniskelamin)
-            ->select('kamar.id', 'kamar.nomor')
-            ->leftJoin('resident', 'kamar.id', '=', 'resident.idkamar')
-            ->leftJoin('senior', 'kamar.id', '=', 'senior.idkamar')
-            ->where('kamar.idtahun', $this->helper->idTahunAktif())
-            ->where('kamar.idusroh', $idusroh)
-            ->whereNull('resident.idkamar')
-            ->whereNull('senior.idkamar')
-            ->get();
+        $kamar = Kamar::where('idtahun', $this->helper->idTahunAktif())
+                ->where('jeniskelamin', Auth::user()->jeniskelamin)
+                ->where('idusroh', $idusroh)
+                ->doesntHave('resident')->doesntHave('senior')
+                ->get();
+                
         if(count($kamar)===0)
             $kamar = 0;
         return $kamar;
