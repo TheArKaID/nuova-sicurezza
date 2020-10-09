@@ -45,7 +45,7 @@ class PengaturanController extends Controller
         $pengaturan->resettoken = $newtoken;
         $pengaturan->save();
 
-        return redirect()->back();
+        return redirect()->back()->with(['sukses' => 'Token Diperbaharui!']);
     }
 
     public function savePonsus(Request $request)
@@ -58,6 +58,6 @@ class PengaturanController extends Controller
         $pengaturan->ponsus = $request->ponsus;
         $pengaturan->save();
 
-        return redirect()->back();
+        return redirect()->back()->with(['sukses' => 'Kode Poin Khusus Diperbaharui!']);
     }
 }

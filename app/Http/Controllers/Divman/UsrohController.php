@@ -73,7 +73,7 @@ class UsrohController extends Controller
         $usroh->jeniskelamin = Auth::user()->jeniskelamin;
         $usroh->save();
 
-        return redirect(route('divman.usroh'));
+        return redirect(route('divman.usroh'))->with(['sukses' => 'Usroh Telah Ditambahkan!']);
     }
 
     public function detail($id)
@@ -82,8 +82,9 @@ class UsrohController extends Controller
             ->where('jeniskelamin', Auth::user()->jeniskelamin)
             ->where('idtahun', $this->helper->idTahunAktif())->first();
         
-        if($usroh==null)
-            return redirect()->back();
+        if($usroh==null){
+            return redirect(route('divman.usroh'))->withErrors(['Usroh Tidak Ditemukan!']);
+        }
 
         if($this->helper->isMobile())
             return view('m.divman.usroh.detail', [
@@ -107,9 +108,14 @@ class UsrohController extends Controller
         $usroh = Usroh::where('id', $request->id)
             ->where('idtahun', $this->helper->idTahunAktif())
             ->where('jeniskelamin', Auth::user()->jeniskelamin)->first();
+            
+        if($usroh==null){
+            return redirect(route('divman.usroh'))->withErrors(['Usroh Tidak Ditemukan!']);
+        }
+
         $usroh->update($request->all());
         
-        return redirect(route('divman.usroh'));
+        return redirect(route('divman.usroh'))->with(['sukses' => "Usroh Telah DiPerbaharui!"]);
     }
 
     public function hapus($id)
@@ -117,8 +123,13 @@ class UsrohController extends Controller
         $usroh = Usroh::where('id', $id)
             ->where('idtahun', $this->helper->idTahunAktif())
             ->where('jeniskelamin', Auth::user()->jeniskelamin)->first();
+            
+        if($usroh==null){
+            return redirect(route('divman.usroh'))->withErrors(['Usroh Tidak Ditemukan!']);
+        }
+
         $usroh->delete();
         
-        return redirect(route('divman.usroh'));
+        return redirect(route('divman.usroh'))->with(['sukses' => "Usroh Telah Dihapus!"]);
     }
 }

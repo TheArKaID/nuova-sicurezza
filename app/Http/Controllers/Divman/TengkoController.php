@@ -43,7 +43,6 @@ class TengkoController extends Controller
 
     public function tambah()
     {
-        $ta = $this->helper->idTahunAktif();
         $tahun = $this->helper->tahunAktif();
         if($this->helper->isMobile())
             return view('m.divman.tengko.tambah', [
@@ -71,7 +70,7 @@ class TengkoController extends Controller
         $tengko->jeniskelamin = Auth::user()->jeniskelamin;
         $tengko->save();
         
-        return redirect(route('divman.tengko'));
+        return redirect(route('divman.tengko'))->with(['sukses' => 'Tengko Telah Ditambahkan!']);
     }
 
     public function detail($id)
@@ -80,6 +79,10 @@ class TengkoController extends Controller
             ->where('idtahun', $this->helper->idTahunAktif())
             ->where('jeniskelamin', Auth::user()->jeniskelamin)->first();
         
+        if($tengko===NULL) {
+            return redirect(route('divman.tengko'))->withErrors(['Tengko Tidak Ditemukan!']);
+        }
+
         if($this->helper->isMobile())
             return view('m.divman.tengko.detail', [
                 'tengko' => $tengko
@@ -101,9 +104,14 @@ class TengkoController extends Controller
         $tengko = Tengko::where('id', $request->id)
             ->where('idtahun', $this->helper->idTahunAktif())
             ->where('jeniskelamin', Auth::user()->jeniskelamin)->first();
+            
+        if($tengko===NULL) {
+            return redirect(route('divman.tengko'))->withErrors(['Tengko Tidak Ditemukan!']);
+        }
+
         $tengko->update($request->all());
 
-        return redirect(route('divman.tengko'));
+        return redirect(route('divman.tengko'))->with(['sukses' => 'Tengko Telah Diperbaharui!']);
     }
 
     public function hapus($id)
@@ -111,8 +119,13 @@ class TengkoController extends Controller
         $tengko = Tengko::where('id', $id)
             ->where('idtahun', $this->helper->idTahunAktif())
             ->where('jeniskelamin', Auth::user()->jeniskelamin)->first();
+            
+        if($tengko===NULL) {
+            return redirect(route('divman.tengko'))->withErrors(['Tengko Tidak Ditemukan!']);
+        }
+
         $tengko->delete();
         
-        return redirect(route('divman.tengko'));
+        return redirect(route('divman.tengko'))->with(['sukses' => 'Tengko Telah Dihapus!']);
     }
 }

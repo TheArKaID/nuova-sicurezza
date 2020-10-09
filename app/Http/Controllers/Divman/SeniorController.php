@@ -85,12 +85,12 @@ class SeniorController extends Controller
 
         // Password
         if($request->password!=$request->repassword)
-            return redirect()->back()->withInput()->withErrors('Password dan Repassword tidak sama!');
+            return redirect()->back()->withInput()->withErrors(['Password dan Repassword tidak sama!']);
 
         // Username
         $un = Senior::where('username', $request->username)->first();
         if($un!=null)
-            return redirect()->back()->withInput()->withErrors('Username Telah Digunakan');
+            return redirect()->back()->withInput()->withErrors(['Username Telah Digunakan']);
         
         $senior = new Senior;
 
@@ -119,7 +119,7 @@ class SeniorController extends Controller
             $senior->save();
         }
 
-        return redirect(route('divman.senior'));
+        return redirect(route('divman.senior'))->with(['sukses' => "Senior Telah Ditambahkan!"]);
     }
 
     public function detail($id)
@@ -129,6 +129,11 @@ class SeniorController extends Controller
         $senior = Senior::where('id', $id)
             ->where('idtahun', $this->helper->idTahunAktif())
             ->where('jeniskelamin', Auth::user()->jeniskelamin)->first();
+        
+        if($senior===null) {
+            return redirect(route('divman.senior'))->withInput()->withErrors(['Senior Tidak Ditemukan!']);
+        }
+
         $usroh = Usroh::where('idtahun', $ta)
             ->where('jeniskelamin', Auth::user()->jeniskelamin)->get();
         
@@ -162,6 +167,10 @@ class SeniorController extends Controller
         $senior = Senior::where('id', $request->id)
             ->where('idtahun', $this->helper->idTahunAktif())
             ->where('jeniskelamin', Auth::user()->jeniskelamin)->first();
+
+        if($senior===null) {
+            return redirect(route('divman.senior'))->withInput()->withErrors(['Senior Tidak Ditemukan!']);
+        }
 
         // Password
         if($request->password || $request->repassword){
@@ -199,7 +208,7 @@ class SeniorController extends Controller
         
         $senior->save();
         
-        return redirect(route('divman.senior'));
+        return redirect(route('divman.senior'))->with(['sukses' => 'Data Senior Telah Diperbaharui!']);
     }
 
     public function hapus($id)
@@ -208,6 +217,10 @@ class SeniorController extends Controller
             ->where('idtahun', $this->helper->idTahunAktif())
             ->where('jeniskelamin', Auth::user()->jeniskelamin)->first();
         
+        if($senior===null) {
+            return redirect(route('divman.senior'))->withInput()->withErrors(['Senior Tidak Ditemukan!']);
+        }
+
         if($senior->foto){
             $tahun = Str::replaceFirst('/', '-', $this->helper->tahunAktif());
             Storage::delete('public/foto/' .$tahun. '/senior/' .$senior->foto);
@@ -215,7 +228,7 @@ class SeniorController extends Controller
         
         $senior->delete();
         
-        return redirect(route('divman.senior'));
+        return redirect(route('divman.senior'))->with(['sukses' => 'Senior Telah Dihapus!']);
     }
 
     public function getKamar($idusroh)

@@ -53,19 +53,19 @@ class TahunController extends Controller
         
         // Cek apakah kalau dikurangi hasilnya 1
         if(($tahunakhir-$tahunawal)!=1){
-            return redirect()->back()->withInput()->withErrors(["tahun" => "Tahun Awal harus lebih rendah 1 tahun dari Tahun Akhir"]);
+            return redirect()->back()->withErrors(["Tahun Awal harus lebih rendah 1 tahun dari Tahun Akhir"]);
         }
 
         //Cek di database
         $tahun = Tahun::where('tahunajaran', $tahunajaran)->first();
         if($tahun!=null){
-            return redirect()->back()->withInput()->withErrors(['tahun' => 'Tahun sudah ada']);
+            return redirect()->back()->withErrors(['Tahun sudah ada']);
         }
         
         $tahun = new Tahun;
         $tahun->tahunajaran = $tahunajaran;
         $tahun->save();
-        return redirect()->back()->with('sukses', 'Data Tahun Berhasil Ditambahkan');
+        return redirect()->back()->with(['sukses' => 'Data Tahun Berhasil Ditambahkan']);
     }
 
     public function setTahun(Request $request)
@@ -75,14 +75,14 @@ class TahunController extends Controller
         ]);
         $tahun = Tahun::find($request->tahun);
         if($tahun==null){
-            return redirect()->back()->withInput()->withErrors(['tahun' => 'Tahun Tidak Ditemukan']);
+            return redirect()->back()->withInput()->withErrors(['Tahun Tidak Ditemukan']);
         }
 
         $pengaturan = Pengaturan::first();
         $pengaturan->idtahunaktif = $request->tahun;
         $pengaturan->save();
         
-        return redirect()->back()->with('sukses', 'Tahun Aktif Berhasil Diubah');
+        return redirect()->back()->with(['sukses' => 'Tahun Aktif Berhasil Diubah']);
     }
 
     public function hapusTahun(Request $request)
@@ -93,16 +93,16 @@ class TahunController extends Controller
         
         $tahun = Tahun::find($request->tahun);
         if($tahun==null){
-            return redirect()->back()->withInput()->withErrors(['tahun' => 'Tahun Tidak Ditemukan']);
+            return redirect()->back()->withErrors(['Tahun Tidak Ditemukan']);
         }
 
         $pengaturan = Pengaturan::first();
         if($pengaturan->idtahunaktif==$request->tahun){
-            return redirect()->back()->withInput()->withErrors(['tahun' => 'Tahun Sedang Aktif. Harap Ubah Tahun Aktif Terlebih Dahulu']);
+            return redirect()->back()->withErrors(['Tahun Sedang Aktif. Harap Ubah Tahun Aktif Terlebih Dahulu']);
         }
 
         $tahun->delete();
         
-        return redirect()->back()->with('sukses', 'Tahun Telah Dihapus');
+        return redirect()->back()->with(['sukses' => 'Tahun Telah Dihapus']);
     }
 }

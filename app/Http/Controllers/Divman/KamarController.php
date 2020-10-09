@@ -75,7 +75,7 @@ class KamarController extends Controller
         $kamar->jeniskelamin = Auth::user()->jeniskelamin;
         $kamar->save();
         
-        return redirect(route('divman.kamar'));
+        return redirect(route('divman.kamar'))->with(['sukses' => 'Kamar Berhasil Ditambahkan!']);
     }
 
     public function detail($id)
@@ -85,7 +85,7 @@ class KamarController extends Controller
             ->where('idtahun', $this->helper->idTahunAktif())->first();
 
         if($kamar===NULL) {
-            return redirect()->back()->withErrors(['Kamar Tidak Ditemukan!']);
+            return redirect(route('divman.kamar'))->withErrors(['Kamar Tidak Ditemukan!']);
         }
 
         $usroh = Usroh::where('idtahun', $this->helper->idTahunAktif())
@@ -137,7 +137,7 @@ class KamarController extends Controller
 
         $kamar->delete();
         
-        return redirect(route('divman.kamar'))->with(['Kamar Berhasil Dihapus!']);
+        return redirect(route('divman.kamar'))->with(['sukses' => 'Kamar Berhasil Dihapus!']);
     }
 
 }
