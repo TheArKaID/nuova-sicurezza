@@ -81,10 +81,6 @@ class ResidentController extends Controller
             'idkamar' => 'required'
         ]);
 
-        // Password
-        if($request->password!=$request->repassword)
-            return redirect()->back()->withInput()->withErrors(['Password dan Repassword tidak sama!']);
-
         $resident = new Resident;
 
         $resident->idtahun = $this->helper->idTahunAktif();
@@ -108,7 +104,7 @@ class ResidentController extends Controller
             $resident->save();
         }
 
-        return redirect(route('divman.resident'));
+        return redirect(route('divman.resident'))->with(['sukses' => 'Resident Baru Ditambahkan!']);
     }
 
     public function detail($id)
@@ -118,6 +114,10 @@ class ResidentController extends Controller
         $resident = Resident::where('id', $id)
             ->where('idtahun', $this->helper->idTahunAktif())
             ->where('jeniskelamin', Auth::user()->jeniskelamin)->first();
+
+        if($resident===null) {
+            return redirect(route('divman.resident'))->withErrors(['Resident Tidak Ditemukan!']);
+        }
 
         $usroh = Usroh::where('idtahun', $ta)
             ->where('jeniskelamin', Auth::user()->jeniskelamin)->get();
@@ -178,6 +178,10 @@ class ResidentController extends Controller
             ->where('idtahun', $this->helper->idTahunAktif())
             ->where('jeniskelamin', Auth::user()->jeniskelamin)->first();
         
+        if($resident===null) {
+            return redirect(route('divman.resident'))->withErrors(['Resident Tidak Ditemukan!']);
+        }
+
         if($resident->foto){
             $tahun = Str::replaceFirst('/', '-', $this->helper->tahunAktif());
             Storage::delete('public/foto/' .$tahun. '/resident/' .$resident->foto);
@@ -185,7 +189,7 @@ class ResidentController extends Controller
         
         $resident->delete();
         
-        return redirect(route('divman.resident'));
+        return redirect(route('divman.resident'))->with(['sukses' => "Resident Telah Dihapus!"]);
     }
 
     public function import()
@@ -257,7 +261,7 @@ class ResidentController extends Controller
                         ->with('resident')
                         ->with('senior')
                         ->where('nomor', $nomor)->first();
-                
+                        
                 if($kamar==NULL || $kamar->senior!=NULL || $kamar->resident!=NULL) {
                     $kosong++; // Kosong +1 bila nomor kamar tidak sesuai dengan ID Usrohnya
                     $kamar=NULL;
@@ -276,6 +280,8 @@ class ResidentController extends Controller
 
         Cache::put('residentimport', $datas, now()->addHour());
 
+        session()->flash('sukses', 'Pastikan Data Sudah Benar');
+
         if($this->helper->isMobile())
             return view('m.divman.resident.import', 
             [
@@ -292,18 +298,6 @@ class ResidentController extends Controller
         ]);
     }
     
-    public function getKamar($idusroh)
-    {
-        $kamar = Kamar::where('idtahun', $this->helper->idTahunAktif())
-                    ->where('jeniskelamin', Auth::user()->jeniskelamin)
-                    ->where('idusroh', $idusroh)
-                    ->doesntHave('resident')->doesntHave('senior')
-                    ->get();
-        if(count($kamar)===0)
-            $kamar = 0;
-        return $kamar;
-    }
-
     public function prosesImport(Request $request)
     {
         $isfail = false;
@@ -331,8 +325,22 @@ class ResidentController extends Controller
         }
 
         if($isfail)
-            return redirect(route('divman.resident.import'))->with('gagal', 'Proses Import Gagal!');
+            return redirect(route('divman.resident.import'))->withErrors(['Proses Import Gagal!']);
 
-        return redirect(route('divman.resident'))->with('sukses', 'Data Resident Berhasil Diimport!');
+        return redirect(route('divman.resident'))->with(['sukses' => 'Data Resident Berhasil Diimport!']);
+    }
+
+    public function getKamar($idusroh)
+    {
+        
+        $kamar = Kamar::where('idtahun', $this->helper->idTahunAktif())
+                ->where('jeniskelamin', Auth::user()->jeniskelamin)
+                ->where('idusroh', $idusroh)
+                ->doesntHave('resident')->doesntHave('senior')
+                ->get();
+                
+        if(count($kamar)===0)
+            $kamar = 0;
+        return $kamar;
     }
 }
