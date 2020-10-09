@@ -83,10 +83,3 @@
         <div>
     </div>
 @endsection
-@section('scripts')
-    <script>
-        function loadui() {
-            $loadingui.show();
-        }
-    </script>
-@endsection
