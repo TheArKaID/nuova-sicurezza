@@ -31,6 +31,11 @@
             <div class="main-card mb-3 card">
                 <form id="formProfile" action="{{ route('senior.profile.save') }}" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
+                    <div id="alertPasscode" class="alert alert-danger alert-dismissible" style="display: none" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        <h5 class='card-title'>Gagal!</h5>
+                        Maaf, mohon update browser anda. Fitur Passcode tidak dapat digunakan.
+                    </div>
                     <div class="card-body">
                         <div id="accordion" class="accordion-wrapper mb-3">
                             <div class="card">
@@ -120,5 +125,22 @@
         $('#formProfile').on('submit', function () {
             loadui();
         })
+
+        $(document).ready(function () {
+            var passcode = "{{ session('passcode', false) }}";
+            
+            if(passcode) {
+                if (typeof(Storage) !== "undefined") {
+                    localStorage.setItem("passcode", passcode);
+                } else {
+                    $('#alertPasscode').attr('style', 'display: block');
+                }
+            }
+            var passcoderemove = "{{ session('passcoderemove', false) }}";
+            if (passcoderemove){
+                localStorage.removeItem("passcode");
+            }
+        })
+
     </script>
 @endsection

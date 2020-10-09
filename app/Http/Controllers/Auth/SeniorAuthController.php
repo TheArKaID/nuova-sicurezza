@@ -8,6 +8,7 @@ use App\Pengaturan;
 use App\Senior;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Validator;
 
@@ -120,6 +121,30 @@ class SeniorAuthController extends Controller
 
             session()->flash('berhasil', 'Password Berhasil Direset. Silahkan Login');
             return redirect(route('senior.login'));
+        }
+    }
+
+    public function passcodeLogin(Request $request)
+    {
+        $this->validate($request, [
+            'userpasscode' => 'required',
+            'passcode' => 'required|min:6'
+        ]);
+
+        $senior = Senior::where('username', $request->userpasscode)
+            ->where('passcode', $request->passcode)->first();
+            
+        if ($senior!==null) {
+            Auth::guard('senior')->loginUsingId($senior->id);
+            $request->session()->regenerate();
+            $this->clearLoginAttempts($request);
+            return redirect('/s');
+        } else {
+            $this->incrementLoginAttempts($request);
+            return redirect()
+                ->back()
+                ->withInput()
+                ->withErrors(['passcode' => "Passcode anda Salah!"]);
         }
     }
 }

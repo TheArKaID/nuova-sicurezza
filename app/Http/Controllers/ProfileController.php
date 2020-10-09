@@ -81,10 +81,16 @@ class ProfileController extends Controller
                 if($request->passcode!==$request->repasscode) {
                     return redirect()->back()->withErrors(['Passcode Tidak Sama!']);
                 } else {
-                    if(!(intval($request->passcode) && intval($request->repasscode))) {
-                        return redirect()->back()->withErrors(['Passcode Harus Berupa Angka']);
+                    if($request->passcode==="000000") {
+                        $senior->passcode = null;
+                        session()->flash('passcoderemove', true);
+                    } else {
+                        if(!(intval($request->passcode) && intval($request->repasscode))) {
+                            return redirect()->back()->withErrors(['Passcode Harus Berupa Angka']);
+                        }
+                        $senior->passcode = $request->passcode;
+                        session()->flash('passcode', $senior->username);
                     }
-                    $senior->passcode = $request->passcode;
                 }
             }
         }
