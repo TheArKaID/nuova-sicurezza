@@ -39,6 +39,7 @@ Route::middleware('auth:senior')->group(function(){
     Route::get('/s/resident', "ResidentController@index")->name('senior.resident');
     Route::post('/s/resident/tambahpoin', "ResidentController@tambahPoin")->name('senior.resident.poin.tambah');
     Route::get('/s/resident/{id}', "ResidentController@detail")->name('senior.resident.detail');
+    Route::post('/s/resident/{id}/edit', "ResidentController@edit")->name('senior.resident.detail.edit');
     Route::get('/s/resident/{id}/poin', "ResidentController@poin")->name('senior.resident.poin');
     Route::get('/s/resident/hapus/{idpoin}', "ResidentController@hapusPoin")->name('senior.resident.poin.hapus');
 

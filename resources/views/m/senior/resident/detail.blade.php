@@ -80,6 +80,73 @@
                     </table>
                 </div>
             </div>
-        <div>
+            <div class="col-md-12 mt-3 mb-3">
+                <div class="row" style="display: grid">
+                    <a href="#" class="btn btn-primary" data-toggle="modal" id="setDelete" data-target="#editResident" style="float: right">Edit</a>
+                </div>
+            </div>
+        </div>
     </div>
+@endsection
+
+@section('modals')
+<div class="modal fade" id="editResident" tabindex="-1" role="dialog" aria-labelledby="editResident" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Sesuaikan Data Resident</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form id="formEdit" action="{{ route('senior.resident.detail.edit', $resident->id) }}" method="POST" enctype="multipart/form-data">
+            <div class="modal-body">
+                    {{ csrf_field() }}
+                    <div class="position-relative row form-group">
+                        <label for="nama" class="col-sm-2 col-form-label">*Nama</label>
+                        <div class="col-sm-10">
+                            <input name="nama" id="nama" placeholder="Nama Resident" type="text" class="form-control" value="{{ $resident->nama }}" required>
+                        </div>
+                    </div>
+                    <div class="position-relative row form-group">
+                        <label for="NIM" class="col-sm-2 col-form-label">*NIM</label>
+                        <div class="col-sm-10">
+                            <input name="nim" id="NIM" placeholder="NIM" type="number" class="form-control" value="{{ $resident->nim }}" required>
+                            <small>11 Digit</small>
+                        </div>
+                    </div>
+                    <div class="position-relative row form-group">
+                        <label for="foto" class="col-sm-2 col-form-label">Foto</label>
+                        <div class="col-md-10">
+                            @if (!$resident->foto)
+                                <small>Anda belum menambahkan foto resident ini</small>
+                            @else
+                                <small>Saat ini</small>
+                                <img src="{{ asset('storage/foto/' .$tahun. '/resident/' .$resident->foto)}}" alt="" srcset="">
+                            @endif
+                        </div>
+                        <div class="col-sm-10">
+                            <small>Update Foto</small>
+                            <input name="foto" id="foto" placeholder="Foto" type="file" class="form-control">
+                            <small>File JPG, JPEG, PNG | Max Size : 2mb</small>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btnCancel" type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                <button type="submit" class="btn btn-success">Simpan</button>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+@endsection
+
+@section('scripts')
+    <script>
+        $('#formEdit').on('submit', function () {
+            loadui();
+            $('#btnCancel').click();
+        })
+    </script>
 @endsection

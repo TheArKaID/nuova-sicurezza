@@ -45,7 +45,6 @@ class ResidentController extends Controller
 
     public function detail($id)
     {
-        $ta = $this->helper->idTahunAktif();
         $tahun = Str::replaceFirst('/', '-', $this->helper->tahunAktif());
         $resident = Resident::where('id', $id)
                     ->where('jeniskelamin', (Auth::user()->jeniskelamin))
@@ -65,6 +64,38 @@ class ResidentController extends Controller
             'resident' => $resident,
             'tahun' => $tahun,
         ]);
+    }
+
+    public function edit(Request $request, $id)
+    {
+        $this->validate($request, [
+            'nama' => 'required',
+            'nim' => 'required|digits:11',
+        ]);
+
+        $resident = Resident::where('id', $id)
+            ->where('idtahun', $this->helper->idTahunAktif())
+            ->where('jeniskelamin', Auth::user()->jeniskelamin)->first();
+
+        if($resident===NULL) {
+            return redirect(route('senior.resident'))->withErrors(['Maaf, Resident Tidak Ditemukan']);
+        }
+
+        // Foto
+        if($request->hasFile('foto')){
+            $this->validate($request, ['foto' => 'mimes:jpeg,jpg,png|max:2048',]);
+            $file = $request->file('foto');
+            $name = $request->id .".jpg";
+            $tahun = Str::replaceFirst('/', '-', $this->helper->tahunAktif());
+            $file->move('storage/foto/' .$tahun. "/resident/", $name);
+            $resident->foto = $name;
+        }
+
+        $resident->nama = $request->nama;
+        $resident->nim = $request->nim;
+        $resident->save();
+
+        return redirect()->back()->with(['sukses' => 'Data Berhasil Diperbaharui']);
     }
     
     public function poin($id)
