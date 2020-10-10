@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Senior;
 use App\Usroh;
 use Illuminate\Support\Facades\Hash;
+use Intervention\Image\Facades\Image;
 
 class SeniorController extends Controller
 {
@@ -114,7 +115,21 @@ class SeniorController extends Controller
             $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
             $name = $senior->id .".". $ext;
             $tahun = Str::replaceFirst('/', '-', $this->helper->tahunAktif());
-            $file->move('storage/foto/' .$tahun. "/senior/", $name);
+            
+            $img = Image::make($file)->encode('jpg');
+            $quality = 0;
+            $imgsize = $file->getSize();
+            if($imgsize<500000) {
+                $quality = 60;
+            } else if($imgsize>500000 && $imgsize<1000000) {
+                $quality = 40;
+            } else if($imgsize>1000000 && $imgsize<1500000) {
+                $quality = 20;
+            } else {
+                $quality = 8;
+            }
+            $img->save('storage/foto/' .$tahun. "/senior/".$name, $quality);
+
             $senior->foto = $name;
             $senior->save();
         }
@@ -189,10 +204,23 @@ class SeniorController extends Controller
         if($request->hasFile('foto')){
             $this->validate($request, ['foto' => 'mimes:jpeg,jpg,png|max:2048',]);
             $file = $request->file('foto');
-            $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
-            $name = $request->id .".". $ext;
+            $name = $request->id .".jpg";
             $tahun = Str::replaceFirst('/', '-', $this->helper->tahunAktif());
-            $file->move('storage/foto/' .$tahun. "/senior/", $name);
+            
+            $img = Image::make($file)->encode('jpg');
+            $quality = 0;
+            $imgsize = $file->getSize();
+            if($imgsize<500000) {
+                $quality = 60;
+            } else if($imgsize>500000 && $imgsize<1000000) {
+                $quality = 40;
+            } else if($imgsize>1000000 && $imgsize<1500000) {
+                $quality = 20;
+            } else {
+                $quality = 8;
+            }
+            $img->save('storage/foto/' .$tahun. "/senior/".$name, $quality);
+
             $senior->foto = $name;
         }
 

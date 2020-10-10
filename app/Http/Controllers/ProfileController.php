@@ -8,6 +8,7 @@ use App\Helpers\Helper;
 use App\Senior;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Intervention\Image\Facades\Image;
 
 class ProfileController extends Controller
 {
@@ -101,7 +102,21 @@ class ProfileController extends Controller
             $file = $request->file('foto');
             $name = $senior->id .".jpg";
             $tahun = Str::replaceFirst('/', '-', $this->helper->tahunAktif());
-            $file->move('storage/foto/' .$tahun. "/senior/", $name);
+
+            $img = Image::make($file)->encode('jpg');
+            $quality = 0;
+            $imgsize = $file->getSize();
+            if($imgsize<500000) {
+                $quality = 60;
+            } else if($imgsize>500000 && $imgsize<1000000) {
+                $quality = 40;
+            } else if($imgsize>1000000 && $imgsize<1500000) {
+                $quality = 20;
+            } else {
+                $quality = 8;
+            }
+            $img->save('storage/foto/' .$tahun. "/senior/".$name, $quality);
+
             $senior->foto = $name;
         }
 
