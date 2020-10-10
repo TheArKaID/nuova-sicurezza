@@ -150,6 +150,10 @@ class ResidentController extends Controller
             ->where('idtahun', $this->helper->idTahunAktif())
             ->where('jeniskelamin', Auth::user()->jeniskelamin)->first();
 
+        if($resident===null) {
+            return redirect(route('divman.resident'))->withErrors(['Maaf, Resident Tidak Ditemukan!']);
+        }
+
         // Foto
         if($request->hasFile('foto')){
             $this->validate($request, ['foto' => 'mimes:jpeg,jpg,png|max:2048',]);
@@ -169,7 +173,7 @@ class ResidentController extends Controller
         
         $resident->save();
         
-        return redirect(route('divman.resident'));
+        return redirect(route('divman.resident'))->with(['sukses' => 'Data Resident Telah Disimpan!']);
     }
 
     public function hapus($id)
