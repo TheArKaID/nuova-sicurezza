@@ -6,7 +6,7 @@
         <div class="main-card mb-3 card">
             <div class="card-body">
                 <h5 class="card-title">Tambah Tahun</h5>
-                <form action="{{route('divman.tahun.add')}}" method="post">
+                <form id="formAdd" action="{{route('divman.tahun.add')}}" method="post">
                     {{ csrf_field() }}
                     <div class="form-group">
                         <input name="tahunawal" placeholder="Tahun Awal" type="number" class="form-control col-md-4" min="2000" max="9999" style="display: inline" value="{{old('tahunawal')}}" required>
@@ -20,7 +20,7 @@
         <div class="main-card mb-3 card">
             <div class="card-body">
                 <h5 class="card-title">Set Tahun Aktif</h5>
-                <form action="{{route('divman.tahun.set')}}" method="post">
+                <form id="formSet" action="{{route('divman.tahun.set')}}" method="post">
                     {{ csrf_field() }}
                     <div class="form-group">
                         <select name="tahun" id="tahun" class="form-control col-md-8" style="display: inline" required>
@@ -42,7 +42,7 @@
         <div class="main-card mb-3 card">
             <div class="card-body">
                 <h5 class="card-title">Hapus Tahun</h5>
-                <form action="{{route('divman.tahun.delete')}}" method="post">
+                <form id="formDelete" action="{{route('divman.tahun.delete')}}" method="post">
                     {{ csrf_field() }}
                     <div class="form-group">
                         <select name="tahun" id="tahun" class="form-control col-md-8" style="display: inline" required>
@@ -59,4 +59,18 @@
         </div>
     </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $('#formAdd').on('submit', function () {
+            loadui();
+        })
+        $('#formSet').on('submit', function () {
+            loadui();
+        })
+        $('#formDelete').on('submit', function () {
+            loadui();
+        })
+    </script>
 @endsection

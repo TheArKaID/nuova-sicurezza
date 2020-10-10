@@ -29,7 +29,7 @@
         <div class="col-lg-12">
             <div class="main-card mb-3 card">
                 <div class="card-body">
-                    <form action="{{route('divman.senior.tambah')}}" method="POST" enctype="multipart/form-data">
+                    <form id="formAdd" action="{{route('divman.senior.tambah')}}" method="POST" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <p><small style="color: blue">* is required</small></p>
                         <hr>
@@ -149,6 +149,7 @@
     <script src="{{ asset('assets/admin/js/jquery.min.js')}}"></script>
     <script>
         $("select[name='idusroh'").on('change', function () {
+            loadui();
             clearKamar();
             var idusroh = this.value;
             console.log(idusroh);
@@ -169,10 +170,10 @@
                             );
                         });
                     }
-                    // $('.loader').hide();
+                    loadingui.hide();
                 },
                 error: function(){
-                    // $('.loader').hide();
+                    loadingui.hide();
                 }
             });
         });
@@ -181,5 +182,9 @@
             $('select[id="idkamar"]').empty();
             $('select[id="idkamar"]').append('<option selected hidden disabled>Pilih Kamar</option>');
         }
+
+        $('#formAdd').on('submit', function () {
+            loadui();
+        })
     </script>
 @endsection

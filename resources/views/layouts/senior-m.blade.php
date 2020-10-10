@@ -180,14 +180,14 @@
     <script type="text/javascript" src="{{asset('assets/admin/js/main.js')}}"></script>
     <script src="{{asset('assets/admin/js/jquery.min.js')}}"></script>
     <script>
-        $loadingui = $('#loadingui');
+        var loadingui = $('#loadingui');
         jQuery(document).ready(function(){
-            $loadingui.hide();
+            loadingui.hide();
         });
         function loadui() {
-            $loadingui.show();
+            loadingui.show();
             setTimeout(() => {
-                $loadingui.hide();
+                loadingui.hide();
             }, 10000);
         }
     </script>

@@ -30,13 +30,13 @@
             <div class="main-card mb-3 card">
                 <div class="card-body">
                     <div class="row">
-                        <a href="{{route('divman.resident.import')}}" class="btn btn-primary click">
+                        <a href="{{route('divman.resident.import')}}" onclick="loadui()" class="btn btn-primary">
                             <span class="badge badge-pill badge-light" style="margin-left: 0px;">
                                 <i class="fa fa-cloud-upload-alt"></i>
                             </span> Import
                         </a>
                     </div>
-                    <form action="{{route('divman.resident.tambah')}}" method="POST" enctype="multipart/form-data">
+                    <form id="formAdd" action="{{route('divman.resident.tambah')}}" method="POST" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <p>*<small style="color: blue"> is required</small></p>
                         <hr>
@@ -101,6 +101,7 @@
 @section('scripts')
     <script>
         $("select[name='idusroh'").on('change', function () {
+            loadui();
             clearKamar();
             var idusroh = this.value;
             console.log(idusroh);
@@ -121,10 +122,10 @@
                             );
                         });
                     }
-                    // $('.loader').hide();
+                    loadingui.hide();
                 },
                 error: function(){
-                    // $('.loader').hide();
+                    loadingui.hide();
                 }
             });
         });
@@ -134,7 +135,7 @@
             $('select[id="idkamar"]').append('<option selected hidden disabled>Pilih Kamar</option>');
         }
 
-        $(".click").click(function () {
+        $('#formAdd').on('submit', function () {
             loadui();
         })
     </script>

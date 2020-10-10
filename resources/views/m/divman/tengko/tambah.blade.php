@@ -21,7 +21,7 @@
         <div class="col-lg-12">
             <div class="main-card mb-3 card">
                 <div class="card-body">
-                    <form action="{{route('divman.tengko.tambah')}}" method="POST">
+                    <form id="formAdd" action="{{route('divman.tengko.tambah')}}" method="POST">
                         {{ csrf_field() }}
                         <div class="position-relative row form-group">
                             <label for="tipe" class="col-sm-2 col-form-label">Tipe</label>
@@ -56,4 +56,12 @@
             </div>
         <div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $('#formAdd').on('submit', function () {
+            loadui();
+        })
+    </script>
 @endsection

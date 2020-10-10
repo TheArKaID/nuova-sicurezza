@@ -105,7 +105,7 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form action="{{route('senior.resident.poin.tambah')}}" method="POST">
+            <form id="formPoin" action="{{route('senior.resident.poin.tambah')}}" method="POST">
                 {{ csrf_field() }}
                 <div class="modal-body">
                         <input type="hidden" name="idresident" value="{{$resident->id}}">
@@ -142,8 +142,8 @@
                         </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <input type="submit" class="btn btn-success" value="Tambah">
+                    <button type="button" class="btn btn-secondary" id="btnCancel" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-success">Tambah</button>
                 </div>
             </form>
         </div>
@@ -215,5 +215,9 @@
             loadui();
         })
         
+        $('#formPoin').on('submit', function () {
+            loadui();
+            $('#btnCancel').click();
+        })
     </script>
 @endsection

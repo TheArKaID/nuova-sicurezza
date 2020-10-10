@@ -29,7 +29,7 @@
         <div class="col-lg-12">
             <div class="main-card mb-3 card">
                 <div class="card-body">
-                    <a href="{{route('divman.usroh.tambah')}}" class="btn btn-success btn-sm" style="float: right"><i class="fa fa-plus-square"></i></a>
+                    <a href="{{route('divman.usroh.tambah')}}" onclick="loadui()" class="btn btn-success btn-sm" style="float: right"><i class="fa fa-plus-square"></i></a>
                     <table class="mb-0 table table-hover table-responsive">
                         <thead>
                         <tr>
@@ -68,6 +68,7 @@
     $(document).ready(function($) {
         $(".clickable-row").click(function() {
             window.location = $(this).data("url");
+            loadui();
         });
     });
 </script>    

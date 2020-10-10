@@ -34,7 +34,7 @@
         <div class="col-lg-12">
             <div class="main-card mb-3 card">
                 <div class="card-body">
-                    <form action="{{route('divman.senior.simpan')}}" method="POST" enctype="multipart/form-data">
+                    <form id="formEdit" action="{{route('divman.senior.simpan')}}" method="POST" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <input type="hidden" name="id" value="{{$senior->id}}">
                         <p><small style="color: blue">* is required</small></p>
@@ -162,6 +162,7 @@
     <script src="{{ asset('assets/admin/js/jquery.min.js')}}"></script>
     <script>
         $("select[name='idusroh'").on('change', function () {
+            loadui();
             clearKamar();
             var idusroh = this.value;
             console.log(idusroh);
@@ -182,10 +183,10 @@
                             );
                         });
                     }
-                    // $('.loader').hide();
+                    loadingui.hide();
                 },
                 error: function(){
-                    // $('.loader').hide();
+                    loadingui.hide();
                 }
             });
         });
@@ -194,6 +195,15 @@
             $('select[id="idkamar"]').empty();
             $('select[id="idkamar"]').append('<option selected hidden disabled>Pilih Kamar</option>');
         }
+
+        $('#btnDelete').on('click', function () {
+            loadui();
+            $("btnCancel").click();
+        })
+
+        $('#formEdit').on('submit', function () {
+            loadui();
+        })
     </script>
 @endsection
 
@@ -211,8 +221,8 @@
                     <p>PERHATIAN! Data Senior {{ $senior->nama }} akan terhapus.</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <a href="{{route('divman.senior.hapus', $senior->id)}}" class="btn btn-danger">Hapus</a>
+                    <button id="btnCancel" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <a id="btnDelete" href="{{route('divman.senior.hapus', $senior->id)}}" class="btn btn-danger">Hapus</a>
                 </div>
             </div>
         </div>

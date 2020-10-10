@@ -36,14 +36,14 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <form method="post" action="" enctype="multipart/form-data">
+                            <form id="formAdd" method="post" action="" enctype="multipart/form-data">
                                 {{ csrf_field() }}
                                 <a href="{{asset('storage/import/format.xlsx')}}" class="btn btn-primary">
                                     <span class="metismenu-icon pe-7s-download"></span>
                                     Download Format
                                 </a>
                                 <br><br>
-                                <input type="file" name="file" class="pull-left">
+                                <input type="file" name="file" class="pull-left" required>
                                 
                                 <button type="submit" name="preview" class="btn btn-success">
                                     <span class="metismenu-icon pe-7s-display2"></span> Preview
@@ -53,7 +53,7 @@
                             <hr>
                             
                             @if ($data)
-                                <form method='post' action='{{route('divman.resident.prosesimport')}}' class="table table-responsive">
+                                <form id="formPreview" method='post' action='{{route('divman.resident.prosesimport')}}' class="table table-responsive">
                                     {{ csrf_field() }}
                                     <div class='alert alert-danger' id='kosong'>
                                         Semua data belum diisi. <br>Ada <span id='jumlah_kosong'></span> data yang belum diisi.
@@ -111,5 +111,12 @@
             });
         @endif
 
+        $('#formAdd').on('submit', function () {
+            loadui();
+        })
+
+        $('formPreview').on('submit', function () {
+            loadui();
+        })
     </script>
 @endsection

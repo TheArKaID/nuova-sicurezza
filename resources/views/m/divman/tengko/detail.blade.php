@@ -21,7 +21,7 @@
         <div class="col-lg-12">
             <div class="main-card mb-3 card">
                 <div class="card-body">
-                    <form action="{{route('divman.tengko.simpan')}}" method="POST">
+                    <form id="formEdit" action="{{route('divman.tengko.simpan')}}" method="POST">
                         {{ csrf_field() }}
                         <input type="hidden" name="id" value="{{$tengko->id}}">
                         <div class="position-relative row form-group">
@@ -74,10 +74,23 @@
                     <p>PERHATIAN! Semua Data Pelanggaran Resident yang berkaitan dengan Tengko ini akan terhapus juga.</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <a href="{{route('divman.tengko.hapus', $tengko->id)}}" class="btn btn-danger">Hapus</a>
+                    <button id="btnCancel" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <a id="btnDelete" href="{{route('divman.tengko.hapus', $tengko->id)}}" class="btn btn-danger">Hapus</a>
                 </div>
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $('#formEdit').on('submit', function () {
+            loadui();
+        })
+
+        $('#btnDelete').on('click', function () {
+            loadui();
+            $('#btnCancel').click();
+        })
+    </script>
 @endsection
