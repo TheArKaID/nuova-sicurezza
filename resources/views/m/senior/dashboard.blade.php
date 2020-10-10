@@ -127,7 +127,7 @@
                     <h5>Resident</h5>
                     <div class="row">
                         <div class="col-md-6 col-xl-4">
-                            <div class="card mb-3 widget-content bg-primary">
+                            <div class="card mb-3 widget-content bg-warning">
                                 <div class="widget-content-wrapper text-white">
                                     <div class="widget-content-left">
                                         <div class="widget-heading">Resident Putra</div>
@@ -139,7 +139,7 @@
                             </div>
                         </div>
                         <div class="col-md-6 col-xl-4">
-                            <div class="card mb-3 widget-content bg-warning">
+                            <div class="card mb-3 widget-content bg-primary">
                                 <div class="widget-content-wrapper text-white">
                                     <div class="widget-content-left">
                                         <div class="widget-heading">Resident Putri</div>

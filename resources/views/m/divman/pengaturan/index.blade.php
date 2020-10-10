@@ -29,7 +29,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                    <div class="alert alert-primary fade show" role="alert">
+                    <div class="alert alert-warning fade show" role="alert">
                         <h5 class="alert-heading">Poin Khusus</h5>
                         <p>
                             <form action="{{ route('divman.pengaturan.save.ponsus') }}" method="post">
@@ -47,7 +47,7 @@
                         <hr>
                         <p class="mb-0">Kode Poin Khusus akan diberikan pada SR/ASR yang akan menambahkan Poin namun tidak sesuai dengan Tengko yang ada</p>
                     </div>
-                    <div class="alert alert-warning fade show" role="alert">
+                    <div class="alert alert-primary fade show" role="alert">
                         <h5 class="alert-heading">Reset Password Token</h5>
                         <p>
                             <form action="{{ route('divman.pengaturan.refresh.token') }}" method="get">
