@@ -161,16 +161,13 @@
                         <div class="app-footer__inner" style="margin-left: unset">
                             <ul class="nav text-center" style="width: 100%">
                                 <li class="nav-item">
-                                    <a href="javascript:void(0);" class="nav-link">
-                                        <div class="badge badge-success mr-1 ml-0">
-                                            <small>NEW</small>
-                                        </div>
-                                        Unires
+                                    <a href="https://unires.umy.ac.id" target="_blank" class="mr-1 btn btn-primary">
+                                        Unires <span class="badge badge-light">Site</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="javascript:void(0);" class="nav-link">
-                                        UMY
+                                    <a href="https://umy.ac.id" target="_blank" class="mr-1 btn btn-success">
+                                        UMY <span class="badge badge-light">Site</span>
                                     </a>
                                 </li>
                             </ul>
