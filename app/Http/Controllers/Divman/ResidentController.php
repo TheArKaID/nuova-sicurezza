@@ -93,15 +93,15 @@ class ResidentController extends Controller
         $resident->save();
         
         // Foto
-        if($request->hasFile('foto')){
-            $this->validate($request, ['foto' => 'mimes:jpeg,jpg,png|max:2048',]);
-            $file = $request->file('foto');
-            $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
-            $name = $resident->id .".". $ext;
+        if($request->foto){
+            $name = $request->id .".jpg";
             $tahun = Str::replaceFirst('/', '-', $this->helper->tahunAktif());
-            $file->move('storage/foto/' .$tahun. "/resident/", $name);
+
+            $img = explode(',', $request->foto);
+            $image = base64_decode($img[1]);
+            file_put_contents("storage/foto/" .$tahun. "/resident/" .$name, $image);
+
             $resident->foto = $name;
-            $resident->save();
         }
 
         return redirect(route('divman.resident'))->with(['sukses' => 'Resident Baru Ditambahkan!']);
@@ -138,7 +138,6 @@ class ResidentController extends Controller
 
     public function simpan(Request $request)
     {
-        
         $this->validate($request, [
             'nama' => 'required',
             'nim' => 'required|digits:11',
@@ -155,13 +154,14 @@ class ResidentController extends Controller
         }
 
         // Foto
-        if($request->hasFile('foto')){
-            $this->validate($request, ['foto' => 'mimes:jpeg,jpg,png|max:2048',]);
-            $file = $request->file('foto');
-            $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
-            $name = $request->id .".". $ext;
+        if($request->foto){
+            $name = $request->id .".jpg";
             $tahun = Str::replaceFirst('/', '-', $this->helper->tahunAktif());
-            $file->move('storage/foto/' .$tahun. "/resident/", $name);
+
+            $img = explode(',', $request->foto);
+            $image = base64_decode($img[1]);
+            file_put_contents("storage/foto/" .$tahun. "/resident/" .$name, $image);
+
             $resident->foto = $name;
         }
 
