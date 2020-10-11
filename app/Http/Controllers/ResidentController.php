@@ -82,12 +82,14 @@ class ResidentController extends Controller
         }
 
         // Foto
-        if($request->hasFile('foto')){
-            $this->validate($request, ['foto' => 'mimes:jpeg,jpg,png|max:2048',]);
-            $file = $request->file('foto');
+        if($request->foto){
             $name = $request->id .".jpg";
             $tahun = Str::replaceFirst('/', '-', $this->helper->tahunAktif());
-            $file->move('storage/foto/' .$tahun. "/resident/", $name);
+
+            $img = explode(',', $request->foto);
+            $image = base64_decode($img[1]);
+            file_put_contents("storage/foto/" .$tahun. "/resident/" .$name, $image);
+
             $resident->foto = $name;
         }
 

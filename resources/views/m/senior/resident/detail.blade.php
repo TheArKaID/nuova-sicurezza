@@ -122,13 +122,14 @@
                                 <small>Anda belum menambahkan foto resident ini</small>
                             @else
                                 <small>Saat ini</small>
-                                <img src="{{ asset('storage/foto/' .$tahun. '/resident/' .$resident->foto)}}" alt="" srcset="">
+                                <img id="currfoto" src="{{ asset('storage/foto/' .$tahun. '/resident/' .$resident->foto)}}" alt="" srcset="">
                             @endif
                         </div>
                         <div class="col-sm-10">
                             <small>Update Foto</small>
-                            <input name="foto" id="foto" placeholder="Foto" type="file" class="form-control">
-                            <small>File JPG, JPEG, PNG | Max Size : 2mb</small>
+                            <input id="foto" placeholder="Foto" type="file" class="form-control">
+                            <small>File JPG, JPEG, PNG<br>Foto akan dikompresi, hindari mengunggah gambar > 5mb</small>
+                            <input type="hidden" id="fotofile" name="foto"/>
                         </div>
                     </div>
             </div>
@@ -143,6 +144,48 @@
 @endsection
 
 @section('scripts')
+    <script src="{!! mix('js/app.js') !!}"></script>
+    <script>
+        const options = {
+            targetSize: 0.1,
+            quality: 0.75,
+            qualityStepSize: 0.1,
+            minQuality: 0.1
+        }
+
+        const compress = new Compress(options)
+        const upload = document.getElementById("foto")
+        const preview = document.getElementById("currfoto")
+
+        upload.addEventListener("change",
+            (evt) => {
+                loadui();
+                const files = [...evt.target.files]
+
+                compress.compress(files).then((conversions) => {
+                    // Conversions is an array of objects like { photo, info }.
+                    // 'photo' has the photo data while 'info' contains metadata
+                    // about that particular image compression (e.g. time taken).
+
+                    const { photo, info } = conversions[0]
+
+                    // Create an object URL which points to the photo Blob data
+                    const objectUrl = URL.createObjectURL(photo.data)
+
+                    // Set the preview img src to the object URL and wait for it to load
+                    Compress.loadImageElement(preview, objectUrl).then(() => {
+                        URL.revokeObjectURL(objectUrl)
+                        loadingui.hide();
+                    })
+                    
+                    Compress.blobToBase64(photo.data).then((base64) => {
+                        document.getElementById("fotofile").setAttribute("value", base64);
+                    });
+                })
+            },
+            false
+        )
+    </script>
     <script>
         $('#formEdit').on('submit', function () {
             loadui();
