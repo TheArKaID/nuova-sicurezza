@@ -10,8 +10,8 @@
             font-weight: bold;
         }
         img {
-            max-width: 250px;
             width: inherit;
+            height: inherit;
         }
         .table-right{
             text-align: right;
@@ -127,6 +127,7 @@
                         </div>
                         <div class="col-sm-10">
                             <small>Update Foto</small>
+                            <img id="currfoto" alt="" srcset="">
                             <input id="foto" placeholder="Foto" type="file" class="form-control">
                             <small>File JPG, JPEG, PNG<br>Foto akan dikompresi, hindari mengunggah gambar > 5mb</small>
                             <input type="hidden" id="fotofile" name="foto"/>
