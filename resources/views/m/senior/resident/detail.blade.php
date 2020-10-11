@@ -16,7 +16,12 @@
         .table-right{
             text-align: right;
         }
+        .profileImage {
+            width: 100% !important;
+            height: inherit;
+        }
     </style>
+    <link rel="stylesheet" href="{{ asset('css/jquery.mtfpicviewer.css') }}">
 @endsection
 
 @section('content')
@@ -47,7 +52,10 @@
                 <div class="card-body">
                     <div class="position-relative row form-group">
                         <div class="col-md-12" style="text-align: center">
-                            <img src="{{ asset('storage/foto/' .$tahun. '/resident/' .$resident->foto)}}" alt="" srcset="">
+                            <div class="profileImage">
+                                <img src="{{ asset('storage/foto/' .$tahun. '/resident/' .$resident->foto)}}" alt="" srcset="">
+                            </div>
+                            
                         </div>
                     </div>
                     <table class="table">
@@ -192,5 +200,11 @@
             loadui();
             $('#btnCancel').click();
         })
+    </script>
+    <script src="{{ asset('js/jquery.mtfpicviewer.js') }}"></script>
+    <script>
+        $('.profileImage').mtfpicviewer({
+            selector: 'img',
+    	});
     </script>
 @endsection

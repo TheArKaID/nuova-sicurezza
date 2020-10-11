@@ -13,7 +13,12 @@
             width: inherit;
             height: inherit;
         }
+        .profileImage {
+            width: 100% !important;
+            height: inherit;
+        }
     </style>
+    <link rel="stylesheet" href="{{ asset('css/jquery.mtfpicviewer.css') }}">
 @endsection
 
 @section('content')
@@ -42,7 +47,7 @@
             <div class="main-card mb-3 card">
                 <div class="card-body">
                     <div class="position-relative row form-group">
-                        <div class="col-md-10">
+                        <div class="col-md-10 profileImage">
                             <img src="{{ asset('storage/foto/' .$tahun. '/senior/' .$senior->foto)}}" alt="" srcset="">
                         </div>
                     </div>
@@ -80,4 +85,13 @@
             </div>
         <div>
     </div>
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('js/jquery.mtfpicviewer.js') }}"></script>
+    <script>
+        $('.profileImage').mtfpicviewer({
+            selector: 'img',
+        });
+    </script>
 @endsection
