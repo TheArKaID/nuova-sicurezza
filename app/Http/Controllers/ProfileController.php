@@ -44,7 +44,7 @@ class ProfileController extends Controller
             'unique' => Str::upper(':attribute').' Telah Digunakan',
             'digits' => Str::upper(':attribute').' Harus Berjumlah 11',
             'mimes' => Str::upper(':attribute').' Harus JPG, JPEG atau PNG',
-            'max' => Str::upper(':attribute').' Tidak boleh lebih dari 2mb',
+            'max' => Str::upper(':attribute').' Tidak boleh lebih dari 1mb',
         ];
 
         $this->validate($request, [
@@ -96,12 +96,14 @@ class ProfileController extends Controller
         }
 
         // Foto        
-        if($request->hasFile('foto')){
-            $this->validate($request, ['foto' => 'mimes:jpeg,jpg,png|max:2048',], $message);
-            $file = $request->file('foto');
+        if($request->foto){
             $name = $senior->id .".jpg";
             $tahun = Str::replaceFirst('/', '-', $this->helper->tahunAktif());
-            $file->move('storage/foto/' .$tahun. "/senior/", $name);
+            
+            $img = explode(',', $request->foto);
+            $image = base64_decode($img[1]);
+            file_put_contents("storage/foto/" .$tahun. "/senior/" .$name, $image);
+
             $senior->foto = $name;
         }
 
