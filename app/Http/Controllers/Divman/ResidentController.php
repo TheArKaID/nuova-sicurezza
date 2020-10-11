@@ -14,7 +14,6 @@ use App\Resident;
 use App\Usroh;
 use App\Kamar;
 use Illuminate\Support\Facades\DB;
-use Intervention\Image\Facades\Image;
 
 class ResidentController extends Controller
 {    
@@ -100,21 +99,7 @@ class ResidentController extends Controller
             $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
             $name = $resident->id .".". $ext;
             $tahun = Str::replaceFirst('/', '-', $this->helper->tahunAktif());
-            $img = Image::make($file)->encode('jpg');
-            
-            $quality = 0;
-            $imgsize = $file->getSize();
-            if($imgsize<500000) {
-                $quality = 60;
-            } else if($imgsize>500000 && $imgsize<1000000) {
-                $quality = 40;
-            } else if($imgsize>1000000 && $imgsize<1500000) {
-                $quality = 20;
-            } else {
-                $quality = 8;
-            }
-            $img->save('storage/foto/' .$tahun. "/resident/".$name, $quality);
-            
+            $file->move('storage/foto/' .$tahun. "/resident/", $name);
             $resident->foto = $name;
             $resident->save();
         }
@@ -173,23 +158,10 @@ class ResidentController extends Controller
         if($request->hasFile('foto')){
             $this->validate($request, ['foto' => 'mimes:jpeg,jpg,png|max:2048',]);
             $file = $request->file('foto');
-            $name = $request->id .".jpg";
+            $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+            $name = $request->id .".". $ext;
             $tahun = Str::replaceFirst('/', '-', $this->helper->tahunAktif());
-            
-            $img = Image::make($file)->encode('jpg');
-            $quality = 0;
-            $imgsize = $file->getSize();
-            if($imgsize<500000) {
-                $quality = 60;
-            } else if($imgsize>500000 && $imgsize<1000000) {
-                $quality = 40;
-            } else if($imgsize>1000000 && $imgsize<1500000) {
-                $quality = 20;
-            } else {
-                $quality = 8;
-            }
-            $img->save('storage/foto/' .$tahun. "/resident/".$name, $quality);
-            
+            $file->move('storage/foto/' .$tahun. "/resident/", $name);
             $resident->foto = $name;
         }
 
