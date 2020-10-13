@@ -50,7 +50,7 @@
 <div class="vol-md-4"></div>
 
 <div class="modal fade" id="modalPasscode" tabindex="-1" role="dialog" aria-labelledby="modalPasscode" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
         <div class="modal-content">
             <form action="{{ route('senior.login.passcode') }}" method="post">
                 {{ csrf_field() }}
