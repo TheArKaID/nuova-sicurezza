@@ -26,8 +26,8 @@
                             <i class="pe-7s-home icon-gradient bg-mean-fruit">
                             </i>
                         </div>
-                        <h5>Hello, Mobile Dashboard</h5>
-                        <div>2020/2021
+                        <h5>Hi, {{ Auth::user()->nama }}</h5>
+                        <div>{{ $tahunaktif }}
                             <div class="page-title-subheading">Tahun Aktif Saat ini.
                             </div>
                         </div>

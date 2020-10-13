@@ -6,26 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Language" content="en">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Analytics Dashboard - This is an example dashboard created using build-in elements and components.</title>
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+    <title>Sicurezza di Unires</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
     <meta name="description" content="This is an example dashboard created using build-in elements and components.">
     <meta name="msapplication-tap-highlight" content="no">
     <link href="{{asset('assets/admin/css/main.css')}}" rel="stylesheet">
     @laravelPWA
     @yield('styles')
 </head>
-@php
-    $uisetting['fixedsidebar'] = 1;
-    $uisetting['headeroption'] = 1;
-    $uisetting['fixedheader'] = 1;
-    $uisetting['sidebar'] = 0;
-    $uisetting['fixedfooter'] = 1;
-    $uisetting['sidebaroption'] = 1;
-    $page = 'home';
-    $error = null;
-    $success = null;
-    
+@php    
     // Untuk Tombol Back
     $url = explode('/', Request::url());
     array_pop($url);
@@ -48,8 +37,8 @@
         </div>
     </div>
     @yield('modals')
-    <div class="app-container app-theme-white body-tabs-shadow <?php echo $uisetting['fixedsidebar'] == 1 ? ' fixed-sidebar' : ''; echo $uisetting['fixedheader'] == 1 ? ' fixed-header' : ''; echo $uisetting['fixedfooter'] == 1 ? ' fixed-footer' : ''; echo $uisetting['sidebar'] == 1 ? ' closed-sidebar' : '';?>">
-        <div class="app-header header-shadow <?php echo $uisetting['headeroption']; ?>">
+    <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header fixed-footer closed-sidebar">
+        <div class="app-header header-shadow">
             <div class="app-header__logo" style="width: auto; display:flex">
                 <div class="logo-src">
                     @if (!Request::is('s'))
@@ -110,20 +99,6 @@
                                             <a href="{{ route('senior.logout') }}" tabindex="0" class="dropdown-item" onclick="loadui()">Logout</a>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="widget-content-left  ml-3 header-user-info">
-                                    <div class="widget-heading">
-                                        Alina Mclourd
-                                    </div>
-                                    <div class="widget-subheading">
-                                        VP People Manager
-                                    </div>
-                                </div>
-                                <div class="widget-content-right header-user-info ml-3">
-                                    <button type="button"
-                                        class="btn-shadow p-1 btn btn-primary btn-sm show-toastr-example">
-                                        <i class="fa text-white fa-calendar pr-1 pl-1"></i>
-                                    </button>
                                 </div>
                             </div>
                         </div>

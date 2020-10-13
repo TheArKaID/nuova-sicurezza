@@ -27,11 +27,13 @@ class DashboardController extends Controller
 
         if($this->helper->isMobile())
             return view('m.senior.dashboard', [
+                'tahunaktif' => $this->helper->tahunAktif(),
                 'resident' => $resident,
                 'rputra' => $rputra,
                 'rputri' => $rputri
             ]);
         return view('senior.dashboard', [
+            'tahunaktif' => $this->helper->tahunAktif(),
             'resident' => $resident,
             'rputra' => $rputra,
             'rputri' => $rputri
