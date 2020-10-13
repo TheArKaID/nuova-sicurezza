@@ -60,7 +60,6 @@ Route::middleware('auth:senior')->group(function(){
     // Help
     Route::get('/s/about', "HelpController@about")->name('senior.help.about');
     Route::get('/s/contact', "HelpController@contact")->name('senior.help.contact');
-    Route::get('/s/faq', "HelpController@faq")->name('senior.help.faq');
     Route::get('/s/privacy', "HelpController@privacy")->name('senior.help.privacy');
 
     /**
