@@ -73,8 +73,11 @@
             </div>
             <div class="app-header__content" style="top: 160px;">
                 <div class="app-header-left">
-                    <div>
-                        <h5>Sicurezza</h5>
+                    <div class="col-md-12">
+                        <div class="col-md-8">
+                            Your Profile Viewed by <span id="viewername">Nobody</span>
+                        </div>
+                        <div class="ml-auto badge badge-pill badge-success col-md-4">New</div>
                     </div>
                 </div>
                 <div class="app-header-right">
@@ -164,6 +167,22 @@
                 loadingui.hide();
             }, 10000);
         }
+    </script>
+
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+         Pusher.logToConsole = true;
+
+        var pusher = new Pusher('a7c47123512fbd61abbe', {
+            cluster: 'ap1',
+            encrypted: true
+        });
+
+        var channel = pusher.subscribe('user.'+{{Auth::user()->id}});
+        channel.bind('profile-view', function(data) {
+            $('#viewername').html(data.sender.nama);
+            alert(JSON.stringify(data.sender));
+        });
     </script>
     @yield('scripts')
 </body>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ProfileViewed;
 use App\Helpers\Helper;
 use Illuminate\Support\Facades\Cache;
 use App\Http\Controllers\Controller;
@@ -55,12 +56,15 @@ class SeniorController extends Controller
             return redirect(route('senior.senior'))->withErrors(['Senior Tidak Ditemukan!']);
         }
 
+        event(new ProfileViewed(Auth::user(), $senior->id));
+        
         if($this->helper->isMobile())
             return view('m.senior.senior.detail', [
                 'senior' => $senior,
                 'tahun' => $tahun,
             ]);
         
+
         return view('senior.senior.detail', [
             'senior' => $senior,
             'tahun' => $tahun,
