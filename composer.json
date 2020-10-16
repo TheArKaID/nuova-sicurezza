@@ -17,6 +17,7 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.1",
         "phpoffice/phpspreadsheet": "^1.14",
+        "pusher/pusher-php-server": "^4.1",
         "silviolleite/laravelpwa": "^2.0"
     },
     "require-dev": {
