@@ -35,13 +35,13 @@ class ProfileViewed implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return ['user.'.$this->target];
+        return ['profile-viewed'];
         // return ['profile-viewed'];
         // return new PrivateChannel('channel-name');
     }
 
     public function broadcastAs()
     {
-        return "profile-view";
+        return "profile-".$this->target."-view";
     }
 }

@@ -37,6 +37,25 @@
         </div>
     </div>
     @yield('modals')
+    <div class="modal fade" id="modalNotif" tabindex="-1" role="dialog" aria-labelledby="modalNotif" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Notification Permission Request</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Izinkan Aplikasi untuk mengirimkan Notifikasi</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                        <button type="button" onclick="request()" class="btn btn-success">izinkan</button>
+                    </div>
+            </div>
+        </div>
+    </div>
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header fixed-footer closed-sidebar">
         <div class="app-header header-shadow">
             <div class="app-header__logo" style="width: auto; display:flex">
@@ -170,19 +189,37 @@
     </script>
 
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script>
-         Pusher.logToConsole = true;
-
         var pusher = new Pusher('a7c47123512fbd61abbe', {
             cluster: 'ap1',
             encrypted: true
         });
 
-        var channel = pusher.subscribe('user.'+{{Auth::user()->id}});
-        channel.bind('profile-view', function(data) {
+        var channel = pusher.subscribe('profile-viewed');
+        channel.bind('profile-'+{{Auth::user()->id}}+'-view', function(data) {
+            if (window.Notification && Notification.permission !== "granted") {
+                $('#modalNotif').modal('show');
+            }
             $('#viewername').html(data.sender.nama);
+            notify('Profile anda dilihat oleh '+data.sender.nama);
             alert(JSON.stringify(data.sender));
         });
+        
+        function notify(text) {
+            var img = '/images/icons/icon-128x128.png';
+            var notification = new Notification('Hi, {{Auth::user()->nama}}', { body: text, icon: img });
+            
+            notification.onclick = function(event) {
+                event.preventDefault(); // prevent the browser from focusing the Notification's tab
+                location.href = "{{ Request::url() }}";
+            }
+        }
+
+        function request() {
+            notificationRequest();
+            $('#modalNotif').modal('hide');
+        }
     </script>
     @yield('scripts')
 </body>

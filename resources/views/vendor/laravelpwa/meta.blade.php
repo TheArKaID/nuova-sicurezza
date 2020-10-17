@@ -43,4 +43,26 @@
             console.log('Laravel PWA: ServiceWorker registration failed: ', err);
         });
     }
+
+    // Request Notification Permission
+    function notificationRequest() {
+        // Let's check if the browser supports notifications
+        if('Notification' in window) {
+            // Check if we have permission for notification
+            if (window.Notification && Notification.permission !== "granted") {
+                // If not, let's ask for it
+                Notification.requestPermission()
+                .then((permission) => {
+                    if (Notification.permission !== permission){
+                        Notification.permission = permission;
+                    }
+                })
+            }
+        }
+    }
+    
+    window.addEventListener('load', function () {
+        // Request it!
+        notificationRequest();
+    })
 </script>
