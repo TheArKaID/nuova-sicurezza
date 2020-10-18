@@ -59,9 +59,27 @@ return [
         ],
         'shortcuts' => [
             [
-                'name' => 'Sicurezza Login',
-                'description' => 'Login to Sicurezza',
-                'url' => '/s/login',
+                'name' => 'Resident',
+                'description' => 'Your Resident',
+                'url' => '/s/resident',
+                'icons' => [
+                    "src" => "/images/icons/icon-96x96.png",
+                    "purpose" => "any"
+            ]
+            ],
+            [
+                'name' => 'Senior',
+                'description' => 'All Senior',
+                'url' => '/s/senior',
+                'icons' => [
+                    "src" => "/images/icons/icon-96x96.png",
+                    "purpose" => "any"
+                ]
+            ],
+            [
+                'name' => 'Tengko',
+                'description' => 'Check Tengko',
+                'url' => '/s/tengko',
                 'icons' => [
                     "src" => "/images/icons/icon-96x96.png",
                     "purpose" => "any"
