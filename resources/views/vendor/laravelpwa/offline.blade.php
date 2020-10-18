@@ -1,61 +1,44 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.auth')
 
-        <title>Laravel</title>
-        
-        @laravelPWA
+@section('styles')
+    <style>
+        .empty-state {
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 40px;
+        }
+        .empty-state-icon {
+            position: relative;
+            background-color: #6777ef;
+            width: 80px;
+            height: 80px;
+            border-radius: 5px;
+            font-size: 38pt;
+            color: white
+        }
+    </style>
+@endsection
+@section('content')
+    <div class="col-md-4"></div>
+    <div class="col-md-4 centered">
+        <div class="card">
+            <div class="card-body"><h5 class="card-title">Login</h5>
+                <div class="empty-state" data-height="400" style="height: 400px;">
+                    <div class="empty-state-icon bg-danger">
+                        <span style="">?</span>
+                    </div>
+                    <h4>Kami tidak dapat membuka Sicurezza saat ini</h4>
+                    <p class="lead">
+                        Pastikan anda memiliki koneksi internet yang stabil.
+                    </p>
+                    <a href="{{route('senior.login')}}" class="btn btn-success mt-4">Refresh!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="vol-md-4"></div>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <h1>You are currently not connected to any networks.</h1>
-    </body>
-</html>
+@endsection

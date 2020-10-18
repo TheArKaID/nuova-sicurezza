@@ -7,6 +7,7 @@
     <title>@yield('title')</title>
     <link rel="stylesheet" href="{{asset('assets/admin/css/main.css')}}">
     @laravelPWA
+    @yield('styles')
     <style>
       .centered {
             text-align: center;
