@@ -1,5 +1,9 @@
 @extends('layouts.auth')
 
+@section('title')
+    Sicurezza is Offline
+@endsection
+
 @section('styles')
     <style>
         .empty-state {
