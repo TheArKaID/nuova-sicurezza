@@ -71,7 +71,7 @@
                         </span>
                     @enderror
                     <div class="form-group">
-                        <input class="form-control" minlength="6" type="password" name="passcode" id="passcode" required>
+                        <input class="form-control" minlength="6" maxlength="6" type="password" pattern="[0-9]*" inputmode="numeric" name="passcode" id="passcode" required>
                     </div>
                 </div>
                 <div class="modal-footer">

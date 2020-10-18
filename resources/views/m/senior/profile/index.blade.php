@@ -98,9 +98,9 @@
                                     <div class="card-body">
                                         <p><small style="color: blue"><i>Quick Login</i> dengan Passcode</small></p>
                                         <label for="passcode">Passcode</label>
-                                        <input type="number" name="passcode" minlength="6" maxlength="6" class="form-control" placeholder="Passcode">
+                                        <input type="password" pattern="[0-9]*" inputmode="numeric" name="passcode" minlength="6" maxlength="6" class="form-control" placeholder="Passcode">
                                         <label for="repasscode">Re Passcode</label>
-                                        <input type="number" name="repasscode" minlength="6" maxlength="6" class="form-control" placeholder="Ulangi Passcode">
+                                        <input type="password" pattern="[0-9]*" inputmode="numeric" name="repasscode" minlength="6" maxlength="6" class="form-control" placeholder="Ulangi Passcode">
                                         <p><small style="color: {{ $profile->passcode ? 'green' : 'red' }}">{{ $profile->passcode ? 'Passcode Terpasang' : 'Passcode Tidak Dipasang'}}</small></p>
                                     </div>
                                 </div>
