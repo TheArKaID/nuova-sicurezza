@@ -36,6 +36,9 @@
                     <div class="form-group">
                         <button class="col-md-12 btn btn-primary">Reset</button>
                     </div>
+                    <div class="form-group">
+                        <a href="{{ route('senior.login') }}">Login</a>
+                    </div>
                 </form>
             </div>
         </div>
