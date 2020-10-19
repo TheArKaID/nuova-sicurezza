@@ -42,9 +42,9 @@
                             @php
                                 $row=1;
                             @endphp
-                            @foreach ($kamar as $k)
+                            @foreach ($kamar as $row => $k)
                                 <tr class='clickable-row' data-url='{{route('divman.kamar.detail', $k->id)}}'>
-                                    <th scope="row">{{$row}}</th>
+                                    <th scope="row">{{ $kamar->firstItem() + $row }}</th>
                                     <td>{{$k->nomor}}</td>
                                     <td>{{$k->usroh->nama}}</td>
                                 </tr>
@@ -54,6 +54,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $kamar->links() }}
                 </div>
             </div>
         <div>

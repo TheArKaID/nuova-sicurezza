@@ -43,9 +43,9 @@
                             @php
                                 $row=1;
                             @endphp
-                            @foreach ($tengko as $t)
+                            @foreach ($tengko as $row => $t)
                                 <tr class='clickable-row' data-url='{{route('divman.tengko.detail', $t->id)}}'>
-                                    <th scope="row">{{$row}}</th>
+                                    <th scope="row">{{ $tengko->firstItem() + $row }}</th>
                                     <td class="text-center">
                                         <div class="mb-2 mr-2 badge 
                                             {{ $t->tipe=="Ringan" ? "badge-warning" : "" }}
@@ -63,6 +63,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $tengko->links() }}
                 </div>
             </div>
         <div>

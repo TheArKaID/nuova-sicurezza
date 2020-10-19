@@ -26,7 +26,7 @@ class TengkoController extends Controller
     {
         $ta = $this->helper->idTahunAktif();
         $tengko = Tengko::where('idtahun', $ta)
-            ->where('jeniskelamin', Auth::user()->jeniskelamin)->get();
+            ->where('jeniskelamin', Auth::user()->jeniskelamin)->paginate(5);
 
         $tahun = $this->helper->tahunAktif();
         if($this->helper->isMobile())

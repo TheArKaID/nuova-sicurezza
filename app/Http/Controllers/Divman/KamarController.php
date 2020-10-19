@@ -29,7 +29,7 @@ class KamarController extends Controller
     {
         $tahun = $this->helper->tahunAktif();
         $kamar = Kamar::where('idtahun', $this->helper->idTahunAktif())
-            ->where('jeniskelamin', Auth::user()->jeniskelamin)->get();
+            ->where('jeniskelamin', Auth::user()->jeniskelamin)->paginate(16);
             
         if($this->helper->isMobile())
             return view('m.divman.kamar.index', [
