@@ -45,6 +45,7 @@ Route::middleware('auth:senior')->group(function(){
 
     // Tengko
     Route::get('/s/tengko', "TengkoController@index")->name('senior.tengko');
+    // Route::get('/s/tengko', "TengkoController@search")->name('senior.tengko.cari');
     Route::get('/s/tengko/getpelanggaran/{tipe}', "TengkoController@getPelanggaran")->name('senior.tengko.get');
     
     // Usroh

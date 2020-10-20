@@ -41,6 +41,17 @@
                 </div>
                 <div class="card-body">
                     <div class="tab-content">
+                        <form action="{{ route('senior.tengko') }}" method="get">
+                            <div class="row justify-content-center">
+                                <div class="col-xs-10">
+                                    <input type="text" placeholder="Penjelasan..." value="{{ isset($_GET['cari']) ? $_GET['cari'] : '' }}" name="cari" id="cari" class="form-control">
+                                </div>
+                                <div class="col-xs-2">
+                                    <button type="submit" class="form-control btn-primary">Cari</button>
+                                </div>
+                                <small class="text-primary">*Pencarian akan berlaku untuk semua Tipe</small>
+                            </div>
+                        </form>
                         <div class="tab-pane active show" id="tab-ringan" role="tabpanel">
                             <table class="mb-0 table table-hover">
                                 <thead>

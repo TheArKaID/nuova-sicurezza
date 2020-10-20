@@ -17,12 +17,13 @@ class TengkoController extends Controller
 
     public function index()
     {
-        $ta = $this->helper->idTahunAktif();
-        $ringan = Tengko::where('idtahun', $ta)->where('tipe', 'Ringan')->get();
-        $sedang = Tengko::where('idtahun', $ta)->where('tipe', 'Sedang')->get();
-        $berat = Tengko::where('idtahun', $ta)->where('tipe', 'Berat')->get();
-        $tengko = array('ringan' => $ringan, 'sedang' => $sedang, 'berat' => $berat);
-        
+        $tengko = null;
+        if(isset($_GET['cari'])) {
+            $tengko = $this->getSearch($_GET['cari']);
+        } else {
+            $tengko = $this->getAll();
+        }
+
         $tahun = $this->helper->tahunAktif();
         if($this->helper->isMobile())
             return view('m.senior.tengko.index', [
@@ -34,6 +35,31 @@ class TengkoController extends Controller
             'tahun' => $tahun,
             'tengko' => $tengko,
         ]);
+    }
+
+    public function getAll()
+    {
+        $ta = $this->helper->idTahunAktif();
+        $ringan = Tengko::where('idtahun', $ta)->where('tipe', 'Ringan')->orderBy('poin')->get();
+        $sedang = Tengko::where('idtahun', $ta)->where('tipe', 'Sedang')->orderBy('poin')->get();
+        $berat = Tengko::where('idtahun', $ta)->where('tipe', 'Berat')->orderBy('poin')->get();
+        $tengko = array('ringan' => $ringan, 'sedang' => $sedang, 'berat' => $berat);
+        
+        return $tengko;
+    }
+
+    public function getSearch($query)
+    {
+        $ta = $this->helper->idTahunAktif();
+        $ringan = Tengko::where('idtahun', $ta)->where('tipe', 'Ringan')->
+                where('penjelasan', 'LIKE', '%' .$query. '%')->orderBy('poin')->get();
+        $sedang = Tengko::where('idtahun', $ta)->where('tipe', 'Sedang')->
+                where('penjelasan', 'LIKE', '%' .$query. '%')->orderBy('poin')->get();
+        $berat = Tengko::where('idtahun', $ta)->where('tipe', 'Berat')->
+                where('penjelasan', 'LIKE', '%' .$query. '%')->orderBy('poin')->get();
+        $tengko = array('ringan' => $ringan, 'sedang' => $sedang, 'berat' => $berat);
+        
+        return $tengko;
     }
 
     public function getPelanggaran($tipe)
