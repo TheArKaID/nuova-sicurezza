@@ -20,7 +20,7 @@
         function tahunAktif()
         {
             $ta = \App\Pengaturan::first();
-            $tahun = \App\Tahun::find($ta)->first();
+            $tahun = \App\Tahun::find($ta->idtahunaktif);
             return $tahun->tahunajaran;
         }
     }
