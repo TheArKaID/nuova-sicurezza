@@ -22,13 +22,20 @@
             <div class="app-page-title">
                 <div class="page-title-wrapper">
                     <div class="page-title-heading">
-                        <div class="page-title-icon">
-                            <i class="pe-7s-home icon-gradient bg-mean-fruit">
-                            </i>
-                        </div>
-                        <h5>Hi, {{ Auth::user()->nama }}</h5>
-                        <div>{{ $tahunaktif }}
-                            <div class="page-title-subheading">Tahun Aktif Saat ini.
+                        <div class="row">
+                            <div class="main-card card mr-2 ml-2" style="display: -webkit-box;">
+                                <div class="col-md-6" style="max-width: 50%">
+                                    <div class="">
+                                        <img style="max-width: 80%" src="{{ asset('images/icons/icon-512x512.png') }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6" style="max-width: 50%; text-align: start">
+                                    <div class="align-middle" style="height:100%; display: inline">
+                                        Hi, <br>{{ Auth::user()->nama }}
+                                        <div class="page-title-subheading">{{ Auth::user()->status == 0 ? "Senior Resident" : "Assistant of Senior Resident" }}</div>
+                                        <div class="page-title-subheading">{{ $tahunaktif }}</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

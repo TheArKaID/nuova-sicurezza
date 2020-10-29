@@ -40,10 +40,10 @@
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header fixed-footer closed-sidebar">
         <div class="app-header header-shadow">
             <div class="app-header__logo" style="width: auto; display:flex">
-                <div class="logo-src">
+                <div class="">
                     @if (!Request::is('s'))
                         <a href="/s" onclick="loadui()">
-                            <h5>Sicurezza</h5>
+                            <img src="{{ asset('images/icons/icon-72x72.png') }}" style="max-width: 75%">
                         </a>
                     @endif
                 </div>
