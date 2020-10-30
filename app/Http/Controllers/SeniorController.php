@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Cache;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 use App\Senior;
+use App\Tahun;
 use Illuminate\Support\Facades\Auth;
 
 class SeniorController extends Controller
@@ -48,8 +49,9 @@ class SeniorController extends Controller
 
     public function detail($id)
     {
-        $tahun = Str::replaceFirst('/', '-', $this->helper->tahunAktif());
         $senior = Senior::where('id', $id)->where('idtahun', $this->helper->idTahunAktif())->first();
+        $tahunsenior = Tahun::find($senior->idtahun);
+        $tahun = Str::replaceFirst('/', '-', $tahunsenior->tahunajaran);
         
         if($senior===null) {
             return redirect(route('senior.senior'))->withErrors(['Senior Tidak Ditemukan!']);

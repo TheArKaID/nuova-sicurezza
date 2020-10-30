@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use App\Resident;
 use App\Usroh;
 use App\Pencatatan;
+use App\Tahun;
 use App\Tengko;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -45,11 +46,13 @@ class ResidentController extends Controller
 
     public function detail($id)
     {
-        $tahun = Str::replaceFirst('/', '-', $this->helper->tahunAktif());
         $resident = Resident::where('id', $id)
                     ->where('jeniskelamin', (Auth::user()->jeniskelamin))
                     ->where('idtahun', $this->helper->idTahunAktif())->first();
-        
+     
+        $tahunresident = Tahun::find($resident->idtahun);
+        $tahun = Str::replaceFirst('/', '-', $tahunresident->tahunajaran);
+
         if($resident===NULL) {
             return redirect(route('senior.resident'))->withErrors(['Resident Tidak Ditemukan!']);
         }
@@ -84,10 +87,17 @@ class ResidentController extends Controller
         // Foto
         if($request->foto){
             $name = $request->id .".jpg";
-            $tahun = Str::replaceFirst('/', '-', $this->helper->tahunAktif());
+            $tahunresident = Tahun::find($request->idtahun);
+            $tahun = Str::replaceFirst('/', '-', $tahunresident->tahunajaran);
 
             $img = explode(',', $request->foto);
             $image = base64_decode($img[1]);
+            
+            if (!is_dir("storage/foto/" .$tahun. "/resident/")) {
+                // dir doesn't exist, make it
+                mkdir("storage/foto/" .$tahun. "/resident/", 0777, true);
+            }
+
             file_put_contents("storage/foto/" .$tahun. "/resident/" .$name, $image);
 
             $resident->foto = $name;

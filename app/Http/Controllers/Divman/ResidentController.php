@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Resident;
 use App\Usroh;
 use App\Kamar;
+use App\Tahun;
 use Illuminate\Support\Facades\DB;
 
 class ResidentController extends Controller
@@ -155,11 +156,18 @@ class ResidentController extends Controller
 
         // Foto
         if($request->foto){
-            $name = $request->id .".jpg";
-            $tahun = Str::replaceFirst('/', '-', $this->helper->tahunAktif());
+            $name = $resident->id .".jpg";
+            $tahunresident = Tahun::find($resident->idtahun);
+            $tahun = Str::replaceFirst('/', '-', $tahunresident->tahunajaran);
 
             $img = explode(',', $request->foto);
             $image = base64_decode($img[1]);
+            
+            if (!is_dir("storage/foto/" .$tahun. "/resident/")) {
+                // dir doesn't exist, make it
+                mkdir("storage/foto/" .$tahun. "/resident/", 0777, true);
+            }
+            
             file_put_contents("storage/foto/" .$tahun. "/resident/" .$name, $image);
 
             $resident->foto = $name;
