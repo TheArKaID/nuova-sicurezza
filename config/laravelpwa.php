@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'name' => 'Nuova Sicurezza',
+    'name' => 'Sicurezza',
     'manifest' => [
-        'name' => env('APP_NAME', 'Nuova Sicurezza'),
+        'name' => 'Sicurezza \n Unires App',
         'short_name' => 'Sicurezza',
         'start_url' => '/',
         'background_color' => '#ffffff',
@@ -53,7 +53,7 @@ return [
                 'icons' => [
                     "src" => "/images/icons/icon-96x96.png",
                     "purpose" => "any"
-            ]
+                ]
             ],
             [
                 'name' => 'Senior',
