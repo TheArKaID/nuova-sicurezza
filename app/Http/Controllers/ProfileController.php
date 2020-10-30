@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use App\Helpers\Helper;
 use App\Senior;
+use App\Tahun;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -21,7 +22,8 @@ class ProfileController extends Controller
     public function index()
     {
         $senior = Auth::user();
-        $tahun = Str ::replaceFirst('/', '-', $this->helper->tahunAktif());
+        $tahunsenior = Tahun::find($senior->idtahun);
+        $tahun = Str::replaceFirst('/', '-', $tahunsenior->tahunajaran);
         
         if($this->helper->isMobile())
             return view('m.senior.profile.index', [
@@ -98,10 +100,17 @@ class ProfileController extends Controller
         // Foto        
         if($request->foto){
             $name = $senior->id .".jpg";
-            $tahun = Str::replaceFirst('/', '-', $this->helper->tahunAktif());
+            $tahunsenior = Tahun::find($senior->idtahun);
+            $tahun = Str::replaceFirst('/', '-', $tahunsenior->tahunajaran);
             
             $img = explode(',', $request->foto);
             $image = base64_decode($img[1]);
+
+            if (!is_dir("storage/foto/" .$tahun. "/senior/")) {
+                // dir doesn't exist, make it
+                mkdir("storage/foto/" .$tahun. "/senior/", 0777, true);
+            }
+
             file_put_contents("storage/foto/" .$tahun. "/senior/" .$name, $image);
 
             $senior->foto = $name;
