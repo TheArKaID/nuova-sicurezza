@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Senior;
+use App\Tahun;
 use App\Usroh;
 use Illuminate\Support\Facades\Hash;
 
@@ -108,13 +109,21 @@ class SeniorController extends Controller
         $senior->save();
         
         // Foto
-        if($request->hasFile('foto')){
-            $this->validate($request, ['foto' => 'mimes:jpeg,jpg,png|max:2048',]);
-            $file = $request->file('foto');
-            $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
-            $name = $senior->id .".". $ext;
-            $tahun = Str::replaceFirst('/', '-', $this->helper->tahunAktif());
-            $file->move('storage/foto/' .$tahun. "/senior/", $name);
+        if($request->foto){
+            $name = $senior->id .".jpg";
+            $tahunsenior = Tahun::find($senior->idtahun);
+            $tahun = Str::replaceFirst('/', '-', $tahunsenior->tahunajaran);
+
+            $img = explode(',', $request->foto);
+            $image = base64_decode($img[1]);
+            
+            if (!is_dir("storage/foto/" .$tahun. "/senior/")) {
+                // dir doesn't exist, make it
+                mkdir("storage/foto/" .$tahun. "/senior/", 0777, true);
+            }
+            
+            file_put_contents("storage/foto/" .$tahun. "/senior/" .$name, $image);
+
             $senior->foto = $name;
             $senior->save();
         }
@@ -125,10 +134,12 @@ class SeniorController extends Controller
     public function detail($id)
     {
         $ta = $this->helper->idTahunAktif();
-        $tahun = Str::replaceFirst('/', '-', $this->helper->tahunAktif());
         $senior = Senior::where('id', $id)
             ->where('idtahun', $this->helper->idTahunAktif())
             ->where('jeniskelamin', Auth::user()->jeniskelamin)->first();
+        
+        $tahunsenior = Tahun::find($senior->idtahun);
+        $tahun = Str::replaceFirst('/', '-', $tahunsenior->tahunajaran);
         
         if($senior===null) {
             return redirect(route('divman.senior'))->withInput()->withErrors(['Senior Tidak Ditemukan!']);
@@ -186,14 +197,23 @@ class SeniorController extends Controller
         }
 
         // Foto
-        if($request->hasFile('foto')){
-            $this->validate($request, ['foto' => 'mimes:jpeg,jpg,png|max:2048',]);
-            $file = $request->file('foto');
-            $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
-            $name = $request->id .".". $ext;
-            $tahun = Str::replaceFirst('/', '-', $this->helper->tahunAktif());
-            $file->move('storage/foto/' .$tahun. "/senior/", $name);
+        if($request->foto){
+            $name = $senior->id .".jpg";
+            $tahunsenior = Tahun::find($senior->idtahun);
+            $tahun = Str::replaceFirst('/', '-', $tahunsenior->tahunajaran);
+
+            $img = explode(',', $request->foto);
+            $image = base64_decode($img[1]);
+            
+            if (!is_dir("storage/foto/" .$tahun. "/senior/")) {
+                // dir doesn't exist, make it
+                mkdir("storage/foto/" .$tahun. "/senior/", 0777, true);
+            }
+            
+            file_put_contents("storage/foto/" .$tahun. "/senior/" .$name, $image);
+
             $senior->foto = $name;
+            $senior->save();
         }
 
         $senior->idtahun = $this->helper->idTahunAktif();

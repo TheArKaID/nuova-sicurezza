@@ -5,6 +5,10 @@
         small{
             color: green
         }
+        img {
+            width: inherit;
+            height: inherit;
+        }
     </style>
 @endsection
 
@@ -62,7 +66,7 @@
                             <div class="col-sm-10">
                                 <small>Update Foto</small>
                                 <img id="currfoto" alt="" srcset="">
-                                <input name="foto" id="foto" placeholder="Foto" type="file" class="form-control">
+                                <input id="foto" placeholder="Foto" type="file" class="form-control">
                                 <small>File JPG, JPEG, PNG<br>Foto akan dikompresi, hindari mengunggah gambar > 5mb</small>
                                 <input type="hidden" id="fotofile" name="foto"/>
                             </div>
