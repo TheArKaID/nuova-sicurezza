@@ -30,10 +30,11 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6" style="max-width: 50%; text-align: start">
-                                    <div class="align-middle" style="height:100%; display: inline">
-                                        Hi, <br>{{ Auth::user()->nama }}
-                                        <div class="page-title-subheading">{{ Auth::user()->status == 0 ? "Senior Resident" : "Assistant of Senior Resident" }}</div>
-                                        <div class="page-title-subheading">{{ $tahunaktif }}</div>
+                                    <div class="align-middle" style="display: inline-block">
+                                        <div class="page-title-subheading" style="padding-top: 7px">Assalamu'alaikum, </div>
+                                        {{ Auth::user()->nama }}
+                                        <div class="page-title-subheading" style="padding: 0">{{ Auth::user()->status == 0 ? "Senior Resident" : "Assistant of Senior Resident" }}</div>
+                                        <div class="page-title-subheading" style="padding-top: 7px">{{ $tahunaktif }}</div>
                                     </div>
                                 </div>
                             </div>
