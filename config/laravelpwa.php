@@ -3,7 +3,7 @@
 return [
     'name' => 'Sicurezza',
     'manifest' => [
-        'name' => 'Sicurezza \n Unires App',
+        'name' => "Sicurezza\nUnires App",
         'short_name' => 'Sicurezza',
         'start_url' => '/',
         'background_color' => '#ffffff',
