@@ -73,7 +73,7 @@ class SeniorController extends Controller
     {
         $this->validate($request, [
             'nama' => 'required',
-            'nim' => 'required|digits:11',
+            'nim' => 'required|unique:senior,nim|digits:11',
             'jeniskelamin' => 'required',
             'username' => 'required|between:3,10|unique:senior,username',
             'password' => 'required|between:8,20',

@@ -77,7 +77,7 @@ class ResidentController extends Controller
         
         $this->validate($request, [
             'nama' => 'required',
-            'nim' => 'required|digits:11',
+            'nim' => 'required|unique:resident,nim|digits:11',
             'idusroh' => 'required',
             'idkamar' => 'required'
         ]);
