@@ -106,7 +106,12 @@ class ProfileController extends Controller
             $img = explode(',', $request->foto);
             $image = base64_decode($img[1]);
 
-            file_put_contents("foto/" .$tahun. "/senior/" .$name, $image);
+            if (!is_dir("storage/foto/" .$tahun. "/senior/")) {
+                // dir doesn't exist, make it
+                mkdir("storage/foto/" .$tahun. "/senior/", 0777, true);
+            }
+
+            file_put_contents("storage/foto/" .$tahun. "/senior/" .$name, $image);
 
             $senior->foto = $name;
         }

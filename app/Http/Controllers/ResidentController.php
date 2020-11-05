@@ -92,8 +92,13 @@ class ResidentController extends Controller
 
             $img = explode(',', $request->foto);
             $image = base64_decode($img[1]);
-            
-            file_put_contents("foto/" .$tahun. "/resident/" .$name, $image);
+        
+            if (!is_dir("storage/foto/" .$tahun. "/resident/")) {
+                // dir doesn't exist, make it
+                mkdir("storage/foto/" .$tahun. "/resident/", 0777, true);
+            }
+
+            file_put_contents("storage/foto/" .$tahun. "/resident/" .$name, $image);
 
             $resident->foto = $name;
         }
