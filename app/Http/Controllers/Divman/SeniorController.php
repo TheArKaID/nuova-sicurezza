@@ -243,7 +243,7 @@ class SeniorController extends Controller
 
         if($senior->foto){
             $tahun = Str::replaceFirst('/', '-', $this->helper->tahunAktif());
-            Storage::delete('foto/' .$tahun. '/senior/' .$senior->foto);
+            Storage::delete('storage/foto/' .$tahun. '/senior/' .$senior->foto);
         }
         
         $senior->delete();

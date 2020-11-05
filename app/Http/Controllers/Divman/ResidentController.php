@@ -196,7 +196,7 @@ class ResidentController extends Controller
 
         if($resident->foto){
             $tahun = Str::replaceFirst('/', '-', $this->helper->tahunAktif());
-            Storage::delete('foto/' .$tahun. '/resident/' .$resident->foto);
+            Storage::delete('storage/foto/' .$tahun. '/resident/' .$resident->foto);
         }
         
         $resident->delete();
