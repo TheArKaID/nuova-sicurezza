@@ -100,7 +100,7 @@ class ResidentController extends Controller
 
             $img = explode(',', $request->foto);
             $image = base64_decode($img[1]);
-            file_put_contents("storage/foto/" .$tahun. "/resident/" .$name, $image);
+            file_put_contents("foto/" .$tahun. "/resident/" .$name, $image);
 
             $resident->foto = $name;
         }
@@ -163,12 +163,7 @@ class ResidentController extends Controller
             $img = explode(',', $request->foto);
             $image = base64_decode($img[1]);
             
-            if (!is_dir("storage/foto/" .$tahun. "/resident/")) {
-                // dir doesn't exist, make it
-                mkdir("storage/foto/" .$tahun. "/resident/", 0777, true);
-            }
-            
-            file_put_contents("storage/foto/" .$tahun. "/resident/" .$name, $image);
+            file_put_contents("foto/" .$tahun. "/resident/" .$name, $image);
 
             $resident->foto = $name;
         }
@@ -196,7 +191,7 @@ class ResidentController extends Controller
 
         if($resident->foto){
             $tahun = Str::replaceFirst('/', '-', $this->helper->tahunAktif());
-            Storage::delete('public/foto/' .$tahun. '/resident/' .$resident->foto);
+            Storage::delete('foto/' .$tahun. '/resident/' .$resident->foto);
         }
         
         $resident->delete();

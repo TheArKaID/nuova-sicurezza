@@ -116,13 +116,8 @@ class SeniorController extends Controller
 
             $img = explode(',', $request->foto);
             $image = base64_decode($img[1]);
-            
-            if (!is_dir("storage/foto/" .$tahun. "/senior/")) {
-                // dir doesn't exist, make it
-                mkdir("storage/foto/" .$tahun. "/senior/", 0777, true);
-            }
-            
-            file_put_contents("storage/foto/" .$tahun. "/senior/" .$name, $image);
+                        
+            file_put_contents("foto/" .$tahun. "/senior/" .$name, $image);
 
             $senior->foto = $name;
             $senior->save();
@@ -204,13 +199,8 @@ class SeniorController extends Controller
 
             $img = explode(',', $request->foto);
             $image = base64_decode($img[1]);
-            
-            if (!is_dir("storage/foto/" .$tahun. "/senior/")) {
-                // dir doesn't exist, make it
-                mkdir("storage/foto/" .$tahun. "/senior/", 0777, true);
-            }
-            
-            file_put_contents("storage/foto/" .$tahun. "/senior/" .$name, $image);
+                        
+            file_put_contents("foto/" .$tahun. "/senior/" .$name, $image);
 
             $senior->foto = $name;
             $senior->save();
@@ -243,7 +233,7 @@ class SeniorController extends Controller
 
         if($senior->foto){
             $tahun = Str::replaceFirst('/', '-', $this->helper->tahunAktif());
-            Storage::delete('public/foto/' .$tahun. '/senior/' .$senior->foto);
+            Storage::delete('foto/' .$tahun. '/senior/' .$senior->foto);
         }
         
         $senior->delete();
