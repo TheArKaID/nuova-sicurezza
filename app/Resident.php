@@ -61,4 +61,14 @@ class Resident extends Model
         }
         return $poin;
     }
+    
+    protected static function booted() {
+        static::deleting(function($resident) {
+            if($resident->pencatatan) {
+                foreach($resident->pencatatan as $p) { 
+                    $p->delete();
+                };
+            }
+        });
+    }
 }

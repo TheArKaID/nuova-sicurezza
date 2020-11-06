@@ -64,7 +64,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>PERHATIAN! Semua Data Resident pada Kamar {{ $kamar->nomor }} akan terhapus juga.</p>
+                    <p>PERHATIAN! Semua Data Resident atau Senior pada Kamar {{ $kamar->nomor }} akan terhapus juga.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

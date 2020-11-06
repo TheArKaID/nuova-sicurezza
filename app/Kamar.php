@@ -51,9 +51,11 @@ class Kamar extends Model
 
     protected static function booted() {
         static::deleting(function($kamar) {
-            foreach($kamar->resident as $r) { 
-                $r->delete(); 
-            };
+            if($kamar->resident) {
+                $kamar->resident->delete();
+            } elseif ($kamar->senior) {
+                $kamar->senior->delete();
+            }
         });
     }
 }

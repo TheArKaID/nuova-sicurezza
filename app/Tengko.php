@@ -33,4 +33,18 @@ class Tengko extends Model
      */
     protected $fillable = ['idtahun', 'tipe', 'penjelasan', 'poin', 'jeniskelamin', 'created_at', 'updated_at'];
 
+    public function pencatatan()
+    {
+        return $this->hasMany('App\Pencatatan', 'idtengko');
+    }
+    
+    protected static function booted() {
+        static::deleting(function($tengko) {
+            if($tengko->pencatatan) {
+                foreach($tengko->pencatatan as $p) { 
+                    $p->delete();
+                };
+            }
+        });
+    }
 }
