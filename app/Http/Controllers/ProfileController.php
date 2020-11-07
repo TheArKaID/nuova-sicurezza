@@ -51,7 +51,7 @@ class ProfileController extends Controller
 
         $this->validate($request, [
             'nama' => 'required',
-            'nim' => 'required|unique:resident,nim|digits:11',
+            'nim' => 'required|digits:11',
             'password' => 'required',
         ], $message);
 
