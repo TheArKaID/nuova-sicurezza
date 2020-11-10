@@ -29,7 +29,16 @@
         <div class="col-lg-12">
             <div class="main-card mb-3 card">
                 <div class="card-body">
-                    <a href="{{route('divman.kamar.tambah')}}" class="btn btn-success btn-sm" style="float: right"><i class="fa fa-plus-square"></i></a>
+                    <div class="container">
+                        <form action="/s/d-kamar" method="get">
+                            <div class="row">
+                                <input type="text" placeholder="Penjelasan..." value="{{ isset($_GET['cari']) ? $_GET['cari'] : '' }}" name="cari" id="cari" class="form-control" style="width: 66.6%">
+                                <button type="submit" class="btn btn-sm btn-primary" style="width: 33.3%" onclick="loadui()">Cari</button>
+                            </div>
+                        </form>
+                    </div>
+                    <br>
+                    <a href="{{route('divman.kamar.tambah')}}" class="btn btn-success btn-md" style="float: right" onclick="loadui()"><i class="fa fa-plus-square"></i></a>
                     <table class="mb-0 table table-hover table-responsive">
                         <thead>
                         <tr>

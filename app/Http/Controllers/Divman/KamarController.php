@@ -27,10 +27,15 @@ class KamarController extends Controller
 
     public function index()
     {
+        $kamar = null;
+        if(isset($_GET['cari'])) {
+            $kamar = $this->getSearch($_GET['cari']);
+        } else {
+            $kamar = $this->getAll();
+        }
+
         $tahun = $this->helper->tahunAktif();
-        $kamar = Kamar::where('idtahun', $this->helper->idTahunAktif())
-            ->where('jeniskelamin', Auth::user()->jeniskelamin)->paginate(16);
-            
+
         if($this->helper->isMobile())
             return view('m.divman.kamar.index', [
                 'tahun' => $tahun,
@@ -41,6 +46,19 @@ class KamarController extends Controller
             'tahun' => $tahun,
             'kamar' => $kamar
         ]);
+    }
+
+    public function getSearch($search)
+    {
+        return Kamar::where('idtahun', $this->helper->idTahunAktif())
+            ->where('nomor', 'LIKE', '%' .$search. '%')
+            ->where('jeniskelamin', Auth::user()->jeniskelamin)->paginate(1000);
+    }
+
+    public function getAll()
+    {
+        return Kamar::where('idtahun', $this->helper->idTahunAktif())
+            ->where('jeniskelamin', Auth::user()->jeniskelamin)->paginate(16);
     }
 
     public function tambah()
