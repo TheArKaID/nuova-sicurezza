@@ -32,11 +32,13 @@ class SeniorController extends Controller
 
     public function index()
     {
-        $ta = $this->helper->idTahunAktif();
-        $senior = Senior::where('idtahun', $ta)
-            ->where('jeniskelamin', Auth::user()->jeniskelamin)->get();
+        $senior = null;
+        if(isset($_GET['nama'])) {
+            $senior = $this->getSearch($_GET['nama']);
+        } else {
+            $senior = $this->getAll();
+        }
 
-        $senior = $this->sortSenior($senior);
         $tahun = $this->helper->tahunAktif();
         if($this->helper->isMobile())
             return view('m.divman.senior.index', [
@@ -48,6 +50,25 @@ class SeniorController extends Controller
             'tahun' => $tahun,
             'senior' => $senior,
         ]);
+    }
+
+    public function getAll()
+    {
+        $ta = $this->helper->idTahunAktif();
+        $senior = Senior::where('idtahun', $ta)
+            ->where('jeniskelamin', Auth::user()->jeniskelamin)->paginate(16);
+
+        return $this->sortSenior($senior);
+    }
+
+    public function getSearch($nama)
+    {
+        $ta = $this->helper->idTahunAktif();
+        $senior = Senior::where('idtahun', $ta)
+            ->where('nama', 'LIKE', '%' .$nama. '%')
+            ->where('jeniskelamin', Auth::user()->jeniskelamin)->paginate(100);
+
+        return $this->sortSenior($senior);
     }
 
     public function tambah()

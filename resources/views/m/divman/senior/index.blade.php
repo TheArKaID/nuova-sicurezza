@@ -29,7 +29,15 @@
         <div class="col-lg-12">
             <div class="main-card mb-3 card">
                 <div class="card-body">
-                    <a onclick="loadui()" href="{{route('divman.senior.tambah')}}" class="btn btn-success btn-sm" style="float: right"><i class="fa fa-plus-square"></i></a>
+                    <div class="container">
+                        <form action="/s/d-senior" method="get">
+                            <div class="row">
+                                <input type="text" placeholder="Nama Senior" value="{{ isset($_GET['nama']) ? $_GET['nama'] : '' }}" name="nama" id="nama" class="form-control" style="width: 66.6%">
+                                <button type="submit" class="btn btn-md btn-primary" style="width: 33.3%" onclick="loadui()">Cari</button>
+                            </div>
+                        </form>
+                    </div>
+                    <a onclick="loadui()" href="{{route('divman.senior.tambah')}}" class="btn btn-success btn-sm mt-2" style="float: right"><i class="fa fa-plus-square"></i></a>
                     <table class="mb-0 table table-hover table-responsive">
                         <thead>
                         <tr>
@@ -40,22 +48,17 @@
                         </tr>
                         </thead>
                         <tbody>
-                            @php
-                                $row=1;
-                            @endphp
-                            @foreach ($senior as $s)
+                            @foreach ($senior as $row => $s)
                                 <tr class='clickable-row' data-url='{{route('divman.senior.detail', $s->id)}}'>
-                                    <th scope="row">{{$row}}</th>
+                                    <th scope="row">{{ $senior->firstItem() + $row }}</th>
                                     <td>{{$s->nama}}</td>
                                     <td>{{$s->status==0 ? "SR" : "ASR"}}</td>
                                     <td>{{$s->usroh->nama}}</td>
                                 </tr>
-                                @php
-                                    $row++;
-                                @endphp
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $senior->links() }}
                 </div>
             </div>
         <div>

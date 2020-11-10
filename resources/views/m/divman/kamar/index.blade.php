@@ -37,8 +37,7 @@
                             </div>
                         </form>
                     </div>
-                    <br>
-                    <a href="{{route('divman.kamar.tambah')}}" class="btn btn-success btn-md" style="float: right" onclick="loadui()"><i class="fa fa-plus-square"></i></a>
+                    <a href="{{route('divman.kamar.tambah')}}" class="btn btn-success btn-md mt-2" style="float: right" onclick="loadui()"><i class="fa fa-plus-square"></i></a>
                     <table class="mb-0 table table-hover table-responsive">
                         <thead>
                         <tr>
