@@ -33,7 +33,7 @@ class SeniorController extends Controller
     public function index()
     {
         $senior = null;
-        if(isset($_GET['nama'])) {
+        if(isset($_GET['nama']) && $_GET['nama']!=null) {
             $senior = $this->getSearch($_GET['nama']);
         } else {
             $senior = $this->getAll();

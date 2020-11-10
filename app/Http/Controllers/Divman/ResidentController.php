@@ -33,7 +33,7 @@ class ResidentController extends Controller
     public function index()
     {
         $resident = null;
-        if(isset($_GET['nama'])) {
+        if(isset($_GET['nama']) && $_GET['nama']!=null) {
             $resident = $this->getSearch($_GET['nama']);
         } else {
             $resident = $this->getAll();
