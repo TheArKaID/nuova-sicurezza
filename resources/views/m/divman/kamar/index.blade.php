@@ -32,7 +32,7 @@
                     <div class="container">
                         <form action="/s/d-kamar" method="get">
                             <div class="row">
-                                <input type="text" placeholder="Penjelasan..." value="{{ isset($_GET['cari']) ? $_GET['cari'] : '' }}" name="cari" id="cari" class="form-control" style="width: 66.6%">
+                                <input type="text" placeholder="Nomor Kamar" value="{{ isset($_GET['nomor']) ? $_GET['nomor'] : '' }}" name="nomor" id="nomor" class="form-control" style="width: 66.6%">
                                 <button type="submit" class="btn btn-sm btn-primary" style="width: 33.3%" onclick="loadui()">Cari</button>
                             </div>
                         </form>

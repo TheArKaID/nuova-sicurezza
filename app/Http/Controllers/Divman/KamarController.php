@@ -28,8 +28,8 @@ class KamarController extends Controller
     public function index()
     {
         $kamar = null;
-        if(isset($_GET['cari'])) {
-            $kamar = $this->getSearch($_GET['cari']);
+        if(isset($_GET['nomor'])) {
+            $kamar = $this->getSearch($_GET['nomor']);
         } else {
             $kamar = $this->getAll();
         }
