@@ -29,6 +29,14 @@
         <div class="col-lg-12">
             <div class="main-card mb-3 card">
                 <div class="card-body">
+                    <div class="container">
+                        <form action="/s/d-resident" method="get">
+                            <div class="row">
+                                <input type="text" placeholder="Nama Resident" value="{{ isset($_GET['nama']) ? $_GET['nama'] : '' }}" name="nama" id="nama" class="form-control" style="width: 66.6%">
+                                <button type="submit" class="btn btn-md btn-primary" style="width: 33.3%" onclick="loadui()">Cari</button>
+                            </div>
+                        </form>
+                    </div>
                     <a href="{{route('divman.resident.tambah')}}" class="btn btn-success btn-sm" onclick="loadui()" style="float: right; margin-bottom: 5px"><i class="fa fa-plus-square"></i></a>
                     <table class="mb-0 table table-hover table-responsive">
                         <thead>

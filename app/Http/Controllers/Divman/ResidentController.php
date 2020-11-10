@@ -32,13 +32,12 @@ class ResidentController extends Controller
 
     public function index()
     {
-        $ta = $this->helper->idTahunAktif();
-        $resident = Resident::where('resident.idtahun', $ta)
-                    ->where('resident.jeniskelamin', Auth::user()->jeniskelamin)
-                    ->join('kamar', 'resident.idkamar', '=', 'kamar.id')
-                    ->select('resident.*')
-                    ->orderBy('kamar.nomor')
-                    ->paginate(16);
+        $resident = null;
+        if(isset($_GET['nama'])) {
+            $resident = $this->getSearch($_GET['nama']);
+        } else {
+            $resident = $this->getAll();
+        }
 
         $tahun = $this->helper->tahunAktif();
         if($this->helper->isMobile())
@@ -53,6 +52,29 @@ class ResidentController extends Controller
         ]);
     }
 
+    public function getAll()
+    {
+        $ta = $this->helper->idTahunAktif();
+        return Resident::where('resident.idtahun', $ta)
+                    ->where('resident.jeniskelamin', Auth::user()->jeniskelamin)
+                    ->join('kamar', 'resident.idkamar', '=', 'kamar.id')
+                    ->select('resident.*')
+                    ->orderBy('kamar.nomor')
+                    ->paginate(16);
+    }
+
+    public function getSearch($nama)
+    {
+        $ta = $this->helper->idTahunAktif();
+        return Resident::where('resident.idtahun', $ta)
+                    ->where('resident.jeniskelamin', Auth::user()->jeniskelamin)
+                    ->where('resident.nama', 'LIKE', '%' .$nama. '%')
+                    ->join('kamar', 'resident.idkamar', '=', 'kamar.id')
+                    ->select('resident.*')
+                    ->orderBy('kamar.nomor')
+                    ->paginate(1000);
+    }
+    
     public function tambah()
     {
         $ta = $this->helper->idTahunAktif();
