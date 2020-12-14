@@ -87,7 +87,7 @@ class ResidentController extends Controller
         // Foto
         if($request->foto){
             $name = $request->id .".jpg";
-            $tahunresident = Tahun::find($request->idtahun);
+            $tahunresident = Tahun::find($resident->idtahun);
             $tahun = Str::replaceFirst('/', '-', $tahunresident->tahunajaran);
 
             $img = explode(',', $request->foto);
