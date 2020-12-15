@@ -97,26 +97,30 @@ class PoinController extends Controller
         $sheet->setCellValue('A1', 'Nomor');
         $sheet->setCellValue('B1', 'Nama');
         $sheet->setCellValue('C1', 'Kamar');
-        $sheet->setCellValue('D1', 'Poin');
+        $sheet->setCellValue('D1', 'Usroh');
+        $sheet->setCellValue('E1', 'Poin');
 
         // Apply style header yang telah kita buat tadi ke masing-masing kolom header
         $sheet->getStyle('A1')->applyFromArray($style_col);
         $sheet->getStyle('B1')->applyFromArray($style_col);
         $sheet->getStyle('C1')->applyFromArray($style_col);
         $sheet->getStyle('D1')->applyFromArray($style_col);
+        $sheet->getStyle('E1')->applyFromArray($style_col);
 
         $pos = 2;
         foreach ($resident as $key => $r) {
             $sheet->setCellValue('A'.$pos, $key+1);
             $sheet->setCellValue('B'.$pos, $r->nama);
             $sheet->setCellValue('C'.$pos, $r->kamar->nomor);
-            $sheet->setCellValue('D'.$pos, $r->getPoin());
+            $sheet->setCellValue('D'.$pos, $r->usroh->nama);
+            $sheet->setCellValue('E'.$pos, $r->getPoin());
             
             // Apply Style ke Row lainnya
             $sheet->getStyle('A'.$pos)->applyFromArray($style_row);
             $sheet->getStyle('B'.$pos)->applyFromArray($style_row);
             $sheet->getStyle('C'.$pos)->applyFromArray($style_row);
             $sheet->getStyle('D'.$pos)->applyFromArray($style_row);
+            $sheet->getStyle('E'.$pos)->applyFromArray($style_row);
 
             // Set Height Row
             $sheet->getRowDimension($pos)->setRowHeight(20);
@@ -128,6 +132,7 @@ class PoinController extends Controller
         $sheet->getColumnDimension('B')->setAutoSize(true);
         $sheet->getColumnDimension('C')->setAutoSize(true);
         $sheet->getColumnDimension('D')->setAutoSize(true);
+        $sheet->getColumnDimension('E')->setAutoSize(true);
 
         $sheet->setTitle('Data Poin');
 
